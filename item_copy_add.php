@@ -28,7 +28,7 @@
        	 <form class="form" enctype="multipart/form-data" method="POST" action="#" >
         	<div class="form_description">
 				<h2>Item Copy Registration</h2>
-				<p>Use This form to register a Item Copy</p>
+				<p>Use This form to register an Item Copy</p>
 			</div>	
 				
 			<div class="container" style="width:100%;">
@@ -41,6 +41,23 @@
 								<label class="description" for="item_no">Item No</label>
         						<div><input type="text" class="large text" name="item_no" ></div>
         					</li>
+
+        					 <li>
+                                <label class="description" for="cat">Item Category</label>
+                                <select class="element large select">  
+                                    <option value="" selected="selected">Select</option>
+                                    <?php
+                                    	$categories=Category::getAllCategories();
+                                    	foreach ($categories as $key => $value) {
+                                    		echo "<option value=".$value['category_id'].">".$value['category_name']."</option>";
+                                    	}
+
+                                    ?>
+                                       
+                                </select>
+                                
+                            </li>
+
 
         					<li>
 
@@ -66,13 +83,18 @@
         					</li>
                             <li>
                                 <label class="description" for="supplier">Supplier</label>
-                                <select>  
-                                    <option value="db_name1">supplier01</option>
-                                    <option value="db_name1">supplier02</option>
-                                    <option value="db_name1">supplier03</option>
-                                    <option value="db_name1">supplier04</option>     
+                                <select class="element large select">  
+                                    <option value="" selected="selected">Select</option>
+                                    <?php
+                                    	$suppliers=Supplier::getAllSuppliers();
+                                    	foreach ($suppliers as $key => $value) {
+                                    		echo "<option value=".$value['supplier_id'].">".$value['supplier_name']."</option>";
+                                    	}
+
+                                    ?>
+                                       
                                 </select>
-                                <br><br>
+                                
                             </li>
 
 	

@@ -50,6 +50,13 @@ class Category {
 		return $this->_categoryID;
 		
 	}
+
+
+	public static function getAllCategories(){
+		$cat_names=array();
+		$result=DB::getInstance()->directSelect("Select * FROM category ORDER BY category_name");
+		return $result;
+	}
 }
 
 ?>

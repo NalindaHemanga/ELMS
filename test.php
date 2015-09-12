@@ -42,6 +42,10 @@ if($GLOBALS["form_data"]=="NULL") echo "did it !";
 $var="helloo_world";
 
 echo '<input type="button" value="click me" onClick="alert(\"asdasd\");">';
+$cat_names=Category::getAllCategoryNames();
+                                    	foreach ($cat_names as $key => $value) {
+                                    		echo $value['category_name'];
+                                    	}
 
 
 ?>

@@ -79,6 +79,14 @@ class Supplier{
 
 	}
 
+	public static function getAllSuppliers(){
+
+		$result=DB::getInstance()->directSelect("Select * FROM supplier ORDER BY supplier_name");
+		return $result;
+
+
+	}
+
 
 
 

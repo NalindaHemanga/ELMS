@@ -1,0 +1,24 @@
+<link rel="stylesheet" type="text/css" href="css/leftnav.css" />
+<link rel="stylesheet" type="text/css" href="css/category_tree.css" />
+<div id="leftcolumnwrap">
+        	<div id="leftcolumn">
+		<h3>Categories</h3>
+				<ol class="tree">
+					<?php
+					/*me php kellen wenne category tree eka hadenna ona html code eka genarate wena eka*/
+					require 'includes/CategoryTree/category_tree.php'; 
+					/*category_tree.php eke thiyenne categories monawada kiyala database eken balala ekata anuwa tree ekata enna ona html code tika echo(print) karana "collapseTree" kiyala funtion ekak.*/ 
+					
+					foreach ($catagories as $catagory6){
+						if ($catagory6->get_parent() == (NULL||0)){
+						collapseTree($catagory6, $catagories);
+						}
+					}
+					
+					?>
+					
+				</ol>
+            
+        
+		</div>
+        </div>

@@ -1,0 +1,11 @@
+.btn {
+  margin-left:8%;
+  margin-top:200px;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 50px;
+  background: #3498db;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}

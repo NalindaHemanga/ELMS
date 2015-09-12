@@ -1,0 +1,53 @@
+#leftcolumnwrap {
+
+    width: 20%;
+    float: left;
+    margin: 0 auto;
+}
+
+#leftcolumn {
+	height:500px;
+    background: #0d6f94;
+    border-radius: 10px;
+    border: 1px solid #1fb8eb;
+    margin: 5px;
+	
+}
+
+ul.leftnav {
+    list-style-type: none;
+    margin: 5px;
+    padding: 10px;
+}
+
+li.leftnav {
+
+	padding : 7px;
+	height:  30px ;
+
+
+}
+
+a.home {
+
+	border-radius: 10px;
+	height: 30px;
+	
+
+
+}
+
+a.home:link, a.home:visited {
+    display: block;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #63A6D6;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a.home:hover, a.home:active {
+    background-color: #C4E69E;
+}

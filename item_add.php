@@ -1,3 +1,79 @@
+<?php
+  
+    require_once 'core/init.php';
+  
+
+    if(count($_POST) > 0) {
+        
+       
+		
+    	$item_data = array(
+
+		
+		"no" 					=>	$_POST["item_no"],
+		"name"	 				=> 	$_POST["item_name"],
+		"type"					=>	$_POST["item_type"],
+		"technical_details" 	=> 	$_POST["item_tec_desc"],
+		"description"			=>  $_POST["item_desc"],
+		"quantity" 				=>	0,
+		"category"				=>  $_POST["category"],
+		"reference" 			=>	$_POST["reference"]
+
+	);
+
+    	
+    	
+    	
+    	$temp_path=$_FILES["item_picture"]["tmp_name"];
+    	$img_type = pathinfo($_FILES["item_picture"]["name"],PATHINFO_EXTENSION);
+    	
+
+    	move_uploaded_file($temp_path, "img/items/" . $_POST["item_no"].".".$img_type);
+    	
+
+
+
+        $_SESSION['form_data'] = $item_data;
+
+        
+        header("Location: item_add.php",true,303);
+        die();
+    }
+    else if (isset($_SESSION['form_data'])){
+        
+
+        
+
+     $new_item = new Item();
+     $new_item->create($_SESSION["form_data"]);
+	
+	if($new_item->register()){
+
+		$message = "You have successfully Inserted an Item !!";
+		echo "<script type='text/javascript'>alert('$message');</script>";
+	} 
+
+	else{
+		
+		
+		$message = "The Item insertion was unsuccessful.";
+		echo "<script type='text/javascript'>alert('$message');</script>";	
+
+
+	}
+
+        
+
+        unset($_SESSION["form_data"]);
+        
+    }
+    
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +99,7 @@
      	     
 
  			 newli.setAttribute('id', counter);
-      		    newli.innerHTML = '<div><input type="url" class="medium text" name="links[]" placeholder=" Paste Link Here" required="required"><a href="javascript: void(0)" onClick="removeInput(\'dynamicInput\',\''+counter+'\');"> Remove this Link</a></div>';
+      		    newli.innerHTML = '<div><input type="url" class="medium text" name="reference[]" placeholder=" Paste Link Here" required="required"><a href="javascript: void(0)" onClick="removeInput(\'dynamicInput\',\''+counter+'\');"> Remove this Link</a></div>';
          		 document.getElementById(divName).appendChild(newli);
          		 counter++;
      
@@ -57,7 +133,7 @@
 			
         <div class="form">
        
-       	 <form class="form" enctype="multipart/form-data" method="POST" action="form_test.php" >
+       	 <form class="form" enctype="multipart/form-data" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" >
         	<div class="form_description">
 				<h2>Add New Item</h2>
 				<p>Use This form to register a new Item</p>
@@ -70,23 +146,32 @@
 						<ul>
 						
 							<li>
-								<label class="description" for="nic_no">Item Name</label>
-        						<div><input type="text" class="large text" name="nic_no" ></div>
+								<label class="description" for="item_no">Item No</label>
+        						<div><input type="text" class="large text" name="item_no" ></div>
         					</li>
 
-        					<li>
+							<li>
+								<label class="description" for="item_name">Item Name</label>
+        						<div><input type="text" class="large text" name="item_name" ></div>
+        					</li>
 
-        					<label class="description">Item Type</label>
-							<span>
-									<input name="item_type" class="radio" type="radio" value="non-consumable" checked="checked"/>
-										<label class="choice" for="item_type">Non-consumable</label>
-									<input name="item_type" class="radio" type="radio" value="consumable" />
-										<label class="choice" for="item_type">Consumable</label>
-									
+        					 <li>
+                                <label class="description" for="category">Item Category</label>
+                                <select class="element large select" name="category">  
+                                    <option value="" selected="selected">Select</option>
+                                    <?php
+                                    	$categories=Category::getAllCategories();
+                                    	foreach ($categories as $key => $value) {
+                                    		echo '<option value="'.$value['category_id'].'"\>'.$value['category_name']."</option>";
+                                    	}
 
-							</span> 
+                                    ?>
+                                       
+                                </select>
+                                
+                            </li>
 
-							</li>
+        					
 
 							<li>
 						<label class="description" for="item_desc">Item Description </label>
@@ -96,7 +181,7 @@
 					</li>
 
 						<li>
-						<label class="description" for="paragraph">Technical Details </label>
+						<label class="description" for="item_tec_desc">Technical Details </label>
 							<div>
 								<textarea name="item_tec_desc" class="small textarea"></textarea> 
 						</div> 
@@ -109,10 +194,13 @@
         				</ul>
 				</div>
 
-				<div class="container" style="display:inline-block;width:49%;">
+				<div class="container" style="display:inline-block;width:49%;vertical-align:top">
 						
 						<ul>
+						
 							<li>	
+							
+							
 								<label class="description">Image of the Item</label>
 						
 							
@@ -121,8 +209,11 @@
 									</div>
 
 									<div>
-										<input name="picture" class="file" type="file" accept="image/*" onchange="loadFile(event)" /> 
+										<input name="item_picture" class="file" type="file" accept="image/*" onchange="loadFile(event)" /> 
 									</div>
+
+									
+							
 
 										<script>
  											 var loadFile = function(event) {
@@ -139,6 +230,7 @@
 							</li>
 
 
+
 							      				
 
 
@@ -148,7 +240,21 @@
 				</div>
 
 					<li>
-					<label class="description" for="links[]">Reference Links</label>
+
+        					<label class="description">Item Type</label>
+							<span>
+									<input name="item_type" class="radio" type="radio" value="1" checked="checked"/>
+										<label class="choice" for="item_type">Non-consumable</label>
+									<input name="item_type" class="radio" type="radio" value="0" />
+										<label class="choice" for="item_type">Consumable</label>
+									
+
+							</span> 
+
+							</li>
+
+					<li>
+					<label class="description" for="reference[]">Reference Links</label>
 					</li>
 					
 					 <div id="dynamicInput">

@@ -23,7 +23,7 @@
 
 	);
 
-    	print_r($supplier_data);
+    	
     	
     	
 

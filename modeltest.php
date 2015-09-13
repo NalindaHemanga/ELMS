@@ -13,6 +13,7 @@
 <body>
 
 <a href="#openModal">Open Modal</a>
+<input type="text"/>
 
 <div id="openModal" class="modalDialog">
 

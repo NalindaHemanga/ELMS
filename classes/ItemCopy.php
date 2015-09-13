@@ -1,7 +1,8 @@
 <?php
 class ItemCopy{
 
-	private $no,
+	private $id,
+			$no,
 			$owner,
 			$status,
 			$barcode,
@@ -23,7 +24,7 @@ class ItemCopy{
 
 	public function create($data=array()){
 
-		
+		$this->id 				= 	$data["id"];
 		$this->no 				=	$data["no"];
 		$this->owner	 		= 	$data["owner"];
 		$this->status			=	$data["status"];
@@ -39,7 +40,7 @@ class ItemCopy{
 
 		$row=array(
 
-				"item_copy_id" => $this->id,
+				
 				"item_copy_owner" => $this->owner,
 				"item_copy_status" => $this->status,
 				"item_copy_barcode" => $this->barcode,
@@ -56,7 +57,7 @@ class ItemCopy{
 			);
 
 
-		if(DB::getInstance()->insertRaw("item_copy",$raw))
+		if(DB::getInstance()->insertRow("item_copy",$row))
 			return true;
 		else
 			return false;
@@ -64,15 +65,55 @@ class ItemCopy{
 	}
 
 
+	public static function search($values=array()){
+     
+      /* This function returns an array of item copy objects if the results have many item copies,
+      		else returns a single object.
 
+      */
+		
+		$item_copies=array();
+		$result1=DB::getInstance()->search("item_copy",$values);
 
+		if(count($result1)!=0){
+			
+			for($x=0;$x<count($result1);$x++){
+	
+			$item_copy_data=array(
 
+				"owner"=>$result1[$x]["item_copy_owner"],
+				"status" => $result1[$x]["item_copy_status"],
+				"barcode" => $result1[$x]["item_copy_barcode"],
+				"price" => $result1[$x]["item_copy_unit_price"],
+				"installed_date" => $result1[$x]["item_copy_installed_date"],
+				"condition" => $result1[$x]["item_copy_condition"],
+				"no" => $result1[$x]["item_copy_no"],
+				"item_id" => $result1[$x]["item_id"],
+				"supplier" => $result1[$x]["supplier_id"],
+				"id" => $result1[$x]["item_copy_id"]
+				);
 
+		
+			$new_item_copy=new ItemCopy();
+			$new_item_copy->create($item_copy_data);
+			$item_copies[]=$new_item_copy;
+			
 
+		}
+		if(count($item_copies)==1)
+			return $item_copies[0];
+		else
+			return $item_copies;
 
+		}
+		else
+			return null;
+		
 
+	}
+
+	
 
 }
-
 
 ?>

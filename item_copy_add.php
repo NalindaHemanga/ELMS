@@ -1,3 +1,78 @@
+<?php
+  
+    require_once 'core/init.php';
+  
+
+    if(count($_POST) > 0) {
+        
+       
+		
+    	$item_copy_data = array(
+
+		"id"				=>	null,
+		"no" 				=>	$_POST["item_no"],
+		"owner"	 			=> 	$_POST["copy_owner"],
+		"status"			=>	1,
+		"barcode" 			=> 	$_POST["barcode"],
+		"price" 			=>   $_POST["price"],
+		"installed_date" 	=>	date('Y-m-d'),
+		"condition"			=>	"Working Properly",
+		"supplier"			=>	$_POST["supplier"],
+		"item_id"			=> 	2
+
+	);
+
+    	
+    	
+    	
+    	
+    	
+
+
+
+        $_SESSION['form_data'] = $item_copy_data;
+
+        
+        header("Location: item_copy_add.php",true,303);
+        die();
+    }
+    else if (isset($_SESSION['form_data'])){
+        
+
+        
+
+     $new_item_copy = new ItemCopy();
+     $new_item_copy->create($_SESSION["form_data"]);
+	
+	if($new_item_copy->register()){
+
+		$message = "You have successfully Inserted an Item Copy!!";
+		echo "<script type='text/javascript'>alert('$message');</script>";
+	} 
+
+	else{
+		
+		
+		$message = "The Item Copy insertion was unsuccessful.";
+		echo "<script type='text/javascript'>alert('$message');</script>";	
+
+
+	}
+
+        
+
+        unset($_SESSION["form_data"]);
+        
+    }
+    
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +87,7 @@
 	<link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 	<script src="lib/jquery.min.js"></script>
 
-<script language="Javascript" type="text/javascript">
+<script  type="text/javascript">
 	
 	var counter = 0;
 	
@@ -94,7 +169,7 @@
 			
         <div class="form">
        
-       	 <form class="form" enctype="multipart/form-data" method="POST" action="#" >
+       	 <form class="form" enctype="multipart/form-data" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" >
         	<div class="form_description">
 				<h2>Item Copy Registration</h2>
 				<p>Use This form to register an Item Copy</p>
@@ -108,7 +183,7 @@
 						
 							<li>
 								<label class="description" for="item_no">Item No</label>
-        						<div><input type="text" class="large text" name="item_no" ></div>
+        						<div><input type="text" class="large text" name="item_no" required="required" ></div>
         					</li>
 
         					
@@ -118,9 +193,9 @@
 
         					<label class="description">Copy Owner</label>
 							<span>
-									<input name="copy_owner" class="radio" type="radio" value="non-consumable" checked="checked"/>
+									<input name="copy_owner" class="radio" type="radio" value="1" checked="checked"/>
 										<label class="choice" for="copy_owner">Electronic Laboratory</label>
-									<input name="copy_owner" class="radio" type="radio" value="consumable" />
+									<input name="copy_owner" class="radio" type="radio" value="0" />
 										<label class="choice" for="copy_owner">SCORE Laboratory</label>
 									
 
@@ -130,17 +205,17 @@
 
 						    <li>
 								<label class="description" for="item_c_barcode">Barcode</label>
-        						<div><input type="text" class="large text" name="item_c_barcode" ></div>
+        						<div><input type="text" class="large text" name="barcode" ></div>
         					</li>
                             <li>
 								<label class="description" for="item_unit_price">Unit Price</label>
-        						<div><input type="text" class="large text" name="item_unit_price" ></div>
+        						<div><input type="text" class="large text" name="price" ></div>
         					</li>
                             <li>
                                 <label class="description" for="supplier">Supplier ( <a href="#openModal">Add New</a> )</label>
 
-                                <select class="element large select" id="supplier_dropdown">  
-                                    <option value="" selected="selected">Select</option>
+                                <select class="element large select" id="supplier_dropdown" name="supplier">  
+                                    <option value="" selected="selected" required="required">Select</option>
                                     <?php
                                     	$suppliers=Supplier::getAllSuppliers();
                                     	foreach ($suppliers as $key => $value) {

@@ -9,7 +9,7 @@
 		
     	$item_data = array(
 
-		
+		"id"					=> 	null,
 		"no" 					=>	$_POST["item_no"],
 		"name"	 				=> 	$_POST["item_name"],
 		"type"					=>	$_POST["item_type"],
@@ -17,7 +17,8 @@
 		"description"			=>  $_POST["item_desc"],
 		"quantity" 				=>	0,
 		"category"				=>  $_POST["category"],
-		"reference" 			=>	$_POST["reference"]
+		"reference" 			=>	$_POST["reference"],
+		"item_copies"			=>	null
 
 	);
 
@@ -147,17 +148,17 @@
 						
 							<li>
 								<label class="description" for="item_no">Item No</label>
-        						<div><input type="text" class="large text" name="item_no" ></div>
+        						<div><input type="text" class="large text" name="item_no" required="required"></div>
         					</li>
 
 							<li>
 								<label class="description" for="item_name">Item Name</label>
-        						<div><input type="text" class="large text" name="item_name" ></div>
+        						<div><input type="text" class="large text" name="item_name" required="required"></div>
         					</li>
 
         					 <li>
                                 <label class="description" for="category">Item Category</label>
-                                <select class="element large select" name="category">  
+                                <select class="element large select" name="category" required="required">  
                                     <option value="" selected="selected">Select</option>
                                     <?php
                                     	$categories=Category::getAllCategories();

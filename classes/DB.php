@@ -50,6 +50,8 @@ class DB {
 		
 		try{
 
+		if(count($values)>0){
+
 		$no=0;
 
 		$select_statement="SELECT * FROM ".$table." WHERE ";
@@ -77,6 +79,14 @@ class DB {
 			
 			$this->query->bindValue(":".$key,$value,$param_type);
 		}
+	}
+
+	else{
+			$this->query = $this->pdo->prepare("SELECT * FROM ".$table.";");
+
+	}
+
+
 
 		 
     		$this->query->execute();

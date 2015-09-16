@@ -1,13 +1,12 @@
 <?php
 require "core/init.php";
 
-$cat_id=$_POST['CatId'];
+$cat_label=$_POST['CatLabel'];
 $cat_name=$_POST['cat_name'];
 
-//Insert query
-$query = mysql_query("DELETE FROM `electronicdb`.`category` WHERE `category`.`category_id` = $cat_id");
+DB::getInstance()->delete("category",array("category_label"=>$cat_label));
+
+$category = Category::search(array("category_label" => $cat_label));
+$category->deleteCat();
 echo "Category $cat_name deleted.";
-
-DB::getInstance()->delete("category",array("category_id"=>$cat_id));
-
 ?>

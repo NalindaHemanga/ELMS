@@ -38,6 +38,25 @@ class item{
 	
 	}
 
+	public function get_no(){
+		
+		return $this->no;
+		
+	}
+
+	public function get_id(){
+		
+		return $this->id;
+		
+	}
+
+	public function get_name(){
+		
+		return $this->name;
+		
+	}
+
+
 	public function register(){
 
 		$row=array(
@@ -148,16 +167,18 @@ class item{
 			$new_item=new Item();
 			$new_item->create($item_data);
 			$items[]=$new_item;
+
+
+		}
+		if(count($items)==1){
 			
-
-		}
-		if(count($items)==1)
 			return $items[0];
-		else
-			return $items;
-
 		}
-		else
+		else{
+			return $items;
+		}
+		}
+		else{
 			return null;
 		
 
@@ -170,7 +191,7 @@ class item{
 
 
 }
-
+}
 
 
 ?>

@@ -12,14 +12,8 @@
 				<ol class="tree">
 					<?php
 					
-					require 'includes/CategoryTree/category_tree_editable.php'; 
-					 
+					require 'includes/CategoryTree/NewCatStruct.php'; 
 					
-					foreach ($catagories as $catagory){
-						if ($catagory->get_parent() == (NULL||0)){
-						collapseTree($catagory, $catagories);
-						}
-					}
 					
 					?>
 					<div id="mainCat">
@@ -60,18 +54,20 @@
 
 
 <script type="text/javascript">
-var cat_ID = 0;
+var cat_label = "0000";
 var cat_NAME;
 var cat_ID_new_division = "mainCat";
+var cur_cat_id;
 
-function catCliked(cat_id,name)
+function catCliked(lable,name,id)
 {
-	loadXMLDoc(cat_id)
+	loadXMLDoc(id)
 	newCatCancel();
-	cat_ID = cat_id;
+	cat_label = lable;
 	cat_NAME = name;
+	cur_cat_id = id;
 	document.getElementById("selectedCatLbl").innerHTML=name;
-	cat_ID_new_division = cat_id + ".1"
+	cat_ID_new_division = lable + ".1"
 	var w= "";
 	w+= '<a class="button icon chat" id="dltCatBtn" onclick="deleteCat()"><span>Delete</span></a>';
 	document.getElementById("dltCat").innerHTML=w;
@@ -84,7 +80,7 @@ function catCliked(cat_id,name)
 function addNewCat()
 {
     var s= "";
-    s+= '<input type="text" id="'+cat_ID_new_division+'name" required="required"/>'; //Create one textbox as HTML
+    s+= '<input type="text" id="'+cat_ID_new_division+'name" required="required">'; //Create one textbox as HTML
     document.getElementById(cat_ID_new_division).innerHTML=s;
 	var t= "";
 	t+= '<a class="button icon chat" id="submit_cat" onclick="submitNewCat()"><span>Add</span></a>';
@@ -99,10 +95,10 @@ function addNewCat()
 function submitNewCat()
 {
 	var newCatTxtId = cat_ID_new_division+"name";
-	var newCatTxtValue = document.getElementById(newCatTxtId).value
-	if(newCatTxtValue!=""){
-	var dataString = 'parent1='+ cat_ID + '&cat_name1='+ newCatTxtValue;	
-		
+	var newCatTxtValue = document.getElementById(newCatTxtId).value;
+	if(newCatTxtValue!=""){	
+	var dataString ='cat_name1='+ newCatTxtValue;	
+	
 $.ajax({
 type: "POST",
 url: "submit_cat.php",
@@ -129,7 +125,7 @@ function newCatCancel()
 function deleteCat()
 {
     if (confirm("Are you sure that you want to delete this category? " + cat_NAME) == true) {
-        var dataString = 'CatId='+ cat_ID + '&cat_name='+ cat_NAME;
+        var dataString = 'CatLabel='+ cat_label + '&cat_name='+ cat_NAME;
 	$.ajax({
 	type: "POST",
 	url: "delete_cat.php",
@@ -158,7 +154,7 @@ function submitEditedCat()
 {
     if (confirm("Are you sure that you want to change the category " + cat_NAME + "?") == true) {
 	var editedCatName = document.getElementById("editCatNameTxtbx").value;
-        var dataString = 'CatId='+ cat_ID + '&edited_cat_name='+ editedCatName;
+        var dataString = 'CatLabel='+ cat_label + '&edited_cat_name='+ editedCatName;
 	$.ajax({
 	type: "POST",
 	url: "edit_cat.php",
@@ -206,6 +202,7 @@ xmlhttp.onreadystatechange=function()
   }
  xmlhttp.open("GET", "itemViewerEditable.php?cat_id=" + cat_id, true);
         xmlhttp.send();
+
 }
 
 

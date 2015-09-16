@@ -4,6 +4,24 @@ require 'core/init.php';
 $cat_id = $_GET["cat_id"];
 if(isset($cat_id))
 {
+	$category = Category::search(array("category_id"=>$cat_id));
+	$items = $category->get_items();
+	foreach($items as $label1){
+		
+		foreach($label1 as $label2){
+		echo "<div id='item'>";
+		echo "<a href='default.asp'>";
+		//echo "<img src='".$row1['image_url']."'>";
+		echo $label2->get_name();
+		echo "</a>";
+		echo "</div>";
+		}
+	}
+
+
+
+
+
 	//itemView($cat_id);
 	echo '<div  class="dashicon" >';
 	echo		'<a href="item_add.php">';
@@ -14,40 +32,5 @@ if(isset($cat_id))
 
 }
 
-function itemView($cat_id){
-	$item_ids = "SELECT item_id FROM item_category WHERE Cat_ID=$cat_id;";
-	$fetch2 = mysql_query($item_ids);
-	$itemSet = array();
-	$num=mysql_num_rows($fetch2);
-	
-	if(0==$num){}
-else{
-
-	while($row = mysql_fetch_assoc($fetch2))
-	{
-		$itemSet[] = $row['item_id'];
-		$item_id = $row['item_id'];
-		$item_details = "SELECT item_name,image_url FROM item WHERE item_id=$item_id;";
-		$fetch3 = mysql_query($item_details);
-		$num1=mysql_num_rows($fetch3);
-		echo "<div id='item'>";
-		if(0==$num1){
-			echo "NO IMAGE";
-		}
-		else{
-			while($row1 = mysql_fetch_assoc($fetch3)){
-				echo "<a href='default.asp'>";
-				echo "<img src='".$row1['image_url']."'>";
-				echo $row1['item_name'];
-				echo "</a>";
-			}
-		}
-		
-		echo "</div>";
-	}
-}
-
-
-}
 
 ?>

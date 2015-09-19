@@ -19,6 +19,7 @@ if(password_verify("nalinda",$hash)){
 	echo "invalid";
 }
 
+echo "test";
 
 
 //echo date_format(date_add(DateTime::createFromFormat('d/m/Y', date("d/m/Y")),date_interval_create_from_date_string("5 years")),"d/m/Y");

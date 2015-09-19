@@ -28,13 +28,13 @@ class Category {
 		foreach ($result as $key => $row) {
 		$catagory = new Category;
 		$catagory->set_id($row['category_id']);
-		$catagory->set_label($row['category_label']);
+		$catagory->set_label($row['category_no']);
 		$catagory->set_name($row['category_name']);
 		//$catagories[] = $catagory;
-		$mainCat1 = substr($row['category_label'],0,1);
-		$mainCat2 = substr($row['category_label'],1,1);
-		$subCat1 = substr($row['category_label'],2,1) ;
-		$subCat2 = substr($row['category_label'],3,1);
+		$mainCat1 = substr($row['category_no'],0,1);
+		$mainCat2 = substr($row['category_no'],1,1);
+		$subCat1 = substr($row['category_no'],2,1) ;
+		$subCat2 = substr($row['category_no'],3,1);
 		//echo"$mainCat1 $mainCat2 $subCat1 $subCat2 # ";
 		if (((int)$subCat1)==0 && ((int)$subCat2)==0)
 		{	
@@ -67,7 +67,7 @@ class Category {
 
 	public function registerCat(){
 	
-	DB::getInstance()->insertRow("category",array("category_name"=>$this->_name,"category_label"=>$this->_label));
+	DB::getInstance()->insertRow("category",array("category_name"=>$this->_name,"category_no"=>$this->_label));
 	}
 
 	public function deleteCat(){
@@ -149,11 +149,11 @@ class Category {
 			$category_data=array(
 
 				"cat_name"=>$result1[0]["category_name"],
-				"cat_label" => $result1[0]["category_label"]
+				"cat_label" => $result1[0]["category_no"]
 				);
 			$new_category=new Category();
 			$new_category->set_name($result1[0]["category_name"]);
-			$new_category->set_label($result1[0]["category_label"]);
+			$new_category->set_label($result1[0]["category_no"]);
 
 			$itemList = DB::getInstance()->search("item_category",array("category_id"=>$result1[0]["category_id"]));
 			foreach ($itemList as $item){

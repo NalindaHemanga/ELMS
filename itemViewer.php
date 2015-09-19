@@ -2,6 +2,7 @@
 require 'core/init.php';
 
 $cat_id = $_GET["cat_id"];
+$editable = $_GET["editable"];
 if(isset($cat_id))
 {
 	$category = Category::search(array("category_id"=>$cat_id));
@@ -9,8 +10,9 @@ if(isset($cat_id))
 	foreach($items as $label1){
 		
 		foreach($label1 as $label2){
-		echo "<div id='item'>";
-		echo "<a href='default.asp'>";
+		$itemId = $label2->get_id();
+		echo "<div id='$itemId'>";
+		echo "<a onclick = itemClicked(\"$itemId\")>";
 		//echo "<img src='".$row1['image_url']."'>";
 		echo $label2->get_name();
 		echo "</a>";
@@ -19,8 +21,9 @@ if(isset($cat_id))
 	}
 
 
+}
 
-
+if ($editable == 1){
 
 	//itemView($cat_id);
 	echo '<div  class="dashicon" >';

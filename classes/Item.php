@@ -56,6 +56,12 @@ class item{
 		
 	}
 
+	public function get_copies(){
+		
+		return $this->item_copies;
+		
+	}
+
 
 	public function register(){
 

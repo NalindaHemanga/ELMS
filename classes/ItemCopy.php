@@ -64,6 +64,18 @@ class ItemCopy{
 
 	}
 
+	public function get_no(){
+		
+		return $this->no;
+		
+	}
+
+	public function get_id(){
+		
+		return $this->id;
+		
+	}
+
 
 	public static function search($values=array()){
      

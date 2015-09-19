@@ -11,10 +11,26 @@
 		
 				<ol class="tree">
 					<?php
-					
-					require 'includes/CategoryTree/NewCatStruct.php'; 
-					
-					
+						require_once 'core/init.php';
+
+						$categoryStruct = Category::getCatList();
+
+						foreach ($categoryStruct as $mcat1){
+						//echo "1";
+						foreach ($mcat1 as $mcat2){
+						$Cur_label=$mcat2->get_label();
+						$name=$mcat2->get_name();
+						$Cur_id=$mcat2->get_id();
+						//if(is_object($mcat2)){echo"%%";}
+						//echo"$id ";
+						echo "<li>";
+						echo "<label for=$Cur_label>".$name."</label> <input type='checkbox' class='check' id=$Cur_label onclick=catCliked('".$Cur_label."','".$name."','".$Cur_id."') />";
+						echo "</li>";
+						echo "<div id=$Cur_label.1>";
+						echo "</div>";
+							}
+						}
+
 					?>
 					<div id="mainCat">
 					
@@ -200,7 +216,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("content").innerHTML=xmlhttp.responseText;
     }
   }
- xmlhttp.open("GET", "itemViewerEditable.php?cat_id=" + cat_id, true);
+ xmlhttp.open("GET", "itemViewer.php?cat_id=" + cat_id + "&editable=" + 1, true);
         xmlhttp.send();
 
 }
@@ -229,5 +245,33 @@ return false;
 }
 
 
+function itemClicked(itemId) {
 
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("content").innerHTML=xmlhttp.responseText;
+    }
+  }
+ xmlhttp.open("GET", "getItemDetails.php?item_id=" + itemId, true);
+        xmlhttp.send();
+}
+
+function itemCopyClicked(itemCopyId) {
+
+	alert(itemCopyId);
+
+}
 </script>
+
+

@@ -139,9 +139,8 @@ class Category {
 
 	public static function search($values=array()){
 
-		
-		$result1=DB::getInstance()->search("category",$values);
 
+		$result1=DB::getInstance()->search("category",$values);
 		if(count($result1)!=0){
 			
 			
@@ -156,12 +155,12 @@ class Category {
 			$new_category->set_label($result1[0]["category_no"]);
 
 			$itemList = DB::getInstance()->search("item_category",array("category_id"=>$result1[0]["category_id"]));
+
+
 			foreach ($itemList as $item){
 			$new_category->addItem(Item::search(array("item_id"=>$item["item_id"])));
-
 			}
 		
-
 			return $new_category;
 			
 		}

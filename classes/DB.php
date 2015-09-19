@@ -47,7 +47,7 @@ class DB {
 
 
 	public function search($table,$values=array()){
-		
+		//echo"Done";
 		try{
 
 		if(count($values)>0){

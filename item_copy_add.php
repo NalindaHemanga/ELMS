@@ -1,7 +1,11 @@
 <?php
   
     require_once 'core/init.php';
-  
+    if(count($_GET) > 0){
+	
+	$_SESSION['itemName'] = $_GET["item_name"];
+	$_SESSION['itemId'] = $_GET["item_id"];
+	}
 
     if(count($_POST) > 0) {
         
@@ -18,7 +22,7 @@
 		"installed_date" 	=>	date('Y-m-d'),
 		"condition"			=>	"Working Properly",
 		"supplier"			=>	$_POST["supplier"],
-		"item_id"			=> 	2
+		"item_id"			=> 	$_SESSION['itemId']
 
 	);
 
@@ -42,7 +46,7 @@
         
 
      $new_item_copy = new ItemCopy();
-     $new_item_copy->create($_SESSION["form_data"]);
+     $new_item_copy->createNew($_SESSION["form_data"]);
 	
 	if($new_item_copy->register()){
 
@@ -171,8 +175,8 @@
        
        	 <form class="form" enctype="multipart/form-data" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" >
         	<div class="form_description">
-				<h2>Item Copy Registration</h2>
-				<p>Use This form to register an Item Copy</p>
+				<h2>Item Copy Registration - <?php echo $_SESSION['itemName'];?> </h2>
+				<p>Use This form to register an Item Copy into <?php echo $_SESSION['itemName'];?></p>
 			</div>	
 				
 			<div class="container" style="width:100%;">
@@ -181,10 +185,10 @@
 						
 						<ul>
 						
-							<li>
+							<!--<li>
 								<label class="description" for="item_no">Item No</label>
         						<div><input type="text" class="large text" name="item_no" required="required" ></div>
-        					</li>
+        					</li> -->
 
         					
 

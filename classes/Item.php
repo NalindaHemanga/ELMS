@@ -35,7 +35,38 @@ class item{
 		$this->category				=	$data["category"];
 		$this->reference 			=	$data["reference"];
 		$this->item_copies 			=	$data["item_copies"];
-	
+
+
+	}
+
+
+	public function createNew($data=array()){
+
+		$this->id 					=	$data["id"];
+		$this->no 					=	$data["no"];
+		$this->name	 				= 	$data["name"];
+		$this->type					=	$data["type"];
+		$this->technical_details 	= 	$data["technical_details"];
+		$this->description			=   $data["description"];
+		$this->quantity 			=	$data["quantity"];
+		$this->category				=	$data["category"];
+		$this->reference 			=	$data["reference"];
+		$this->item_copies 			=	$data["item_copies"];
+
+	$category = Category::search(array("category_id"=>$data["category"]));
+	$itemList = $category->get_items();
+
+	if (!empty($itemList[strtoupper(substr($data["name"],0,1))])){
+		array_push($itemList[strtoupper(substr($data["name"],0,1))],$this);
+	}
+	else{
+		$itemList[strtoupper(substr($data["name"],0,1))][1] = $this;
+	}
+	end($itemList[strtoupper(substr($data["name"],0,1))]);
+	$last_id=key($itemList[strtoupper(substr($data["name"],0,1))]);
+	$newItemLabel = strtoupper(substr($data["name"],0,1)).(string)$last_id;
+	$this->no = $newItemLabel;
+
 	}
 
 	public function get_no(){
@@ -115,7 +146,6 @@ class item{
 
 	public static function search($values=array()){
      
-     
 		
 		$items=array();
 		$result1=DB::getInstance()->search("item",$values);
@@ -124,7 +154,7 @@ class item{
 			
 			for($x=0;$x<count($result1);$x++){
 
-
+			
 			$ref_result=DB::getInstance()->search("item_reference",array("item_id"=>$result1[$x]["item_id"]));
 
 			$reference=array();
@@ -136,6 +166,7 @@ class item{
 
 
 			}
+
 
 			$cat_result=DB::getInstance()->search("item_category",array("item_id"=>$result1[$x]["item_id"]));
 			$categories=array();
@@ -149,8 +180,16 @@ class item{
 			}
 
 			$item_copies=ItemCopy::search(["item_id"=>$result1[$x]["item_id"]]);
+			$item_copies_orderd = array();
+			if(is_array($item_copies)){
 
-
+			foreach($item_copies as $itemCopy){
+				$item_copies_orderd[$itemCopy->get_no()] = $itemCopy;
+			}
+			}
+			else if(is_object($item_copies)){
+				$item_copies_orderd[$item_copies->get_no()] = $item_copies;
+			}
 	
 			$item_data=array(
 
@@ -165,12 +204,13 @@ class item{
 				"quantity" 				=>	$result1[$x]["item_quantity"],
 				"category"				=>	$categories,
 				"reference" 			=>	$reference,
-				"item_copies" 			=>	$item_copies
+				"item_copies" 			=>	$item_copies_orderd
 				
 				);
 
 		
 			$new_item=new Item();
+
 			$new_item->create($item_data);
 			$items[]=$new_item;
 

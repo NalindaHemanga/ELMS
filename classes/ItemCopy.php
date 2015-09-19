@@ -20,6 +20,36 @@ class ItemCopy{
 
 	}
 
+	public function createNew($data=array()){
+
+		$this->id 				= 	$data["id"];
+		$this->no 				=	$data["no"];
+		$this->owner	 		= 	$data["owner"];
+		$this->status			=	$data["status"];
+		$this->barcode 			= 	$data["barcode"];
+		$this->price 			=   $data["price"];
+		$this->installed_date 	=	$data["installed_date"];
+		$this->condition 		=	$data["condition"];
+		$this->supplier			=	$data["supplier"];
+		$this->item_id			= 	$data["item_id"];
+
+	$parentItem = Item::search(array("item_id"=>$data["item_id"]));
+
+	$itemCopyList = $parentItem->get_copies();
+
+	if (!empty($itemCopyList)){
+		array_push($itemCopyList,$this);
+	}
+	else{
+		$itemCopyList[1] = $this;
+	}
+	end($itemCopyList);
+	$last_id=key($itemCopyList);
+	$newItemCopyNo = $last_id;
+	$this->no = $newItemCopyNo;
+
+	}
+
 
 
 	public function create($data=array()){

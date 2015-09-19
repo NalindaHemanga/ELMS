@@ -3,33 +3,35 @@
     require_once 'core/init.php';
   
 
+    if(count($_GET) > 0) {
+	
+	        $_SESSION['categoryName'] = $_GET["cat_name"];
+	        $_SESSION['categoryId'] = $_GET["cat_id"];
+		$_SESSION['categoryNo'] =$_GET["cat_no"];
+	}
+
     if(count($_POST) > 0) {
         
-       
 		
     	$item_data = array(
 
 		"id"					=> 	null,
-		"no" 					=>	$_POST["item_no"],
+		"no" 					=>	null,
 		"name"	 				=> 	$_POST["item_name"],
 		"type"					=>	$_POST["item_type"],
 		"technical_details" 	=> 	$_POST["item_tec_desc"],
 		"description"			=>  $_POST["item_desc"],
 		"quantity" 				=>	0,
-		"category"				=>  $_POST["category"],
+		"category"				=>  $_SESSION['categoryId'],
 		"reference" 			=>	$_POST["reference"],
 		"item_copies"			=>	null
 
 	);
 
     	
-    	
-    	
     	$temp_path=$_FILES["item_picture"]["tmp_name"];
     	$img_type = pathinfo($_FILES["item_picture"]["name"],PATHINFO_EXTENSION);
-    	
-
-    	move_uploaded_file($temp_path, "img/items/" . $_POST["item_no"].".".$img_type);
+    	move_uploaded_file($temp_path, "img/items/" . $_POST["item_name"].$_SESSION['categoryNo']."."."jpg");
     	
 
 
@@ -46,7 +48,7 @@
         
 
      $new_item = new Item();
-     $new_item->create($_SESSION["form_data"]);
+     $new_item->createNew($_SESSION["form_data"]);
 	
 	if($new_item->register()){
 
@@ -136,7 +138,7 @@
        
        	 <form class="form" enctype="multipart/form-data" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" >
         	<div class="form_description">
-				<h2>Add New Item</h2>
+				<h2>Add New Item to <?php if(isset($_SESSION['categoryName'])){echo $_SESSION['categoryName'];}?></h2>
 				<p>Use This form to register a new Item</p>
 			</div>	
 				
@@ -146,31 +148,13 @@
 						
 						<ul>
 						
-							<li>
-								<label class="description" for="item_no">Item No</label>
-        						<div><input type="text" class="large text" name="item_no" required="required"></div>
-        					</li>
+						
 
 							<li>
 								<label class="description" for="item_name">Item Name</label>
         						<div><input type="text" class="large text" name="item_name" required="required"></div>
         					</li>
 
-        					 <li>
-                                <label class="description" for="category">Item Category</label>
-                                <select class="element large select" name="category" required="required">  
-                                    <option value="" selected="selected">Select</option>
-                                    <?php
-                                    	$categories=Category::getAllCategories();
-                                    	foreach ($categories as $key => $value) {
-                                    		echo '<option value="'.$value['category_id'].'"\>'.$value['category_name']."</option>";
-                                    	}
-
-                                    ?>
-                                       
-                                </select>
-                                
-                            </li>
 
         					
 
@@ -244,7 +228,7 @@
 
         					<label class="description">Item Type</label>
 							<span>
-									<input name="item_type" class="radio" type="radio" value="1" checked="checked"/>
+									<input name="item_type" class="radio" type="radio" value="1" />
 										<label class="choice" for="item_type">Non-consumable</label>
 									<input name="item_type" class="radio" type="radio" value="0" />
 										<label class="choice" for="item_type">Consumable</label>

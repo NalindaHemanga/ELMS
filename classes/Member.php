@@ -67,6 +67,38 @@ class Member {
 
 	}
 
+	public function getRoles(){
+		$roles=array();
+		foreach ($this->type as $key => $value) {
+			switch($value){
+
+				case "sys_ad":$roles[]="System Administrator";break;
+				case "lab_ad":$roles[]="Laboratory Administrator";break;
+				case "lab_as":$roles[]="Laboratory Assistant";break;
+				case "rel_lec":$roles[]="Related Lecturer";break;
+				case "nrel_lec":$roles[]="Non-Related Lecturer";break;
+				case "rel_ta":$roles[]="Related Teaching Assistant";break;
+				case "nrel_ta":$roles[]="Non-Realated Teaching Assistant";break;
+				case "u_std":$roles[]="Undergraduate Student";break;
+				case "g_std":$roles[]="Graduate Student";break;
+				case "col":$roles[]="Collaborator";break;
+				case "tmp_mem":$role[]="Temporary Member";break;
+
+			}
+		}
+
+		return implode(" , ",$roles);
+
+
+	}
+
+	public function getRemarks(){
+
+		return $this->remarks;
+
+
+	}
+
 
 	public function register(){
 

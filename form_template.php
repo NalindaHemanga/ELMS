@@ -92,6 +92,21 @@
 					<!-- CHECK BOX -->
 
 					<li>
+						<label class="description" for="dropdown">Drop Down</label>
+							<div>
+								<select class="medium select" name="dropdown"> 
+									
+									<option value="0" selected="selected"><input name="first_option" class="radio" type="radio" value="1" checked="checked"/>
+										<label class="choice" for="first_option">First option</label></option>
+									<option value="1" >First option</option>
+									<option value="2" >Second option</option>
+									<option value="3" >Third option</option>
+
+								</select>
+							</div> 
+					</li>	
+
+					<li>
 						<label class="description">Checkboxes</label>
 							<span>
 									

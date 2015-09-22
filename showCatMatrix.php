@@ -46,7 +46,7 @@ foreach($categoryStruct as $key => $value){
 			}
 		}
 	}
-
+ksort($itemTable);
 echo "<tr>";
 echo "<td colspan = \"2\"></td>";
 //echo "<td></td>";

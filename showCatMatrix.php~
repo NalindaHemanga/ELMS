@@ -18,7 +18,7 @@ th, td {
 </style>
 </head>
 <body>
-<h2>Cell that spans two rows:</h2>
+<h2>Category Matrix</h2>
 <table style="width:100%">
 
 <?php
@@ -46,7 +46,7 @@ foreach($categoryStruct as $key => $value){
 			}
 		}
 	}
-
+print_r($itemTable);
 echo "<tr>";
 echo "<td colspan = \"2\"></td>";
 //echo "<td></td>";

@@ -36,7 +36,8 @@
             </div>
 
             <div class="" id="rightpane">
-                    <div style="position:relative;top:50%;text-align:center;">Drag and drop item copies here !!</div>
+                
+                    <div style="text-align:center;">Drag and Drop Item copies here to issue</div>
             </div>
 
 

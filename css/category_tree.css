@@ -1,5 +1,5 @@
 
-html { font-family: Verdana, Arial, Helvetica, sans-serif; }
+
 
 
 ol.tree
@@ -9,7 +9,7 @@ ol.tree
 	font-size: 13px;
 	font-weight: bold;
 }
-	li 
+	li.node 
 	{ 
 		/*position: relative; */
 		margin-left: -5px;

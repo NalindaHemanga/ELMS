@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
 <link rel="stylesheet" type="text/css" href="css/form.css" />
+<script src="js/calendar.js"></script>
 
 </head>
 <body>
@@ -158,6 +159,40 @@
 					</li>	
 
 					<li>
+
+
+					<!-- DATE -->
+
+					<li id="li_1" >
+		<label class="description" for="element_1">Date </label>
+		<span>
+			<input id="element_1_1" name="element_1_1" class="element text" disabled="disabled" size="2" maxlength="2" value="" type="text"> /
+			<label for="element_1_1">MM</label>
+		</span>
+		<span>
+			<input id="element_1_2" name="element_1_2" class="element text" disabled="disabled" size="2" maxlength="2" value="" type="text"> /
+			<label for="element_1_2">DD</label>
+		</span>
+		<span>
+	 		<input id="element_1_3" name="element_1_3" class="element text" disabled="disabled" size="4" maxlength="4" value="" type="text">
+			<label for="element_1_3">YYYY</label>
+		</span>
+	
+		<span id="calendar_1">
+			<img id="cal_img_1" class="datepicker" src="img/calendar.gif" alt="Pick a date.">	
+		</span>
+		<script type="text/javascript">
+			Calendar.setup({
+			inputField	 : "element_1_3",
+			baseField    : "element_1",
+			displayArea  : "calendar_1",
+			button		 : "cal_img_1",
+			ifFormat	 : "%B %e, %Y",
+			onSelect	 : selectDate
+			});
+		</script>
+		 
+		</li>
 
 						<span>
 							<input type="submit" class="button" value="      SUBMIT      " />

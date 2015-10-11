@@ -29,7 +29,7 @@ class Supplier{
 		$this->country 		=	$data["country"];
 		$this->telephone	=	$data["telephone"];
 
-		
+
 
 	}
 
@@ -37,21 +37,21 @@ class Supplier{
 
 		$row = array(
 
-			"supplier_name" => $this->company, 	 	
-			"supplier_email" => $this->email, 		
-			"supplier_address_line1" => $this->street,	 	
-			"supplier_address_line2" => $this->line2,	
-			"supplier_city" => $this->city,		
-			"supplier_province" => $this->province, 	
-			"supplier_postal" => $this->postal, 		
-			"supplier_country" => $this->country 		
-			
+			"supplier_name" => $this->company,
+			"supplier_email" => $this->email,
+			"supplier_address_line1" => $this->street,
+			"supplier_address_line2" => $this->line2,
+			"supplier_city" => $this->city,
+			"supplier_province" => $this->province,
+			"supplier_postal" => $this->postal,
+			"supplier_country" => $this->country
 
-				
+
+
 			);
 
-		
-		
+
+
 
 		if(DB::getInstance()->insertRow("supplier",$row)){
 
@@ -75,7 +75,7 @@ class Supplier{
 		else
 			return false;
 
-		
+
 
 	}
 

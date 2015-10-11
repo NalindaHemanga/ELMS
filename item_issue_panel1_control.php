@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	require_once 'core/init.php';
 	$searchValue=$_GET["searchVal"];
@@ -6,24 +6,24 @@
 
 	if($new_member){
 		echo "<div>";
-		echo "<fieldset bgcolor='white'>";
+		echo "<fieldset>";
 		echo "<legend>Member Details</legend>";
 		echo "<div style='display:inline-block'>";
-		
+
 		echo "<img src='img/profile_pictures/".$new_member->getNicNo().".jpg' width='100' hight='120' style='border:1px solid #ccc;'/>";
 		echo "</div>";
 
 		echo "<div style='display:inline-block;vertical-align:top'>";
-		
-		
-		
+
+
+
 		echo "<table style='padding:20px;'>";
 		echo "<tr><td>Name    :<th><td>".$new_member->getInitials() . " " . $new_member->getSurname()."<td><tr>";
 		echo "<tr><td>Role/s    :<th><td>".$new_member->getRoles()."<td><tr>";
 		echo "<tr><td>Remarks :<th><td>".$new_member->getRemarks()."<td><tr>";
 		echo "</table>";
-		
-		
+
+
 		echo "</div>";
 		echo "</fieldset>";
 		echo "</div>";

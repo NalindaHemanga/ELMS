@@ -35,6 +35,7 @@ class DB {
 	public function getLastId(){ 
 		return $this->pdo->lastInsertId();
 	}
+	
 	public function directInsert($sql){
 		
 		$this->query=$this->pdo->prepare($sql);

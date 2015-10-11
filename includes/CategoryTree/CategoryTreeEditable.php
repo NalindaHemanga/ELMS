@@ -6,10 +6,13 @@
 <div id="subcolumnwrap">
         <div id="treecolumn">
 		<div id="coltree" style="overflow-y:auto; height:350px; background: #D7DADB;">
-		
+
 		<font size="5" face="Agency FB"><center><strong>Item Categories</strong></center></font>
-		
+
 				<ol class="tree">
+
+
+          
 					<?php
 						require_once 'core/init.php';
 
@@ -23,7 +26,7 @@
 						$Cur_id=$mcat2->get_id();
 						//if(is_object($mcat2)){echo"%%";}
 						//echo"$id ";
-						echo "<li>";
+						echo "<li class='node'>";
 						echo "<label for=$Cur_label>".$name."</label> <input type='checkbox' class='check' id=$Cur_label onclick=catCliked('".$Cur_label."','".$name."','".$Cur_id."') />";
 						echo "</li>";
 						echo "<div id=$Cur_label.1>";
@@ -33,7 +36,7 @@
 
 					?>
 					<div id="mainCat">
-					
+
 					</div>
 				</ol>
 		</div>
@@ -62,12 +65,12 @@
 
 </div>
 <div >
-<label onclick = "showCatMatrix()";>Show category matrix</label> 
+<label onclick = "showCatMatrix()";>Show category matrix</label>
 </div>
 </center>
 </div>
 </div>
-            
+
        		</div>
 </div>
 
@@ -115,9 +118,9 @@ function submitNewCat()
 {
 	var newCatTxtId = cat_ID_new_division+"name";
 	var newCatTxtValue = document.getElementById(newCatTxtId).value;
-	if(newCatTxtValue!=""){	
-	var dataString ='cat_name1='+ newCatTxtValue;	
-	
+	if(newCatTxtValue!=""){
+	var dataString ='cat_name1='+ newCatTxtValue;
+
 $.ajax({
 type: "POST",
 url: "submit_cat.php",
@@ -155,7 +158,7 @@ function deleteCat()
 	});
 	setTimeout(function(){reloadpg();},100);
     } else {
-        
+
     }
 }
 
@@ -184,7 +187,7 @@ function submitEditedCat()
 	});
 	setTimeout(function(){reloadpg();},100);
     } else {
-        
+
     }
 }
 
@@ -298,5 +301,3 @@ xmlhttp.onreadystatechange=function()
         xmlhttp.send();
 }
 </script>
-
-

@@ -12,23 +12,23 @@
 <script src="lib/jquery.min.js"></script>
 
 <script type="text/javascript">
-	
+
 function searchMember(){
 
-	
+
 
 	var val=document.getElementById("searchVal").value;
 	dataString="searchVal="+val;
-		
-		
-		
+
+
+
 		$.ajax({
 			type: "GET",
 			url: "item_issue_panel1_control.php",
 			data: dataString,
-			
+
 			success: function(data) {
-				
+
 				$("#result").html(data);
 			}
 			});
@@ -50,11 +50,11 @@ function searchMember(){
 <body>
     <div id="wrapper">
 		<?php include "includes/header.php" ?>
-		
+
 		<?php include "includes/leftnav.php" ?>
 		<div id="contentwrap">
         <div id="content">
-        
+
 			<div  style="width:50%;display:inline-block;vertical-align:top;">
 			<ul style="list-style-type:none;">
 			<li>
@@ -70,7 +70,7 @@ function searchMember(){
 				<form class="form" onsubmit="return searchMember();" id="searchForm">
 				<ul>
 				<li>
-						
+
         				<div>
 
         				<div><input type="search" class="medium text" name="searchVal" id="searchVal" placeholder=" Search Member By NIC" required="required"/>  <input type="Submit" value="Search" /></div>
@@ -90,7 +90,7 @@ function searchMember(){
 
         </div>
         </div>
-		
+
        <?php include "includes/footer.php" ?>
     </div>
 </body>

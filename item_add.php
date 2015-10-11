@@ -5,14 +5,14 @@
 
     if(count($_GET) > 0) {
 	
-	        $_SESSION['categoryName'] = $_GET["cat_name"];
-	        $_SESSION['categoryId'] = $_GET["cat_id"];
+	    $_SESSION['categoryName'] = $_GET["cat_name"];
+	    $_SESSION['categoryId'] = $_GET["cat_id"];
 		$_SESSION['categoryNo'] =$_GET["cat_no"];
 	}
 
     if(count($_POST) > 0) {
         
-		
+	
     	$item_data = array(
 
 		"id"					=> 	null,
@@ -48,7 +48,7 @@
         
 
      $new_item = new Item();
-     $new_item->createNew($_SESSION["form_data"]);
+     $new_item->create($_SESSION["form_data"]);
 	
 	if($new_item->register()){
 
@@ -228,7 +228,7 @@
 
         					<label class="description">Item Type</label>
 							<span>
-									<input name="item_type" class="radio" type="radio" value="1" />
+									<input name="item_type" class="radio" type="radio" value="1" checked="checked" />
 										<label class="choice" for="item_type">Non-consumable</label>
 									<input name="item_type" class="radio" type="radio" value="0" />
 										<label class="choice" for="item_type">Consumable</label>

@@ -1,14 +1,14 @@
 
 
 <?php
-  
+
     require_once 'core/init.php';
-  
+
 
     if(count($_POST) > 0) {
-        
-       
-		
+
+
+
     	$supplier_data = array(
 
 		"company" 	 	=> 	$_POST["company"],
@@ -23,49 +23,49 @@
 
 	);
 
-    	
-    	
-    	
 
-    	
+
+
+
+
 
 
 
         $_SESSION['form_data'] = $supplier_data;
 
-        
+
         header("Location: supplier_registration.php",true,303);
         die();
     }
     else if (isset($_SESSION['form_data'])){
-        
 
-        
+
+
 
      $new_supplier = new Supplier();
      $new_supplier->create($_SESSION["form_data"]);
-	
+
 	if($new_supplier->register()){
 
 		$message = "You have successfully Registered the Supplier !!";
 		echo "<script type='text/javascript'>alert('$message');</script>";
-	} 
+	}
 
 	else{
-		
-		
+
+
 		$message = "The Supplier Registration was unsuccessful.";
-		echo "<script type='text/javascript'>alert('$message');</script>";	
+		echo "<script type='text/javascript'>alert('$message');</script>";
 
 
 	}
 
-        
+
 
         unset($_SESSION["form_data"]);
-        
+
     }
-    
+
 ?>
 
 
@@ -75,23 +75,23 @@
 <html>
 <head>
 <title>Supplier Registration</title>
-<script language="Javascript" type="text/javascript">
-	
+<script  type="text/javascript">
+
 	var counter = 0;
-	
-	
+
+
 	function addInput(divName){
-		
-     	
-     	
+
+
+
      	     var newli = document.createElement('li');
-     	     
+
 
  			 newli.setAttribute('id', counter);
       		    newli.innerHTML = '<div><input type="text" class="medium text" name="links[]" required="required" pattern="[0-9]{10}"><a href="javascript: void(0)" onClick="removeInput(\'dynamicInput\',\''+counter+'\');"> Remove </a></div>';
          		 document.getElementById(divName).appendChild(newli);
          		 counter++;
-     
+
  }
 
     function removeInput(divName,liid) {
@@ -119,33 +119,33 @@
 <body>
     <div id="wrapper">
 		<?php include "includes/header.php" ?>
-		
+
 		<?php include "includes/leftnav.php" ?>
-		
+
 		<div id="contentwrap">
         <div id="content">
-			
-			
+
+
         <div class="form">
-       
+
        	 <form class="form" enctype="multipart/form-data" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" >
         	<div class="form_description">
 				<h2>Supplier Registration</h2>
 				<p>Use This form to register a new supplier</p>
-			</div>	
-				
+			</div>
+
 			<div class="container" style="width:100%;">
-				
-				
-						
+
+
+
 						<ul>
-						
+
 							<li>
 								<label class="description" for="company">Company Name</label>
         						<div><input id="name" type="text" class="medium text" name="company" required="required" ></div>
         					</li>
 
-      
+
 
 							<li>
 								<label class="description"for="email">E-mail Address</label>
@@ -154,35 +154,35 @@
 
         					<li>
 		<label class="description" for="element_1">Address </label>
-		
+
 		<div>
 			<input id="street" name="street" class="element text medium"  type="text" required="required">
 			<label for="street">Street Address</label>
 		</div>
-	
+
 		<div>
 			<input id="line2" name="line2" class="element text medium" value="" type="text" required="required">
 			<label for="line2">Address Line 2</label>
 		</div>
-	
+
 		<div class="left">
 			<input id="city" name="city" class="element text small"  type="text" required="required">
 			<label for="city">City</label>
 		</div>
-	
+
 		<div class="right">
 			<input id="province" name="province" class="element text small"  type="text">
 			<label for="province">State / Province / Region</label>
 		</div>
-	
+
 		<div class="left">
 			<input id="postal" name="postal" class="element text small" maxlength="15"  type="text">
 			<label for="postal">Postal / Zip Code</label>
 		</div>
-	
+
 		<div class="right">
-			<select class="element select small" id="country" name="country" required="required"> 
-			
+			<select class="element select small" id="country" name="country" required="required">
+
 <option value="Afghanistan" >Afghanistan</option>
 <option value="Albania" >Albania</option>
 <option value="Algeria" >Algeria</option>
@@ -378,35 +378,35 @@
 <option value="Yemen" >Yemen</option>
 <option value="Zambia" >Zambia</option>
 <option value="Zimbabwe" >Zimbabwe</option>
-	
+
 			</select>
 		<label for="element_1_6">Country</label>
-	</div> 
+	</div>
 		</li>
 
-        					
 
 
-        			
-        				
-				
+
+
+
+
         					<li>
 					<label class="description" for="links[]">Telephone</label>
 					</li>
-					
+
 					 <div id="dynamicInput">
-          				
+
     				 </div>
-    				
+
     				 <li>
      				<a href="javascript: void(0)" onClick="addInput('dynamicInput');">Click to add Telephone Number</a>
      				</li>
 
 
-				
+
      				<br/><br/>
-				
-					
+
+
 					<li>
 
 						<span>
@@ -415,7 +415,7 @@
 
 						</span>
 						<span>
-							
+
 
 							<input type="reset"  class="button" />
 						</span>
@@ -423,7 +423,7 @@
 					</li>
 
 					</ul>
-        
+
 
 
         </div>
@@ -435,7 +435,7 @@
 
         </div>
         </div>
-		
+
        <?php include "includes/footer.php" ?>
     </div>
 </body>

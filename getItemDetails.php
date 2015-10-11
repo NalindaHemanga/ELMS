@@ -11,7 +11,8 @@ if(isset($item_id))
 	foreach($copies as $itemCopy){
 	$itemCopyId = $itemCopy->get_id();
 	$itemCopyNo = $itemCopy->get_no();
-	echo"<li onclick = itemCopyClicked(\"$itemCopyId\")>$itemCopyNo</li>";
+	echo"<li class='node' 
+	draggable='true' style='border:1px solid #1fb8eb' onclick = itemCopyClicked(\"$itemCopyId\")>$itemCopyNo</li>";
 	}
 	echo"</ul>";
 	}else{echo"No item copies for this item.";}

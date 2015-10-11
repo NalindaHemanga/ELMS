@@ -1,16 +1,16 @@
 <?php
-  
+
     require_once 'core/init.php';
     if(count($_GET) > 0){
-	
+
 	$_SESSION['itemName'] = $_GET["item_name"];
 	$_SESSION['itemId'] = $_GET["item_id"];
 	}
 
     if(count($_POST) > 0) {
-        
-       
-		
+
+
+
     	$item_copy_data = array(
 
 		"id"				=>	null,
@@ -26,49 +26,49 @@
 
 	);
 
-    	
-    	
-    	
-    	
-    	
+
+
+
+
+
 
 
 
         $_SESSION['form_data'] = $item_copy_data;
 
-        
+
         header("Location: item_copy_add.php",true,303);
         die();
     }
     else if (isset($_SESSION['form_data'])){
-        
 
-        
+
+
 
      $new_item_copy = new ItemCopy();
      $new_item_copy->createNew($_SESSION["form_data"]);
-	
+
 	if($new_item_copy->register()){
 
 		$message = "You have successfully Inserted an Item Copy!!";
 		echo "<script type='text/javascript'>alert('$message');</script>";
-	} 
+	}
 
 	else{
-		
-		
+
+
 		$message = "The Item Copy insertion was unsuccessful.";
-		echo "<script type='text/javascript'>alert('$message');</script>";	
+		echo "<script type='text/javascript'>alert('$message');</script>";
 
 
 	}
 
-        
+
 
         unset($_SESSION["form_data"]);
-        
+
     }
-    
+
 ?>
 
 
@@ -92,23 +92,23 @@
 	<script src="lib/jquery.min.js"></script>
 
 <script  type="text/javascript">
-	
+
 	var counter = 0;
 	
-	
-	function addInput(divName){
-		
-     	
-     	
-     	     var newli = document.createElement('li');
-     	     
 
- 			 newli.setAttribute('id', counter);
-      		    newli.innerHTML = '<div><input type="text" class="medium text" name="tel[]" required="required" pattern="[0-9]{10}"><a href="javascript: void(0)" onClick="removeInput(\'dynamicInput\',\''+counter+'\');"> Remove </a></div>';
-         		 document.getElementById(divName).appendChild(newli);
-         		 counter++;
-     
- }
+    function addInput(divName){
+
+
+
+        var newli = document.createElement('li');
+
+
+        newli.setAttribute('id', counter);
+        newli.innerHTML = '<div><input type="text" class="medium text" name="tel[]" required="required" pattern="[0-9]{10}"><a href="javascript: void(0)" onClick="removeInput(\'dynamicInput\',\''+counter+'\');"> Remove </a></div>';
+        document.getElementById(divName).appendChild(newli);
+        counter++;
+
+    }
 
     function removeInput(divName,liid) {
 
@@ -125,15 +125,15 @@
 		var form=document.getElementById("supplierForm");
 
 		var dataString = $(form).serialize();
-		
-		
+
+
 		$.ajax({
 			type: "POST",
 			url: "remote_supplier_registration.php",
 			data: dataString,
-			
+
 			success: function(json_data) {
-				
+
 				form.reset();
 				var div=document.getElementById("dynamicInput");
 				div.innerHTML="";
@@ -150,8 +150,8 @@
 			}
 			});
 
-		
-		
+
+
 
 		return false;
 
@@ -164,33 +164,33 @@
 <body>
     <div id="wrapper">
 		<?php include "includes/header.php" ?>
-		
+
 		<?php include "includes/leftnav.php" ?>
-		
+
 		<div id="contentwrap">
         <div id="content">
-			
-			
+
+
         <div class="form">
-       
+
        	 <form class="form" enctype="multipart/form-data" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" >
         	<div class="form_description">
 				<h2>Item Copy Registration - <?php echo $_SESSION['itemName'];?> </h2>
 				<p>Use This form to register an Item Copy into <?php echo $_SESSION['itemName'];?></p>
-			</div>	
-				
+			</div>
+
 			<div class="container" style="width:100%;">
-				
+
 				<div class="container" style="width:49%;display:inline-block;">
-						
+
 						<ul>
-						
+
 							<!--<li>
 								<label class="description" for="item_no">Item No</label>
         						<div><input type="text" class="large text" name="item_no" required="required" ></div>
         					</li> -->
 
-        					
+
 
 
         					<li>
@@ -201,9 +201,9 @@
 										<label class="choice" for="copy_owner">Electronic Laboratory</label>
 									<input name="copy_owner" class="radio" type="radio" value="0" />
 										<label class="choice" for="copy_owner">SCORE Laboratory</label>
-									
 
-							</span> 
+
+							</span>
 
 							</li>
 
@@ -218,7 +218,7 @@
                             <li>
                                 <label class="description" for="supplier">Supplier ( <a href="#openModal">Add New</a> )</label>
 
-                                <select class="element large select" id="supplier_dropdown" name="supplier">  
+                                <select class="element large select" id="supplier_dropdown" name="supplier">
                                     <option value="" selected="selected" required="required">Select</option>
                                     <?php
                                     	$suppliers=Supplier::getAllSuppliers();
@@ -228,12 +228,12 @@
 
                                     ?>
 
-                                       
+
                                 </select>
-                                
+
                             </li>
 
-	
+
         				</ul>
 				</div>
 				<br/><br/>
@@ -254,7 +254,7 @@
 
         </div>
         </div>
-		
+
        <?php include "includes/footer.php" ?>
     </div>
 
@@ -272,25 +272,25 @@
 
 	<div class="form">
 		<a href="#close" title="Close" class="close">X</a>
-       
+
        	 <form id="supplierForm" class="form" onsubmit="return registerSupplier();">
         	<div class="form_description">
 				<h2>Supplier Registration</h2>
 				<p>Use This form to register a new supplier</p>
-			</div>	
-				
+			</div>
+
 			<div class="container" style="width:100%;">
-				
-				
-						
+
+
+
 						<ul>
-						
+
 							<li>
 								<label class="description" for="company">Company Name</label>
         						<div><input id="name" type="text" class="medium text" name="company" required="required" ></div>
         					</li>
 
-      
+
 
 							<li>
 								<label class="description"for="email">E-mail Address</label>
@@ -299,35 +299,35 @@
 
         					<li>
 		<label class="description" for="element_1">Address </label>
-		
+
 		<div>
 			<input id="street" name="street" class="element text medium"  type="text" required="required">
 			<label for="street">Street Address</label>
 		</div>
-	
+
 		<div>
 			<input id="line2" name="line2" class="element text medium" value="" type="text" required="required">
 			<label for="line2">Address Line 2</label>
 		</div>
-	
+
 		<div class="left">
 			<input id="city" name="city" class="element text small"  type="text" required="required">
 			<label for="city">City</label>
 		</div>
-	
+
 		<div class="right">
 			<input id="province" name="province" class="element text small"  type="text">
 			<label for="province">State / Province / Region</label>
 		</div>
-	
+
 		<div class="left">
 			<input id="postal" name="postal" class="element text small" maxlength="15"  type="text">
 			<label for="postal">Postal / Zip Code</label>
 		</div>
-	
+
 		<div class="right">
-			<select class="element select small" id="country" name="country" required="required"> 
-			
+			<select class="element select small" id="country" name="country" required="required">
+
 <option value="Afghanistan" >Afghanistan</option>
 <option value="Albania" >Albania</option>
 <option value="Algeria" >Algeria</option>
@@ -523,35 +523,35 @@
 <option value="Yemen" >Yemen</option>
 <option value="Zambia" >Zambia</option>
 <option value="Zimbabwe" >Zimbabwe</option>
-	
+
 			</select>
 		<label for="element_1_6">Country</label>
-	</div> 
+	</div>
 		</li>
 
-        					
 
 
-        			
-        				
-				
+
+
+
+
         					<li>
 					<label class="description" for="links[]">Telephone</label>
 					</li>
-					
+
 					 <div id="dynamicInput">
-          				
+
     				 </div>
-    				
+
     				 <li>
      				<a href="javascript: void(0)" onClick="addInput('dynamicInput');">Click to add Telephone Number</a>
      				</li>
 
 
-				
+
      				<br/><br/>
-				
-					
+
+
 					<li>
 
 						<span>
@@ -560,7 +560,7 @@
 
 						</span>
 						<span>
-							
+
 
 							<input type="reset"  class="button" />
 						</span>
@@ -568,7 +568,7 @@
 					</li>
 
 					</ul>
-        
+
 
 
         </div>

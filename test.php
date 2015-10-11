@@ -41,6 +41,46 @@ function display(msg){
 </script>
 </html>
 
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#div1, #div2
+{float:left; width:100px; height:100px; margin:10px;padding:10px;border:1px solid #aaaaaa;}
+</style>
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+   var nodeCopy = document.getElementById(data).cloneNode(true);
+    nodeCopy.id = "newId"; /* We cannot use the same ID */
+var option = document.createElement("option");
+var node = document.createTextNode("This is new.");
+option.appendChild(node)
+    ev.target.appendChild(option);
+}
+</script>
+</head>
+<body>
+
+<div id="div1" ondrop="drop(event)" >
+  <img src="img_w3slogo.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
+</div>
+
+<table border=1 ondrop="drop(event)" id="" ondragover="allowDrop(event)">
+<tr><td>Heelloo</td></tr></table>
+
+</body>
+</html>
+
 
 						
         				

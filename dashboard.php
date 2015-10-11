@@ -13,7 +13,7 @@
 <body>
     <div id="wrapper">
 		<?php include "includes/header.php" ?>
-		
+
 		<?php include "includes/leftnav.php" ?>
 		<div id="contentwrap">
         <div id="content">
@@ -38,11 +38,26 @@
 			</a>
 			</div>
 
-			
-			
+			<div  class="dashicon" >
+			<a href="item_issue_panel1.php">
+			<img src="img/icons/transaction.png" height="150" width="150" />
+			Item Transaction
+			</a>
+			</div>
+
+			<div  class="dashicon" >
+			<a href="supplier_manager_dashboard.php">
+			<img src="img/icons/schedule.png" height="150" width="150" />
+			Schedule Manager
+			</a>
+    </div>
+
+
+
+
         </div>
         </div>
-		
+
        <?php include "includes/footer.php" ?>
     </div>
 </body>

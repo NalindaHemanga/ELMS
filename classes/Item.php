@@ -1,4 +1,3 @@
-
 <?php
 
 class item{
@@ -70,9 +69,34 @@ class item{
 
 	}
 
+	public function get_category(){
+		
+		return $this->category;
+		
+	}
+
+
+
 	public function get_no(){
 		
 		return $this->no;
+		
+	}
+
+	public function get_description(){
+		
+		return $this->description;
+		
+	}
+
+	public function get_reference(){
+		
+		return $this->reference;
+		
+	}
+	public function get_technical_details(){
+		
+		return $this->technical_details;
 		
 	}
 
@@ -185,11 +209,11 @@ class item{
 			if(is_array($item_copies)){
 
 			foreach($item_copies as $itemCopy){
-				$item_copies_orderd[$itemCopy->get_no()] = $itemCopy;
+				$item_copies_orderd[substr($itemCopy->get_no(), strpos($itemCopy->get_no(), "#") + 1)] = $itemCopy;
 			}
 			}
 			else if(is_object($item_copies)){
-				$item_copies_orderd[$item_copies->get_no()] = $item_copies;
+				$item_copies_orderd[substr($item_copies->get_no(), strpos($item_copies->get_no(), "#") + 1)] = $item_copies;
 			}
 	
 			$item_data=array(

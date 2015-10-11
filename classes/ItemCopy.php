@@ -106,6 +106,18 @@ class ItemCopy{
 
 	}
 
+	public function get_status(){
+
+		return $this->status;
+
+	}
+
+	public function get_condition(){
+
+		return $this->condition;
+
+	}
+
 
 	public static function search($values=array()){
 

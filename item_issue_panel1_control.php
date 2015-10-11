@@ -47,7 +47,7 @@
 		echo "<br/>";
 		echo "<br/>";
 		echo "<div>";
-		echo "<input type='button' class='button' value='Proceed'/>";
+		echo "<input type='button' class='button' value='Proceed' onclick=\"location.href='item_issue_panel2.php';\"/>";
 		echo "</div>";
 	}
 	else{

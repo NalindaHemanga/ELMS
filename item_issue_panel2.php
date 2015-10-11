@@ -32,11 +32,11 @@
         	</div>
         <div id="content">
             <div class="" id="leftpane">
-
+                <div style="position:relative;top:50%;text-align:center;">No Items to be shown !!</div>
             </div>
 
             <div class="" id="rightpane">
-
+                    <div style="position:relative;top:50%;text-align:center;">Drag and drop item copies here !!</div>
             </div>
 
 

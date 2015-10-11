@@ -60,7 +60,7 @@ class Category {
 	}
 	end($categoryStruct[strtoupper(substr($new_cat_name,0,1))]);
 	$last_id=key($categoryStruct[strtoupper(substr($new_cat_name,0,1))]);
-	$newCategoryLabel = strtoupper(substr($new_cat_name,0,1)).(string)$last_id."00";
+	$newCategoryLabel = strtoupper(substr($new_cat_name,0,1)).(string)$last_id;
 	$this->_label = $newCategoryLabel;
 	
 	}

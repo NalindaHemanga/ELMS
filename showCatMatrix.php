@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +59,7 @@ foreach($categoryTable as $key => $value){
 	if($x == 1){
 		echo "<th rowspan=\"$value\">$key</th>";
 	}
-	$catLabel = $key.$x."00";
+	$catLabel = $key.$x;
 	$category = Category::search(array("category_no"=>$catLabel));
 	$catName = $category->get_name();
 	echo "<td>$x $catName</td>";
@@ -73,10 +68,11 @@ foreach($categoryTable as $key => $value){
 		for($y = 1; $y <= $value2; $y++){
 		if(isset($itemList[$key2][$y])){
 			$itemName = $itemList[$key2][$y]->get_name();
-			echo "<td>$itemName</td>";
+			$itemId = $itemList[$key2][$y]->get_id();
+			echo "<td><a href=\"#\" onclick=cellClicked(\"$itemId\",\"$catLabel\")> $itemName</a></td>";
 		}
 		else{
-			echo "<td>$key2 $y</td>";
+			echo "<td>$key2$y</td>";
 		}
 		}
 	}

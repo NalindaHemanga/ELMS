@@ -64,8 +64,13 @@
 <div id= "submitCat">
 
 </div>
+<<<<<<< HEAD
 <div >
 <label onclick = "showCatMatrix()";>Show category matrix</label>
+=======
+<div style="float: left; padding-left:50px;">
+<a href="#" style="font-family: Georgia, serif; font-size:15px; float: none;" onclick = "showCatMatrix()";>Show category matrix</a> 
+>>>>>>> 996005fb631a6f85790a247d16e4ad757b4ba59d
 </div>
 </center>
 </div>
@@ -269,7 +274,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("content").innerHTML=xmlhttp.responseText;
     }
   }
- xmlhttp.open("GET", "getItemDetails.php?item_id=" + itemId, true);
+ xmlhttp.open("GET", "getItemDetails.php?item_id=" + itemId + "&cat_label=" + cat_label, true);
         xmlhttp.send();
 }
 
@@ -298,6 +303,28 @@ xmlhttp.onreadystatechange=function()
     }
   }
  xmlhttp.open("GET", "showCatMatrix.php", true);
+        xmlhttp.send();
+}
+
+function cellClicked(itemId,catLabel) {
+
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("content").innerHTML=xmlhttp.responseText;
+    }
+  }
+ xmlhttp.open("GET", "getItemDetails.php?item_id=" + itemId + "&cat_label=" + catLabel, true);
         xmlhttp.send();
 }
 </script>

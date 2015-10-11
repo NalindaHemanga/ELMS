@@ -6,9 +6,9 @@
 <div id="subcolumnwrap">
         <div id="treecolumn">
 		<div id="coltree" style="overflow-y:auto; height:350px; background: #D7DADB;">
-		
+
 		<font size="5" face="Agency FB"><center><strong>Item Categories</strong></center></font>
-		
+
 				<ol class="tree">
 					<?php
 						require_once 'core/init.php';
@@ -34,7 +34,7 @@
 
 					?>
 					<div id="mainCat">
-					
+
 					</div>
 				</ol>
 		</div>
@@ -46,8 +46,8 @@
 <form class="form" onsubmit="return searchItemCopy();" id="searchForm">
 				<ul>
 				<li>
-						
-        				
+
+
 
         				<div><input type="search" class="large text" name="copy_no" id="copy_no" placeholder=" Enter Copy No" required="required"/>  </div>
         		</li>
@@ -73,7 +73,7 @@ var cur_cat_id;
 function catCliked(lable,name,id)
 {
 	loadXMLDoc(id)
-	
+
 }
 
 
@@ -96,7 +96,7 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-    document.getElementById("content").innerHTML=xmlhttp.responseText;
+    document.getElementById("leftpane").innerHTML=xmlhttp.responseText;
     }
   }
  xmlhttp.open("GET", "itemViewer.php?cat_id=" + cat_id + "&editable=" + 0, true);
@@ -120,7 +120,7 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-    document.getElementById("content").innerHTML=xmlhttp.responseText;
+    document.getElementById("leftpane").innerHTML=xmlhttp.responseText;
     }
   }
  xmlhttp.open("GET", "getItemDetailsIssue.php?item_id=" + itemId, true);
@@ -135,22 +135,22 @@ function itemCopyClicked(itemCopyId) {
 
 function searchItemCopy(){
 
-	
+
 
 	var val=document.getElementById("copy_no").value;
 
 	dataString="copy_no="+val;
-		
-		
-		
+
+
+
 		$.ajax({
 			type: "GET",
 			url: "getItemDetailsIssue.php",
 			data: dataString,
-			
+
 			success: function(data) {
-				
-				$("#content").html(data);
+
+				$("#leftpane").html(data);
 			}
 			});
 
@@ -160,5 +160,3 @@ function searchItemCopy(){
 }
 
 </script>
-
-

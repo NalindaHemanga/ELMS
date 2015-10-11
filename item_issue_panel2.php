@@ -8,7 +8,8 @@
 <link rel="stylesheet" type="text/css" href="css/content.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
-
+<link rel="stylesheet" type="text/css" href="css/dashboardicon.css" />
+<link rel="stylesheet" type="text/css" href="css/itemissue.css" />
 <script src="lib/jquery.min.js"></script>
 
 
@@ -30,7 +31,13 @@
 
         	</div>
         <div id="content">
+            <div class="" id="leftpane">
 
+            </div>
+
+            <div class="" id="rightpane">
+
+            </div>
 
 
 

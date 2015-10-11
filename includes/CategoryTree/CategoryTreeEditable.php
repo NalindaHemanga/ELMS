@@ -12,7 +12,7 @@
 				<ol class="tree">
 
 
-          
+
 					<?php
 						require_once 'core/init.php';
 
@@ -64,13 +64,12 @@
 <div id= "submitCat">
 
 </div>
-<<<<<<< HEAD
+
 <div >
-<label onclick = "showCatMatrix()";>Show category matrix</label>
-=======
+
 <div style="float: left; padding-left:50px;">
-<a href="#" style="font-family: Georgia, serif; font-size:15px; float: none;" onclick = "showCatMatrix()";>Show category matrix</a> 
->>>>>>> 996005fb631a6f85790a247d16e4ad757b4ba59d
+<a href="#" style="font-family: Georgia, serif; font-size:15px; float: none;" onclick = "showCatMatrix()";>Show category matrix</a>
+
 </div>
 </center>
 </div>

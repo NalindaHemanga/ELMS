@@ -50,11 +50,11 @@ class ItemCopy{
 	$no1=(string)$parentCategory->get_label();
 	$no2=(string)$parentItem->get_no();
 	$no3=(string)$last_id;
-	$this->no = $no1.$no2."#".$no3;
+	$this->no = $no1.$no2."_".$no3;
 
 
 	}
-	
+
 	public function create($data=array()){
 
 		$this->id 				= 	$data["id"];
@@ -73,7 +73,7 @@ class ItemCopy{
 
 		$row=array(
 
-				
+
 				"item_copy_owner" => $this->owner,
 				"item_copy_status" => $this->status,
 				"item_copy_barcode" => $this->barcode,
@@ -98,15 +98,15 @@ class ItemCopy{
 	}
 
 	public function get_no(){
-		
+
 		return $this->no;
-		
+
 	}
 
 	public function get_id(){
-		
+
 		return $this->id;
-		
+
 	}
 
 	public function get_status(){
@@ -123,19 +123,19 @@ class ItemCopy{
 
 
 	public static function search($values=array()){
-     
+
       /* This function returns an array of item copy objects if the results have many item copies,
       		else returns a single object.
 
       */
-		
+
 		$item_copies=array();
 		$result1=DB::getInstance()->search("item_copy",$values);
 
 		if(count($result1)!=0){
-			
+
 			for($x=0;$x<count($result1);$x++){
-	
+
 			$item_copy_data=array(
 
 				"owner"=>$result1[$x]["item_copy_owner"],
@@ -150,11 +150,11 @@ class ItemCopy{
 				"id" => $result1[$x]["item_copy_id"]
 				);
 
-		
+
 			$new_item_copy=new ItemCopy();
 			$new_item_copy->create($item_copy_data);
 			$item_copies[]=$new_item_copy;
-			
+
 
 		}
 		if(count($item_copies)==1)
@@ -165,11 +165,11 @@ class ItemCopy{
 		}
 		else
 			return null;
-		
+
 
 	}
 
-	
+
 
 }
 

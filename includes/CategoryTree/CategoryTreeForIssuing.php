@@ -140,7 +140,6 @@ function searchItemCopy(){
 	var val=document.getElementById("copy_no").value;
 
 	var dataString="copy_no="+val;
-    var dataString2=encodeURIComponent(dataString);
 
 
 

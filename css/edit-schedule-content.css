@@ -1,0 +1,91 @@
+#contentwrap {
+	
+    width: 80%;
+    float: left;
+    margin: 0 auto;
+}
+
+#content {
+    
+	 height:500px;
+    background: #CEE3F6;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+    margin: 5px;
+	}
+#left{
+    width: 70%;
+    float:left;
+}
+
+#right{
+    width:25%;
+    float:right;
+
+}
+
+
+
+
+/*
+input{
+    width:70%;
+    height:40%;
+}
+    
+
+
+
+    
+
+tr{
+    
+    height:10%px;
+    width:100%px;
+    }
+
+td{
+    width:80%px;
+    height:45%;
+    text-align:center;
+}
+*/
+
+label{
+    width:120px;
+    display: inline-block;
+    height:20px;
+}
+
+#button {
+   border-top: 1px solid #96d1f8;
+   background: #cad9e3;
+   background: -webkit-gradient(linear, left top, left bottom, from(#53a7db), to(#cad9e3));
+   background: -webkit-linear-gradient(top, #53a7db, #cad9e3);
+   background: -moz-linear-gradient(top, #53a7db, #cad9e3);
+   background: -ms-linear-gradient(top, #53a7db, #cad9e3);
+   background: -o-linear-gradient(top, #53a7db, #cad9e3);
+   padding: 7px 14px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #000000;
+   font-size: 19px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   float:right;
+   }
+#button:hover {
+   border-top-color: #d1d1d1;
+   background: #d1d1d1;
+   color: #000000;
+   }
+button:active {
+   border-top-color: #ffffff;
+   background: #ffffff;
+   }

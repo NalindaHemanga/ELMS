@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
 
     
-    <script src="jquery-2.1.4.min.js"></script>
+   
     
     <script>
         var curCourse;
@@ -30,7 +30,13 @@ function drop(ev,id) {
    // ev.target.appendChild(document.getElementById(data));
     document.getElementById(id).value = curCourse;
 }
+        
+        
+        
 </script>
+    
+    
+    
         
 </head>
 <body>
@@ -43,11 +49,15 @@ function drop(ev,id) {
             <div id="left">
 
         	<h2> Edit Fixed Schedule </h2>
-            <hr width="700px"><br>
+            <hr width="840px"><br>
+                
+                <label>From:</label><input type="date"/> <label>To:</label><input type="date"/><br><br>
+                
+
             
             
-            
-            <table border="1" style="overflow:auto" padding="0" cellspacing="0" id="boxid">
+             
+            <table width="100%" height="300px" border="1" style="overflow:auto;" padding="0" cellspacing="0" >
         			
                     <tr>
         				<td><b> Time </b></td>
@@ -60,109 +70,83 @@ function drop(ev,id) {
                    
                     <tr>
                         <td>08.00-09.00</td>
-                        <td><input  type="text" value="" name="m1"></td>
+                        <td><input id="m1" type="text" value="" name="m1" ondrop='drop(event,"m1")' ondragover="allowDrop(event)"></td>
                         <td><input id="t1" type="text" value="" name="t1" ondrop='drop(event,"t1")' ondragover="allowDrop(event)"></td>
-                        <td><input type="text" value="" name="w1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-                        <td><input type="text" value="" name="th1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
-                        <td><input type="text" value="" name="f1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                        <td><input id="w1" type="text" value="" name="w1" ondrop='drop(event,"w1")' ondragover="allowDrop(event)"></td>
+                        <td><input id="th1" type="text" value="" name="th1" ondrop='drop(event,"th1")' ondragover="allowDrop(event)"></td>
+                        <td><input id="f1" type="text" value="" name="f1" ondrop='drop(event,"f1")' ondragover="allowDrop(event)"></td>
                             
                     </tr>
                     <tr>
                         <td>09.00-10.00</td>
-                         <td><input type="text" value=""  name="m2"></td>
-                        <td><input type="text" value="" name="t2"></td>
-                        <td><input type="text" value=""  name="w2"></td>
-                        <td><input type="text" value=""  name="th2"></td>
-                        <td><input type="text" value=""  name="f2"></td>
+                         <td><input id="m2" type="text" value="" name="m2" ondrop='drop(event,"m2")' ondragover="allowDrop(event)"></td>
+                        <td><input id="t2" type="text" value="" name="t2" ondrop='drop(event,"t2")' ondragover="allowDrop(event)"></td>
+                        <td><input id="w2" type="text" value="" name="w2" ondrop='drop(event,"w2")' ondragover="allowDrop(event)"></td>
+                        <td><input id="th2" type="text" value="" name="th2" ondrop='drop(event,"th2")' ondragover="allowDrop(event)"></td>
+                        <td><input id="f2" type="text" value="" name="f2" ondrop='drop(event,"f2")' ondragover="allowDrop(event)"></td>
                     </tr>
                     <tr>
                         <td>10.00-11.00</td>
-                        <td><input type="text" value=""  name="m3"></td>
-                        <td><input type="text" value=""  name="t3"></td>
-                        <td><input type="text" value=""  name="w3"></td>
-                        <td><input type="text" value=""  name="th3"></td>
-                        <td><input type="text" value=""  name="f3"></td>
+                        <td><input id="m3" type="text" value="" name="m3" ondrop='drop(event,"m3")' ondragover="allowDrop(event)"></td>
+                        <td><input id="t3" type="text" value="" name="t3" ondrop='drop(event,"t3")' ondragover="allowDrop(event)"></td>
+                        <td><input id="w3" type="text" value="" name="w3" ondrop='drop(event,"w3")' ondragover="allowDrop(event)"></td>
+                        <td><input id="th3" type="text" value="" name="th3" ondrop='drop(event,"th3")' ondragover="allowDrop(event)"></td>
+                        <td><input id="f3" type="text" value="" name="f3" ondrop='drop(event,"f3")' ondragover="allowDrop(event)"></td>
                     </tr>
                     <tr>
                         <td>11.00-12.00</td>
-                       <td><input type="text" value=""  name="m4"></td>
-                        <td><input type="text" value=""  name="t4"></td>
-                        <td><input type="text" value=""  name="w4"></td>
-                        <td><input type="text" value="" name="th4"></td>
-                        <td><input type="text" value="" name="f4"></td>
+                       <td><input id="m4" type="text" value="" name="m4" ondrop='drop(event,"m4")' ondragover="allowDrop(event)"></td>
+                        <td><input id="t4" type="text" value="" name="t4" ondrop='drop(event,"t4")' ondragover="allowDrop(event)"></td>
+                        <td><input id="w4" type="text" value="" name="w4" ondrop='drop(event,"w4")' ondragover="allowDrop(event)"></td>
+                        <td><input id="th4" type="text" value="" name="th4" ondrop='drop(event,"th4")' ondragover="allowDrop(event)"></td>
+                        <td><input id="f4" type="text" value="" name="f4" ondrop='drop(event,"f4")' ondragover="allowDrop(event)"></td>
                     </tr>
                     <tr>
                         <td>12.00-01.00</td>
-                         <td><input type="text" value=""  name="m5"></td>
-                        <td><input type="text" value="" name="t5"></td>
-                        <td><input type="text" value="" name="w5"></td>
-                        <td><input type="text" value="" name="th5"></td>
-                        <td><input type="text" value="" name="f5"></td>
+                         <td><input id="m5" type="text" value="" name="m5" ondrop='drop(event,"m5")' ondragover="allowDrop(event)"></td>
+                        <td><input id="t5" type="text" value="" name="t5" ondrop='drop(event,"t5")' ondragover="allowDrop(event)"></td>
+                        <td><input id="w5" type="text" value="" name="w5" ondrop='drop(event,"w5")' ondragover="allowDrop(event)"></td>
+                        <td><input id="th5" type="text" value="" name="th5" ondrop='drop(event,"th5")' ondragover="allowDrop(event)"></td>
+                        <td><input id="f5" type="text" value="" name="f5" ondrop='drop(event,"f5")' ondragover="allowDrop(event)"></td>
                     </tr>
                     <tr>
                         <td>01.00-02.00</td>
-                        <td><input type="text" value=""  name="m6"></td>
-                        <td><input type="text" value="" name="t6"></td>
-                        <td><input type="text" value="" name="w6"></td>
-                        <td><input type="text" value="" name="th6"></td>
-                        <td><input type="text" value="" name="f6"></td>
+                        <td><input id="m6" type="text" value="" name="m6" ondrop='drop(event,"m6")' ondragover="allowDrop(event)"></td>
+                        <td><input id="t6" type="text" value="" name="t6" ondrop='drop(event,"t6")' ondragover="allowDrop(event)"></td>
+                        <td><input id="w6" type="text" value="" name="w6" ondrop='drop(event,"w6")' ondragover="allowDrop(event)"></td>
+                        <td><input id="th6" type="text" value="" name="th6" ondrop='drop(event,"th6")' ondragover="allowDrop(event)"></td>
+                        <td><input id="f6" type="text" value="" name="f6" ondrop='drop(event,"f6")' ondragover="allowDrop(event)"></td>
                     </tr>
                     <tr>
                         <td>02.00-03.00</td>
-                        <td><input type="text" value="" name="m7"></td>
-                        <td><input type="text" value="" name="t7"></td>
-                        <td><input type="text" value="" name="w7"></td>
-                        <td><input type="text" value="" name="th7"></td>
-                        <td><input type="text" value="" name="f7"></td>
+                        <td><input id="m7" type="text" value="" name="m7" ondrop='drop(event,"m7")' ondragover="allowDrop(event)"></td>
+                        <td><input id="t7" type="text" value="" name="t7" ondrop='drop(event,"t7")' ondragover="allowDrop(event)"></td>
+                        <td><input id="w7" type="text" value="" name="w7" ondrop='drop(event,"w7")' ondragover="allowDrop(event)"></td>
+                        <td><input id="th7" type="text" value="" name="th7" ondrop='drop(event,"th7")' ondragover="allowDrop(event)"></td>
+                        <td><input id="f7" type="text" value="" name="f7" ondrop='drop(event,"f7")' ondragover="allowDrop(event)"></td>
                     </tr>
                     <tr>
                         <td>03.00-04.00</td>
-                         <td><input type="text" value="" name="m8"></td>
-                        <td><input type="text" value="" name="t8"></td>
-                        <td><input type="text" value="" name="w8"></td>
-                        <td><input type="text" value="" name="th8"></td>
-                        <td><input type="text" value="" name="f8"></td>
+                         <td><input id="m8" type="text" value="" name="m8" ondrop='drop(event,"m8")' ondragover="allowDrop(event)"></td>
+                        <td><input id="t8" type="text" value="" name="t8" ondrop='drop(event,"t8")' ondragover="allowDrop(event)"></td>
+                        <td><input id="w8" type="text" value="" name="w8" ondrop='drop(event,"w8")' ondragover="allowDrop(event)"></td>
+                        <td><input id="th8" type="text" value="" name="th8" ondrop='drop(event,"th8")' ondragover="allowDrop(event)"></td>
+                        <td><input id="f8" type="text" value="" name="f8" ondrop='drop(event,"f8")' ondragover="allowDrop(event)"></td>
                     </tr>
                     <tr>
                         <td>04.00-05.00</td>
-                        <td><input type="text" value="" name="m9"></td>
-                        <td><input type="text" value="" name="t9"></td>
-                        <td><input type="text" value="" name="w9"></td>
-                        <td><input type="text" value="" name="th9"></td>
-                        <td><input type="text" value="" name="f9"></td>
+                        <td><input id="m9" type="text" value="" name="m9" ondrop='drop(event,"m9")' ondragover="allowDrop(event)"></td>
+                        <td><input id="t9" type="text" value="" name="t9" ondrop='drop(event,"t9")' ondragover="allowDrop(event)"></td>
+                        <td><input id="w9" type="text" value="" name="w9" ondrop='drop(event,"w9")' ondragover="allowDrop(event)"></td>
+                        <td><input id="th9" type="text" value="" name="th9" ondrop='drop(event,"th9")' ondragover="allowDrop(event)"></td>
+                        <td><input id="f9" type="text" value="" name="f9" ondrop='drop(event,"f9")' ondragover="allowDrop(event)"></td>
                  </tr>
 		              
-                </table>
-<!--
-<script>
+                </table><br>
+                 <input type="submit" id="button" value=" Submit" name="submit"/> 
 
-            $(function () {
-    $("td").dblclick(function () {
-        var OriginalContent = $(this).text();
-         
-        $(this).addClass("cellEditing");
-        $(this).html("<input type='text' value='" + OriginalContent + "' />");
-        $(this).children().first().focus();
- 
-        $(this).children().first().keypress(function (e) {
-            if (e.which == 13) {
-                var newContent = $(this).val();
-                $(this).parent().text(newContent);
-                $(this).parent().removeClass("cellEditing");
-            }
-        });
-         
-    $(this).children().first().blur(function(){
-        $(this).parent().text(OriginalContent);
-        $(this).parent().removeClass("cellEditing");
-    });
-    });
-});
-    
-</script>
                 
--->
-                
+           
 <?php
 $connection = mysql_connect("localhost", "root", ""); // Establishing Connection with Server
 $db = mysql_select_db("electronicdb", $connection); // Selecting Database from Server
@@ -186,68 +170,43 @@ mysql_close($connection); // Closing Connection with Server
 ?>
                 
                 
+<br> 
                 
-                
-                
-                
-                
-
-<br> <br> 
-                
-                <div id="123" draggable="true"
-ondragstart='drag(event,"electronics")'> electronic </div>
-                
-                
- <div class="form">               
- <form action="" method="post">
-          
-                <label>Time:</label>
-                <select name="Time">
-    <option value="8-9">08.00-09.00</option>
-    <option value="9-10">09.00-10.00</option>
-    <option value="10-11">10.00-11.00</option>
-    <option value="11-12">11.00-12.00</option>
-     <option value="12-1">12.00-01.00</option>
-    <option value="1-2">01.00-02.00</option>
-    <option value="2-3">02.00-03.00</option>
-    <option value="3-4">03.00-04.00</option>
-     <option value="4-5">04.00-05.00</option>
-  </select>
-                <label>Day:</label>
-                <select name="day">
-    <option value="monday">Monday</option>
-    <option value="tuesday">Tuesday</option>
-    <option value="wednesday">Wednesday</option>
-    <option value="thursday">Thursday</option>
-     <option value="friday">Friday</option>
-                </select>
-                <br><br>
-                <label >Course Name:</label>
-                <select name="course_name">
-    <option value="electronics">Electronics</option>
-    <option value="robotics">Robotics</option>
-    <option value="embeded_systems">Embeded Systems</option>
-    
-                </select> <br>
-                <input type="submit" id="button" value=" Submit" name="submit" onclick = "pdateTable()"/>
-     
-                </form>
-            </div>  
-     
-     <br><br><br>
-<a href="#">View Schedule</a>
-
 </div>
+           
+
+<div id="right">
+      <fieldset style="float:right;width:130px;height:150px; margin-top:110px;">
+    <legend>Courses</legend>
+          
+                <div id="1" draggable="true"
+ondragstart='drag(event,"Electronics")'><font color="#0d6f94">Electronics</font></div>
+                
+                <div id="2" draggable="true"
+ondragstart='drag(event,"Robotics")'><font color="#0d6f94"> Robotics</font> </div>
+                
+                <div id="3" draggable="true"
+ondragstart='drag(event,"Embeded Systems")'><font color="#0d6f94"> Embeded Systems </font> </div>
+    </fieldset><br><br><br>
+   
+
+          
+          
+            
+            
+            </div>
 
 
 
-
-
+ 
+            </div>
         </div>
         </div>
 		
         <div id="footerwrap">
         <div id="footer">
+            <?php include "includes/footer.php" ?>
+		
 			<div align="center">
 				<font color="white" size="2px" align="center">&copy; 2015, All rights reserved by University of Colombo School of Computing
 				<br>

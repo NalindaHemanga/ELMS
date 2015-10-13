@@ -23,7 +23,13 @@ function drag(ev) {
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
+    var newli = document.createElement('li');
+
+
+    newli.setAttribute('id', data);
+       newli.innerHTML = '<div><input type="hidden" class="medium text" readonly draggable="true" value="'+data+'"name="items[]"/></div>';
+        document.getElementById('items').appendChild(newli);
+
 
 }
 </script>
@@ -55,6 +61,12 @@ function drop(ev) {
             <div class="" id="rightpane" ondrop="drop(event)" ondragover="allowDrop(event)">
 
                     <div style="text-align:center;">Drag and Drop Item copies here to issue</div>
+                    <ol class="items">
+                    <div id="items">
+
+
+                    </div>
+                </ol>
             </div>
 
             <div class="" id="bottomleft">

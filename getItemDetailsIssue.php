@@ -29,7 +29,7 @@ if(array_key_exists("item_id", $_GET)){
 				$status="Not Available";
 			}
 
-			echo "<li class='node' onclick = itemCopyClicked(\"$itemCopyId\")><div id='".$itemCopyNo."' draggable=".$draggable." ondragstart=\"drag(event);\" style='border:1px solid #000000;padding:10px;background:".$bgcolour.";margin-right:30px;margin-top:5px;'><img src='img/icons/itemcopy.png' height='50' width='50' align='left'/><b> Item Copy No : </b>$itemCopyNo<br/><b> Condition : </b>$itemCopyCondition<br/><b>Status : </b>$status</div></li>";
+			echo "<li class='node' onclick = itemCopyClicked(\"$itemCopyId\")><div id='".$itemCopyNo."' draggable=".$draggable." ondragstart=\"drag(event);\" style='border:1px solid #000000;padding:10px;background:".$bgcolour.";margin-right:30px;margin-top:5px;margin-left:30px'><img src='img/icons/itemcopy.png' height='50' width='50' align='left'/><b> Item Copy No : </b>$itemCopyNo<br/><b> Condition : </b>$itemCopyCondition<br/><b>Status : </b>$status</div></li>";
 		}
 		echo"</ul>";
 	}

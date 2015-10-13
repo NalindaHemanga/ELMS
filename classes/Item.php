@@ -12,7 +12,7 @@ class item{
 			$category,
 			$item_copies=array(),
 			$reference=array();
-			
+
 
 
 
@@ -70,52 +70,52 @@ class item{
 	}
 
 	public function get_category(){
-		
+
 		return $this->category;
-		
+
 	}
 
 
 
 	public function get_no(){
-		
+
 		return $this->no;
-		
+
 	}
 
 	public function get_description(){
-		
+
 		return $this->description;
-		
+
 	}
 
 	public function get_reference(){
-		
+
 		return $this->reference;
-		
+
 	}
 	public function get_technical_details(){
-		
+
 		return $this->technical_details;
-		
+
 	}
 
 	public function get_id(){
-		
+
 		return $this->id;
-		
+
 	}
 
 	public function get_name(){
-		
+
 		return $this->name;
-		
+
 	}
 
 	public function get_copies(){
-		
+
 		return $this->item_copies;
-		
+
 	}
 
 
@@ -123,14 +123,14 @@ class item{
 
 		$row=array(
 
-				
+
 				"item_name" => $this->name,
 				"item_technical_details" => $this->technical_details,
 				"item_description" => $this->description,
 				"item_type" => $this->type,
 				"item_quantity" => $this->quantity,
 				"item_no" => $this->no
-				
+
 
 
 
@@ -140,7 +140,7 @@ class item{
 		if(DB::getInstance()->insertRow("item",$row)){
 			$last_id=DB::getInstance()->getLastId();
 			if(count($this->reference)>0){
-			
+
 			foreach ($this->reference as $key => $value) {
 				$row2=array(
 					"item_id" 		=> $last_id,
@@ -150,7 +150,7 @@ class item{
 					);
 
 				DB::getInstance()->insertRow("item_reference",$row2);
-				
+
 
 			}
 
@@ -170,20 +170,20 @@ class item{
 
 
 	public static function search($values=array()){
-     
-		
+
+
 		$items=array();
 		$result1=DB::getInstance()->search("item",$values);
 
 		if(count($result1)!=0){
-			
+
 			for($x=0;$x<count($result1);$x++){
 
-			
+
 			$ref_result=DB::getInstance()->search("item_reference",array("item_id"=>$result1[$x]["item_id"]));
 
 			$reference=array();
-			
+
 			for($a=0;$a<count($ref_result);$a++){
 
 				$reference[$a]=$ref_result[$a]["reference"];
@@ -209,16 +209,16 @@ class item{
 			if(is_array($item_copies)){
 
 			foreach($item_copies as $itemCopy){
-				$item_copies_orderd[substr($itemCopy->get_no(), strpos($itemCopy->get_no(), "#") + 1)] = $itemCopy;
+				$item_copies_orderd[substr($itemCopy->get_no(), strpos($itemCopy->get_no(), "_") + 1)] = $itemCopy;
 			}
 			}
 			else if(is_object($item_copies)){
-				$item_copies_orderd[substr($item_copies->get_no(), strpos($item_copies->get_no(), "#") + 1)] = $item_copies;
+				$item_copies_orderd[substr($item_copies->get_no(), strpos($item_copies->get_no(), "_") + 1)] = $item_copies;
 			}
-	
+
 			$item_data=array(
 
-			
+
 
 				"id" 					=>	$result1[$x]["item_id"],
 				"no" 					=>	$result1[$x]["item_no"],
@@ -230,10 +230,10 @@ class item{
 				"category"				=>	$categories,
 				"reference" 			=>	$reference,
 				"item_copies" 			=>	$item_copies_orderd
-				
+
 				);
 
-		
+
 			$new_item=new Item();
 
 			$new_item->create($item_data);
@@ -242,7 +242,7 @@ class item{
 
 		}
 		if(count($items)==1){
-			
+
 			return $items[0];
 		}
 		else{
@@ -251,12 +251,12 @@ class item{
 		}
 		else{
 			return null;
-		
+
 
 	}
 
 
-	
+
 
 
 

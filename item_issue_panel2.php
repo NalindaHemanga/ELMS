@@ -27,7 +27,7 @@ function drop(ev) {
 
 
     newli.setAttribute('id', data);
-       newli.innerHTML = '<div><input type="hidden" class="medium text" readonly draggable="true" value="'+data+'"name="items[]"/></div>';
+       newli.innerHTML = '<div><input type="text" class="large text" readonly draggable="true" value="'+data+'"name="items[]"/></div>';
         document.getElementById('items').appendChild(newli);
 
 

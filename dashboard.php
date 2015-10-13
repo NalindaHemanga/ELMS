@@ -46,7 +46,7 @@
 			</div>
 
 			<div  class="dashicon" >
-			<a href="supplier_manager_dashboard.php">
+			<a href="schedule_dashboard.php">
 			<img src="img/icons/schedule.png" height="150" width="150" />
 			Schedule Manager
 			</a>

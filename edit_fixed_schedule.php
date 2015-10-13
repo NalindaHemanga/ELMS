@@ -55,18 +55,13 @@
                 <h2> Edit Fixed Schedule </h2>
                 <hr width="840px"><br>
 
-            <div id="left" style="width:68%;overflow:auto;display:inline-block;border:3px solid #000000;padding:5px;">
+            <div id="left" style="width:68%;overflow-x:auto;display:inline-block;border:3px solid #000000;padding:5px;">
 
 
 <?php
 require_once 'core/init.php';
 $sql="SELECT course_name FROM fixed_schedule LEFT JOIN course ON fixed_schedule.course_id=course.course_id ORDER BY fixed_schedule_id;";
 $result=DB::getInstance()->directSelect($sql);
-
-
-
-
-
 ?>
 
 
@@ -77,7 +72,7 @@ $result=DB::getInstance()->directSelect($sql);
             <table width="100%" height="300px" border="1" style="overflow:auto;" padding="0" cellspacing="0" >
 
                     <tr>
-                        <td><b> Time </b></td>
+                        <td ><b> Time </b></td>
                         <td><b> Monday </b></td>
                         <td><b> Tuesday </b></td>
                         <td><b> Wednesday </b></td>
@@ -183,6 +178,9 @@ ondragstart='drag(event,"Robotics")'><font color="#0d6f94"> Robotics</font> </di
 
                 <div id="3" draggable="true"
 ondragstart='drag(event,"Embeded Systems")'><font color="#0d6f94"> Embeded Systems </font> </div>
+
+
+
     </fieldset><br><br><br>
 
 

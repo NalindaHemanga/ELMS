@@ -17,7 +17,8 @@ if(array_key_exists("item_id", $_GET)){
 			$itemCopyCondition=$itemCopy->get_condition();
 			//$GLOBALS[$itemCopyNo]="";
 			//unset($GLOBALS[$itemCopyNo]);
-			if($itemCopyStatus==1 && !key_exists($itemCopyNo,$GLOBALS)){
+
+			if($itemCopyStatus==1 && !array_key_exists($itemCopyNo,$_SESSION)){
 
 				$bgcolour="#B3F5C2";
 				$draggable="true";

@@ -24,11 +24,33 @@ function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var newli = document.createElement('li');
+    var node=document.getElementById(data);
+    node.remove();
+
 
 
     newli.setAttribute('id', data);
-       newli.innerHTML = '<div><input type="text" class="large text" readonly draggable="true" value="'+data+'"name="items[]"/></div>';
+       newli.innerHTML = '<div><input type="text" class="medium text" readonly draggable="false" value="'+data+'"name="items[]"/><a href="#">remove</a></div>';
         document.getElementById('items').appendChild(newli);
+
+
+    	dataString="copy_no="+data;
+
+
+    		$.ajax({
+    			type: "GET",
+    			url: "item_issue_panel2_control.php",
+    			data: dataString,
+
+    			success: function(data) {
+
+                    alert(data);
+    			}
+    			});
+
+
+
+
 
 
 }

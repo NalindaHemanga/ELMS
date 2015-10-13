@@ -73,7 +73,7 @@ function searchMember(){
 
         				<div>
 
-        				<div><input type="search" class="medium text" name="searchVal" id="searchVal" placeholder=" Search Member By NIC" required="required"/>  <input type="Submit" value="Search" /></div>
+        				<div><input type="search" class="medium text" name="searchVal" id="searchVal" placeholder=" Search Member By NIC" required="required" pattern="[0-9]{9}" title="Enter NIC number without the character at the end"/>  <input type="Submit" value="Search" /></div>
         			</li>
         			</ul>
 

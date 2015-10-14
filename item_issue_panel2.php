@@ -20,33 +20,55 @@ function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
+function removeItem(data){
+
+
+    var node=document.getElementById(data.slice(0,-1));
+    node.remove();
+    dataString="copy_no="+data.slice(0,-1);
+
+
+        $.ajax({
+            type: "GET",
+            url: "item_issue_panel2_control.php",
+            data: dataString,
+
+            success: function(data) {
+
+                alert(data);
+            }
+            });
+
+}
+
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var newli = document.createElement('li');
     var node=document.getElementById(data);
+    dataString="copy_no="+data;
+
+
+        $.ajax({
+            type: "GET",
+            url: "item_issue_panel2_control.php",
+            data: dataString,
+
+            success: function(data) {
+
+                alert(data);
+            }
+            });
+
     node.remove();
 
 
 
     newli.setAttribute('id', data);
-       newli.innerHTML = '<div><input type="text" class="medium text" readonly draggable="false" value="'+data+'"name="items[]"/><a href="#">remove</a></div>';
+       newli.innerHTML = '<div><input type="text" class="medium text" readonly draggable="false" value="'+data+'"name="items[]"/><a id="'+data+'n'+'" onclick=\"removeItem(this.id);\">remove</a></div>';
         document.getElementById('items').appendChild(newli);
 
 
-    	dataString="copy_no="+data;
-
-
-    		$.ajax({
-    			type: "GET",
-    			url: "item_issue_panel2_control.php",
-    			data: dataString,
-
-    			success: function(data) {
-
-                    alert(data);
-    			}
-    			});
 
 
 
@@ -97,7 +119,7 @@ function drop(ev) {
 
             <div id="bottomright">
                 <div class="" style="text-align:center">
-                    <img src="img/icons/trash.png" width="100" height="100" alt="" />
+                
                 </div>
 
             </div>

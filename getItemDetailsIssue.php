@@ -1,6 +1,8 @@
 
 <?php
 require 'core/init.php';
+
+$_SESSION["items"]=array();
 if(array_key_exists("item_id", $_GET)){
 	$value=$_GET["item_id"];
 
@@ -17,8 +19,14 @@ if(array_key_exists("item_id", $_GET)){
 			$itemCopyCondition=$itemCopy->get_condition();
 			//$GLOBALS[$itemCopyNo]="";
 			//unset($GLOBALS[$itemCopyNo]);
+			if(!isset($_SESSION["items"])){
+				$bgcolour="#B3F5C2";
+				$draggable="true";
+				$status="Available";
 
-			if($itemCopyStatus==1 && !array_key_exists($itemCopyNo,$_SESSION)){
+			}
+
+			else if($itemCopyStatus==1 && !in_array($itemCopyNo,$_SESSION["items"])){
 
 				$bgcolour="#B3F5C2";
 				$draggable="true";
@@ -51,7 +59,8 @@ if(array_key_exists("item_id", $_GET)){
 		$itemCopyCondition=$itemCopy->get_condition();
 		//$GLOBALS[$itemCopyNo]="";
 		//unset($GLOBALS[$itemCopyNo]);
-		if($itemCopyStatus==1 && !key_exists($itemCopyNo,$GLOBALS)){
+
+		if($itemCopyStatus==1 && !in_array($itemCopyNo,$_SESSION["items"])){
 
 			$bgcolour="#B3F5C2";
 			$draggable="true";
@@ -63,8 +72,8 @@ if(array_key_exists("item_id", $_GET)){
 			$status="Not Available";
 		}
 
-		echo "<ul><li class='node' onclick = itemCopyClicked(\"$itemCopyId\")><div id='".$itemCopyNo."' draggable=".$draggable."  style='border:1px solid #000000;padding:10px;background:".$bgcolour.";margin-right:30px;margin-top:5px;'><img src='img/icons/itemcopy.png' height='50' width='50' align='left'/><b> Item Copy No : </b>$itemCopyNo<br/><b> Condition : </b>$itemCopyCondition<br/><b>Status : </b>$status</div></li></ul>";
-	}
+		echo "<ul><li class='node' onclick = itemCopyClicked(\"$itemCopyId\")><div id='".$itemCopyNo."' draggable=".$draggable." ondragstart=\"drag(event);\" style='border:1px solid #000000;padding:10px;background:".$bgcolour.";margin-right:30px;margin-top:5px;margin-left:30px'><img src='img/icons/itemcopy.png' height='50' width='50' align='left'/><b> Item Copy No : </b>$itemCopyNo<br/><b> Condition : </b>$itemCopyCondition<br/><b>Status : </b>$status</div></li></ul>";
+}
 
 
 }

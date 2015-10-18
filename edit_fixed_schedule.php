@@ -58,10 +58,11 @@ input[type="text"] {
 }
 
 input[type="button"] {
-    margin-left: -27px;
-    height: 23px;
-    width: 25px;
-    background:url(img/clear_button.png);
+    margin-left: -29px;
+
+    height: 25px;
+    width: 26px;
+    background:url(img/close-btn.png);
     border: 0;
     -webkit-appearance: none;
 }

@@ -69,6 +69,16 @@ class item{
 
 	}
 
+	public function count_up($x){
+
+		$row = DB::getInstance()->search("item",array("item_id"=>$this->id));
+		$iid = $this->id;
+		$newQuantity = $row[0]["item_quantity"]+$x;
+		$sql = "UPDATE `item` SET `item_quantity` = '$newQuantity' WHERE `item`.`item_id` =$iid;";
+		DB::getInstance()->directUpdate($sql);		
+
+	}
+
 	public function get_category(){
 
 		return $this->category;

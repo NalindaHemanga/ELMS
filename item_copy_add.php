@@ -50,6 +50,8 @@
 
 	if($new_item_copy->register()){
 
+		$parentItem = item::search(array("item_id"=>$_SESSION['itemId']));
+		$parentItem->count_up(1);
 		$message = "You have successfully Inserted an Item Copy!!";
 		echo "<script type='text/javascript'>alert('$message');</script>";
 	}

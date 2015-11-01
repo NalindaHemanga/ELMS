@@ -97,6 +97,13 @@ class ItemCopy{
 
 	}
 
+	public function get_item_name(){
+
+		$sql="SELECT item_name FROM item,item_copy WHERE item_copy_id=".$this->id." AND item.item_id=item_copy.item_id;";
+		$result=DB::getInstance()->directSelect($sql);
+		return $result[0]["item_name"];
+	}
+
 	public function get_no(){
 
 		return $this->no;

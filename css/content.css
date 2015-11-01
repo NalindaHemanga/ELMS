@@ -1,10 +1,10 @@
 #contentwrap {
-	
+
     width: 80%;
     float: left;
     margin: 0 auto;
 
-    
+
 }
 
 #content {
@@ -15,5 +15,5 @@
     margin: 5px;
     overflow:auto;
     padding: 10px;
-    
+
 	}

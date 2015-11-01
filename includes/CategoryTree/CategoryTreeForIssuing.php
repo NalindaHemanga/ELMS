@@ -96,7 +96,7 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-    document.getElementById("leftpane").innerHTML=xmlhttp.responseText;
+    document.getElementById("sub_content").innerHTML=xmlhttp.responseText;
     }
   }
  xmlhttp.open("GET", "itemViewer.php?cat_id=" + cat_id + "&editable=" + 0, true);
@@ -120,7 +120,7 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-    document.getElementById("leftpane").innerHTML=xmlhttp.responseText;
+    document.getElementById("sub_content").innerHTML=xmlhttp.responseText;
     }
   }
  xmlhttp.open("GET", "getItemDetailsIssue.php?item_id=" + itemId, true);
@@ -150,7 +150,7 @@ function searchItemCopy(){
 
 			success: function(data) {
 
-				$("#leftpane").html(data);
+				$("#sub_content").html(data);
 			}
 			});
 

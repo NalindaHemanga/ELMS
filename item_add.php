@@ -31,7 +31,7 @@
 
     	$temp_path=$_FILES["item_picture"]["tmp_name"];
     	$img_type = pathinfo($_FILES["item_picture"]["name"],PATHINFO_EXTENSION);
-    	move_uploaded_file($temp_path, "img/items/" . $_POST["item_name"].$_SESSION['categoryNo']."."."jpg");
+    	move_uploaded_file($temp_path, "img/items/" . $_POST["item_name"]."."."jpg");
 
 
 

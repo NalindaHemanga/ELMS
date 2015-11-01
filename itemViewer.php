@@ -20,7 +20,7 @@ if(isset($cat_id))
 		
 		echo "<div id='$itemId' class=\"dashicon\">";
 		echo "<a onclick = itemClicked(\"$itemId\")>";
-		echo "<img src=\"img/items/".$label2->get_name()."$categoryNo.jpg \" height=\"150\" width=\"150\"/>";
+		echo "<img src=\"img/items/".$label2->get_name().".jpg \" height=\"150\" width=\"150\"/>";
 		echo $label2->get_name();
 		echo "</a>";
 		echo "</div>";

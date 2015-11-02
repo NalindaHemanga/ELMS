@@ -1,12 +1,12 @@
 <?php
 
-class ForumPost{
+class forumPost{
 
-	private $category_id,
-			$category_title,
-			$category_description,
-			$last_post_date,
-			$last_user_posted;
+	private $post_id,
+			$post_title,
+			$post_description,
+			$posted_date,
+			$posted_user;
 
 
 
@@ -21,11 +21,11 @@ class ForumPost{
 
 	public function create($data=array()){
 
-		$this->category_id 					=	$data["category_id"];
-		$this->category_title 				= 	$data["category_title"];
-		$this->category_description			=	$data["category_description"];
-		$this->last_post_date 	= 	$data["last_post_date"];
-		$this->last_user_posted			=   $data["last_user_posted"];
+		$this->post_id 					=	$data["post_id"];
+		$this->post_title 				= 	$data["post_title"];
+		$this->post_description			=	$data["post_description"];
+		$this->posted_date 	= 	$data["posted_date"];
+		$this->posted_user			=   $data["posted_user"];
 
 
 	}
@@ -33,11 +33,11 @@ class ForumPost{
 
 	public function createNew($data=array()){
 
-		//$this->category_id 					=	$data["category_id"];
-		$this->category_title 				= 	$data["category_title"];
-		$this->category_description			=	$data["category_description"];
-		//$this->last_post_date 	= 	$data["last_post_date"];
-		//$this->last_user_posted			=   $data["last_user_posted"];
+		//$this->post_id 					=	$data["post_id"];
+		$this->post_title 				= 	$data["post_title"];
+		$this->post_description			=	$data["post_description"];
+		$this->posted_date 	= 	$data["posted_date"];
+		$this->posted_user			=   $data["posted_user"];
 
 
 	}
@@ -46,7 +46,7 @@ class ForumPost{
 
 	public function get_Title(){
 
-		return $this->category_title;
+		return $this->post_title;
 
 	}
 
@@ -54,21 +54,28 @@ class ForumPost{
 
 	public function get_Description(){
 
-		return $this->category_description;
+		return $this->post_description;
 
 	}
-
-
-
 
 
 	public function get_id(){
 
-		return $this->id;
+		return $this->post_id;
 
 	}
 
+	public function get_Posteduser(){
 
+		return $this->posted_user;
+
+	}
+
+	public function get_Postdate(){
+
+		return $this->posted_date;
+
+	}
 
 
 	public function register(){
@@ -76,17 +83,17 @@ class ForumPost{
 		$row=array(
 
 
-				"category_id" => $this->category_id,
-				"category_title" => $this->category_title,
-				"category_description" => $this->category_description,
-				"last_post_date" => $this->last_post_date,
-				"last_user_posted" => $this->last_user_posted,
+				"post_id" => $this->post_id,
+				"post_title" => $this->post_title,
+				"post_description" => $this->post_description,
+				"posted_date" => $this->posted_date,
+				"posted_user" => $this->posted_user,
 
 
 			);
 
 
-		if(DB::getInstance()->insertRow("forum_category",$row)){
+		if(DB::getInstance()->insertRow("forum_posts",$row)){
 			return true;
 		}
 		else
@@ -97,7 +104,7 @@ class ForumPost{
 
 		public static function getallForum(){
 
-		$result=DB::getInstance()->directSelect("SELECT * FROM forum_category;");
+		$result=DB::getInstance()->directSelect("SELECT * FROM forum_posts;");
 
 		$allforums = array();
 		foreach ($result as $key => $row) {
@@ -116,11 +123,43 @@ class ForumPost{
 
 
 
+		$posts=array();
+		$result1=DB::getInstance()->search("forum_posts",$values);
+
+foreach ( $result1 as $post){
 
 
+			$post_data=array(
+
+				"post_id" 					=>	$post["post_id"],
+				"post_title" 					=>	$post["post_title"],
+				"post_description"	 				=> 	$post["post_description"],
+				"posted_date"					=>	$post["posted_date"],
+				"posted_user" 	=> 	$post["posted_user"],
+
+
+				);
+
+			$new_post=new forumPost();
+
+			$new_post->create($post_data);
+			$posts[]=$new_post;
+
+		}
+		if(count($posts)==1){
+
+			return $posts[0];
+		}
+		else{
+			return $posts;
+		}
+		/*}
+		else{
+			return null;
+
+	}*/
 
 }
 }
-
 
 ?>

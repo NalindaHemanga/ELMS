@@ -3,9 +3,16 @@
 
 <?php
 
+
+
+
+
 require_once 'core/init.php';
 $password="nalinda";
 $hash=crypt($password);
+
+$io=Member::search(["member_nic"=>"931390473"]);
+print_r($io);
 
 
 ///echo $hash;
@@ -26,6 +33,21 @@ echo "test";
 echo date("d/m/Y");
 $a=Item::search(["item_id"=>2]);
 print_r($a);
+
+$data=array(
+
+	"id"=>null,
+	"purpose"=>"sdasd",
+	"comment"=>"asdsdf",
+	"member_id"=>16
+
+
+);
+
+$t=new Transaction();
+$t->create($data);
+$t->add();
+
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 	require_once 'core/init.php';
+	
 	$searchValue=$_GET["searchVal"];
 	$new_member=Member::search(["member_nic"=>$searchValue]);
 
@@ -49,6 +50,16 @@
 		echo "<div>";
 		echo "<input type='button' class='button' value='Proceed' onclick=\"location.href='item_issue_panel2.php';\"/>";
 		echo "</div>";
+
+		$mem_info=array(
+
+				'initials'=>$new_member->getInitials(),
+				'surname'=>$new_member->getSurname(),
+				'nic'=>$searchValue,
+				'id'=>$new_member->getId()
+			);
+
+		$_SESSION['member_details']=$mem_info;
 	}
 	else{
 

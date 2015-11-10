@@ -10,11 +10,11 @@ if(isset($item_id))
 	$itemDescription = $item->get_description();
 	$itemTechDetails = $item->get_technical_details();
 	$itemReference = $item->get_reference();
-	$itemPic = $itemName.$cat_label;
+	$itemPic = $itemName;
 	echo"<div style=\"font-family: Georgia, serif;font-size:25px;\"><div style=\"font-size:25px;\">$itemName</div><br>
 		<ul><li> <div style=\"font-size:20px;\">Description</div><div style=\"font-size:15px;\">$itemDescription</div> </li><br>
 		<li> <div style=\"font-size:20px;\">Technical Details</div><div style=\"font-size:15px;\">$itemTechDetails</div> </li>
-		<li> <div><img id=\"item_pic\" src=\"img/items/$itemPic.jpg\" height=\"195\" width=\"185\" style=\"border:1px solid #ccc;padding:22px\" /></div> </li><br></ul></div>";
+		<li> <div><img id=\"item_pic\" src=\"img/items/$itemPic.png\" height=\"195\" width=\"185\" style=\"border:1px solid #ccc;padding:22px\" /></div> </li><br></ul></div>";
 	if (count($copies)>0){
 	echo"<ul>";
 	foreach($copies as $itemCopy){

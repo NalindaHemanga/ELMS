@@ -1,6 +1,7 @@
 <?php
 class Member {
 
+	private $id;
 	private $nic_no;
 	private $initials;
 	private $surname;
@@ -20,6 +21,7 @@ class Member {
 
 	public function create($data=array()){
 
+		$this->id 			=	$data["id"];
 		$this->nic_no 	 	= 	$data["nic_no"];
 		$this->initials 	=	$data["initials"];
 		$this->surname	 	= 	$data["surname"];
@@ -29,6 +31,11 @@ class Member {
 		$this->validity 	=	$data["validity"];
 		$this->remarks 		=	$data["remarks"];
 
+	}
+
+	
+	public function getId(){
+		return $this->id;
 	}
 
 	public function getInitials(){
@@ -105,8 +112,8 @@ class Member {
 		$row = array(
 
 				"member_nic" => $this->nic_no,
-				"member_initials" => $this->initials,
-				"member_surname" => $this->surname,
+				"member_initials" => strtoupper($this->initials),
+				"member_surname" => strtoupper($this->surname),
 				"member_password" => $this->password,
 				"member_email" => $this->email,
 				"member_validity" => $this->validity,
@@ -160,6 +167,7 @@ class Member {
 		
 			$member_data=array(
 
+				"id"=>$result1[0]["member_id"],
 				"nic_no"=>$result1[0]["member_nic"],
 				"initials" => $result1[0]["member_initials"],
 				"surname" => $result1[0]["member_surname"],

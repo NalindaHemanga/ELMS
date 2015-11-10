@@ -96,9 +96,7 @@
 						<label class="description" for="dropdown">Drop Down</label>
 							<div>
 								<select class="medium select" name="dropdown"> 
-									
-									<option value="0" selected="selected"><input name="first_option" class="radio" type="radio" value="1" checked="checked"/>
-										<label class="choice" for="first_option">First option</label></option>
+								
 									<option value="1" >First option</option>
 									<option value="2" >Second option</option>
 									<option value="3" >Third option</option>
@@ -443,7 +441,10 @@
 
 
         		</ul>
-        
+        		<button style="width:15em;background:#43D14C;">   <div><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-191-circle-plus.png" width="13" height="13" /><font face="Calibri" color="black" size="4"> New </font></div></button>
+        		<button style="width:10em;">   <div><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-17-bin.png" width="13" height="15" /><font face="Calibri" color="black" size="4"> Delete </font></div></button>
+        		<button style="width:10em;">   <div><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-151-edit.png" width="13" height="13" /><font face="Calibri" color="black" size="4"> Edit </font></div></button>
+        		<button style="width:10em;">   <div><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-28-search.png" width="13" height="13" /><font face="Calibri" color="black" size="4"> Search </font></div></button>
 
         </form>
         </div>

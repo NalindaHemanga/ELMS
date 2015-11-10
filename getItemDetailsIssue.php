@@ -34,7 +34,7 @@ if(array_key_exists("item_id", $_GET)){
 				$type="hidden";
 			}
 
-			echo "<li class='node'><div id='".$itemCopyNo."' draggable=".$draggable." ondragstart=\"drag(event);\" style='border:1px solid #000000;padding:10px;background:".$bgcolour.";margin-right:30px;margin-top:5px;margin-left:30px'><img src='img/items/".$itemName.".jpg' height='80' width='80' align='left'/><b> Item Copy Name : </b>$itemName<br/><b> Item Copy No : </b>$itemCopyNo<br/><b> Condition : </b>$itemCopyCondition<br/><b>Status : </b>$status<br/><input type='".$type."' id='".$itemCopyNo."' value='Add to Basket' onclick='addToBasket(this.id);'/></div></li>";
+			echo "<li class='node'><div id='".$itemCopyNo."' draggable=".$draggable." ondragstart=\"drag(event);\" style='border:1px solid #000000;padding:10px;background:".$bgcolour.";margin-right:30px;margin-top:5px;margin-left:30px'><img src='img/items/".$itemName.".png' height='80' width='80' align='left'/><b> Item Copy Name : </b>$itemName<br/><b> Item Copy No : </b>$itemCopyNo<br/><b> Condition : </b>$itemCopyCondition<br/><b>Status : </b>$status<br/><input type='".$type."' id='".$itemCopyNo."' value='Add to Basket' onclick='addToBasket(this.id);'/></div></li>";
 		}
 		echo"</ul>";
 	}
@@ -71,7 +71,7 @@ if(array_key_exists("item_id", $_GET)){
 			$type="hidden";
 		}
 
-		echo "<ul><li class='node' onclick = itemCopyClicked(\"$itemCopyId\")><div id='".$itemCopyNo."' draggable=".$draggable." ondragstart=\"drag(event);\" style='border:1px solid #000000;padding:10px;background:".$bgcolour.";margin-right:30px;margin-top:5px;margin-left:30px'><img src='img/icons/itemcopy.png' height='60' width='60' align='left'/><b> Item Copy Name : </b>$itemName<br/><b> Item Copy No : </b>$itemCopyNo<br/><b> Condition : </b>$itemCopyCondition<br/><b>Status : </b>$status<br/><input type='".$type."' id='".$itemCopyNo."' value='Add to Basket' onclick='addToBasket(this.id);'/></div></li></ul>";
+		echo "<ul><li class='node'><div id='".$itemCopyNo."' draggable=".$draggable." ondragstart=\"drag(event);\" style='border:1px solid #000000;padding:10px;background:".$bgcolour.";margin-right:30px;margin-top:5px;margin-left:30px'><img src='img/items/".$itemName.".png' height='80' width='80' align='left'/><b> Item Copy Name : </b>$itemName<br/><b> Item Copy No : </b>$itemCopyNo<br/><b> Condition : </b>$itemCopyCondition<br/><b>Status : </b>$status<br/><input type='".$type."' id='".$itemCopyNo."' value='Add to Basket' onclick='addToBasket(this.id);'/></div></li></ul>";
 }
 
 

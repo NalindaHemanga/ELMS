@@ -17,10 +17,18 @@
 		<?php include "includes/leftnav.php" ?>
 		<div id="contentwrap">
         <div id="content">
+			
 			<div  class="dashicon" >
 			<a href="user_manager_dashboard.php">
 			<img src="img/icons/users.png" height="150" width="150" />
 			User Manager
+			</a>
+			</div>
+
+			<div  class="dashicon" >
+			<a href="user_manager_dashboard.php">
+			<img src="img/icons/course.png" height="150" width="150" />
+			Course Manager
 			</a>
 			</div>
 

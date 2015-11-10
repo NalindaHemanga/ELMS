@@ -15,6 +15,7 @@
 		}
     	$member_data = array(
 
+    		"id" 	 	=>  null,
 			"nic_no"	=>	$_POST["nic_no"],
 			"initials"	=>	$_POST["initials"],
 			"surname"	=>	$_POST["surname"],
@@ -83,14 +84,7 @@
 <script>
 
 
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-
-  </body>
-</html>
+  
 function validatePassword(){
 var pass2=document.getElementById("pass").value;
 var pass1=document.getElementById("conpass").value;
@@ -103,6 +97,7 @@ else
 //empty string means no validation error
 }
 function autoType() {
+	
     var t1=document.getElementById("nic");
     var p1=document.getElementById("pass");
     var p2=document.getElementById("conpass");
@@ -117,7 +112,6 @@ function resetText(){
 
 document.getElementById("pass").value="";
 document.getElementById("conpass").value="";
-
 
 
 
@@ -172,7 +166,7 @@ function checkCheckBoxGroup(groupName) {
 
 							<li>
 								<label class="description" for="nic_no">NIC Number</label>
-        						<div><input id="nic" type="text" class="large text" name="nic_no" onblur="autoType();" required="required" pattern="[0-9]{9}" title="Enter NIC number without the character at the end"></div>
+        						<div><input id="nic" type="text" class="large text" name="nic_no" onblur="autoType();" required="required" pattern="[0-9]{9}" title="Enter NIC number without the character at the end" onblur="this.setCustomValidity('User ID is a must')"></div>
         					</li>
 
         					<li  >
@@ -189,7 +183,7 @@ function checkCheckBoxGroup(groupName) {
 							</li>
 
 							<li>
-								<label class="description"for="email">E-mail Address</label>
+								<label class="description" for="email">E-mail Address</label>
         						<div><input type="email" class="large text" name="email" required="required"></div>
         					</li>
 

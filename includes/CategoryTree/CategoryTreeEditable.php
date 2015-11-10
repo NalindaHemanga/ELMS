@@ -131,7 +131,9 @@ url: "submit_cat.php",
 data: dataString,
 cache: false,
 success: function(result){
-alert(result);}
+//alert(result);
+alert("New Category Added");
+}
 });
 setTimeout(function(){reloadpg();},100);
 

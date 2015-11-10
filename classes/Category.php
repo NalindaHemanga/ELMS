@@ -67,7 +67,11 @@ class Category {
 
 	public function registerCat(){
 	
-	DB::getInstance()->insertRow("category",array("category_name"=>$this->_name,"category_no"=>$this->_label));
+	if(DB::getInstance()->insertRow("category",array("category_name"=>$this->_name,"category_no"=>$this->_label))){
+		return True;
+	}else{
+		return False;
+	}
 	}
 
 	public function deleteCat(){

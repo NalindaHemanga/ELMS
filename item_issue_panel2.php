@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +32,12 @@ input.close {
 <link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <script src="lib/jquery.min.js"></script>
 <script type="text/javascript">
+
+$(document).on("pageload",function(){
+  alert("pageload event fired!");
+});
+
+
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -41,9 +49,7 @@ function drag(ev) {
 function removeItem(data){
 
 
-    var node=document.getElementById(data.slice(0,-1)+'i');
-    node.remove();
-    dataString="copy_no="+data.slice(0,-1);
+    dataString="copy_no="+data;
 
 
         $.ajax({
@@ -54,12 +60,29 @@ function removeItem(data){
             success: function(data) {
 
                 alert(data);
+                loadContent();
             }
             });
 
+        var newCount;
+
+    var countNode=document.getElementById("count");
+    var count=countNode.textContent;
+    if(count=="1"){
+        newCount="No";
+    }
+    else{
+
+        newCount=parseInt(count)-1;
+    }
+    countNode.innerHTML=newCount;
+
+        
 }
 
 function drop(ev) {
+    
+
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var newli = document.createElement('li');
@@ -142,6 +165,10 @@ function loadContent(){
 
 
 }
+
+function closeclick(){
+    $('#closelink').get(0).click();
+}
 </script>
 
 
@@ -161,8 +188,7 @@ function loadContent(){
 		<?php 
 
             include 'includes/CategoryTree/CategoryTreeForIssuing.php' ;
-            $_SESSION["items"]=array();
-            $_SESSION["basket"]=array();
+            
 
 
         ?>
@@ -171,8 +197,17 @@ function loadContent(){
         	</div>
         <div id="content">
             
-            
-             <label value='0' id="count">No</label> item/s in the Basket (<a href="#openModal" onclick="loadContent();">View Basket</a>)
+                <?php 
+                    $count=0;
+                    if (count($_SESSION["basket"])==0) 
+                        $count="No";
+                    else
+                        $count=count($_SESSION["basket"]);
+
+
+
+                ?>
+             <label value='0' id="count"><?php  echo $count; ?></label> item/s in the Basket (<a href="#openModal" onclick="loadContent();">View Basket</a>)
              <hr/>
 
              <div id="sub_content">

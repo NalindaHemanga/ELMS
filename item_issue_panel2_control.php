@@ -15,14 +15,15 @@
         unset($_SESSION["items"][$key]);
         unset($_SESSION["basket"][$key]);
         print("You removed the item from the basket successfully !");
-        
 
+        
     }
     else{
         array_push($_SESSION["items"],$copy_no);
         $itemCopy=ItemCopy::search(["item_copy_no"=>$copy_no]);
         
         $data=array(
+            "item_copy_id"=>$itemCopy->get_id(),
             "item_copy_no"=>$itemCopy->get_no(),
             "item_copy_name"=>$itemCopy->get_item_name(),
             "quantity"=>1,

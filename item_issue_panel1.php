@@ -1,3 +1,17 @@
+<?php
+
+require_once 'core/init.php';
+	if(isset($_SESSION["items"])){
+		header("Location: item_issue_panel3.php");
+	}
+	else{
+		$_SESSION["items"]=array();
+    $_SESSION["basket"]=array();
+	}
+	
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

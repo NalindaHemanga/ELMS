@@ -6,7 +6,7 @@ require_once 'core/init.php';
 	}
 	else{
 		$_SESSION["items"]=array();
-    $_SESSION["basket"]=array();
+    	$_SESSION["basket"]=array();
 	}
 	
 

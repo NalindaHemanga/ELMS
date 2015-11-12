@@ -47,10 +47,13 @@ class ItemTransaction{
 
 			);
 
-		if(DB::getInstance()->insertRow("item_tansaction",$row))
+
+		if(DB::getInstance()->insertRow("item_transaction",$row)){
 			return true;
-		else
+		}
+		else{
 			return false;
+		}
 
 	}
 

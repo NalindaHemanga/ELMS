@@ -33,7 +33,11 @@ echo "test";
 echo date("d/m/Y");
 $a=Item::search(["item_id"=>2]);
 print_r($a);
-
+$sql="UPDATE item_copy SET item_copy_status=1;";
+DB::getInstance()->directUpdate($sql);
+				
+				
+			
 $data=array(
 
 	"id"=>null,
@@ -50,7 +54,7 @@ $t->add();
 
 
 
-
+echo isset($_SESSION["basket"]);
 
 ?>
 <html>

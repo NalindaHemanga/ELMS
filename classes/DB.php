@@ -33,6 +33,23 @@ class DB {
 
 	}
 
+	public function startTr(){
+
+		$this->pdo->beginTransaction();
+
+	}
+
+	public function commitTr(){
+		$this->pdo->commit();
+	}
+
+	public function rollBackTr(){
+
+		$this->pdo->rollBack();
+	}
+
+
+
 	public function getLastId(){
 		return $this->pdo->lastInsertId();
 	}
@@ -49,7 +66,7 @@ class DB {
 
 
 	public function search($table,$values=array()){
-		//echo"Done";
+		
 		try{
 
 		if(count($values)>0){
@@ -178,7 +195,9 @@ class DB {
 			$state=true;
 
 	}catch(PDOException $e){
+
 		$message=$e->getMessage();
+		echo $message;
 		echo "<script type='text/javascript'>alert('$message');</script>";
 
 
@@ -237,11 +256,15 @@ class DB {
 
 
 	function directUpdate($sql){
+		
+		$state=false;
 		try {
 
 
     	$this->query = $this->pdo->prepare($sql);
-    	$this->query->execute();
+    	if($this->query->execute()){
+    		$state=true;
+    	}
 
 
 
@@ -249,7 +272,7 @@ class DB {
     		echo "Error: " . $e->getMessage();
 		}
 
-
+		return $state;
 
 	}
 

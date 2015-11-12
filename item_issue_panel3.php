@@ -1,3 +1,25 @@
+
+<?php
+
+require_once 'core/init.php';
+
+if(isset($_SESSION["basket"]))
+{
+
+	
+	//echo isset($_SESSION["basket"]);
+
+}
+else{
+	header('location: dashboard.php');
+
+
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +39,37 @@ function loadContent(){
 
 	$( "#modalContent" ).load("item_basket_view.php");
 }
+
+function addTransaction(){
+
+		var form=document.getElementById("checkoutForm");
+
+		var dataString = $(form).serialize();
+		
+
+		$.ajax({
+			type: "POST",
+			url: "item_issue_panel3_control.php",
+			data: dataString,
+
+			success: function(data) {
+
+			
+				
+				var content=document.getElementById("content");
+				content.innerHTML=data;
+
+
+			}
+			});
+
+
+
+
+		return false;
+
+	}
+
 
 
 
@@ -44,7 +97,7 @@ function loadContent(){
 
 		<div class="form">
        
-       	 <form class="form" enctype="multipart/form-data" method="POST" >
+       	 <form class="form" onsubmit="return addTransaction();" id="checkoutForm">
 
 
        	 	<div class="form_description">
@@ -127,3 +180,12 @@ function loadContent(){
     </div>
 </body>
 </html>
+
+
+
+<div id='success' class="modalDialog">
+
+</div>
+
+<div id='error' class="modalDialog">
+</div>

@@ -9,7 +9,7 @@ $pdf->SetFont('Times','',12);
 $header = array('Index', 'Item Name', 'Item Copy No', 'Quantity');
 // Data loading
 $data=array();
-$basket=$_SESSION["basket"];
+$basket=$_SESSION["temp_basket"];
 $c=1;
 foreach ($basket as $key => $value) {
 	array_push($data,array($c,$value["item_copy_name"],$value["item_copy_no"],$value["quantity"]));

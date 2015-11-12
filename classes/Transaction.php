@@ -37,11 +37,13 @@ public function add(){
 
 	if(DB::getInstance()->insertRow("transaction",$row)){
 			return true;
-
+			
 
 	}
-	else
+	else{
 		return false;
+
+	}
 
 }
 
@@ -55,6 +57,8 @@ public static function getHistory($value){
 
 
 }
+
+
 
 
 

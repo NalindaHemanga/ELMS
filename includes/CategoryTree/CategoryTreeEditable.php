@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/item.css" />
 <link rel="stylesheet" type="text/css" href="css/dashboardicon.css" />
 <link rel="stylesheet" type="text/css" href="css/button.css" />
+<link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <div id="subcolumnwrap">
         <div id="treecolumn">
 		<div id="coltree" style="overflow-y:auto; height:350px; background: #D7DADB;">
@@ -86,8 +87,8 @@ var cat_ID_new_division = "mainCat";
 var cur_cat_id;
 
 function catCliked(lable,name,id)
-{
-	loadXMLDoc(id)
+{ 
+	loadXMLDoc(id);
 	newCatCancel();
 	cat_label = lable;
 	cat_NAME = name;
@@ -131,9 +132,7 @@ url: "submit_cat.php",
 data: dataString,
 cache: false,
 success: function(result){
-//alert(result);
-alert("New Category Added");
-}
+alert(result);}
 });
 setTimeout(function(){reloadpg();},100);
 
@@ -328,4 +327,255 @@ xmlhttp.onreadystatechange=function()
  xmlhttp.open("GET", "getItemDetails.php?item_id=" + itemId + "&cat_label=" + catLabel, true);
         xmlhttp.send();
 }
+
+function addItemClicked(cat_id) {
+
+	//loadOpenModel(cat_id);
+	document.getElementById("Modal_h2").innerHTML= "Add new item to "+cat_NAME;
+	document.getElementById("categoryNo").value=cat_label;
+	document.getElementById("categoryId").value=cur_cat_id;
+	//show open model
+	location.href="#openModal"
+	
+}
+
+function loadOpenModel(cat_id){
+
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("modalContent").innerHTML=xmlhttp.responseText;
+    }
+  }
+ xmlhttp.open("GET", "item_add.php?cat_id=" + cat_id + "&cat_name=" + cat_NAME + "&cat_no" + cat_label, true);
+        xmlhttp.send();
+}
+
+
+var counter = 0;
+function addInput(divName){
+
+	var newli = document.createElement('li');
+	newli.setAttribute('id', counter);
+	newli.innerHTML = '<div><input type="url" class="medium text" name="reference[]" placeholder=" Paste Link Here" required="required"><a 		href="javascript: void(0)" onClick="removeInput(\'dynamicInput\',\''+counter+'\');"> Remove this Link</a></div>';
+	document.getElementById(divName).appendChild(newli);
+	counter++;
+}
+
+function removeInput(divName,liid) {
+
+  	var d = document.getElementById(divName);
+	var li = document.getElementById(liid);
+	d.removeChild(li);
+
+}
+
+  /* function CallAlert()
+
+    {
+
+        alert("This is parent window's alert function.");
+
+    }*/
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 </script>
+
+
+<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<div id = "modalContent">
+
+        <div class="form">
+
+       	 <form class="form" enctype="multipart/form-data" id="data" method="post">
+        	<div class="form_description">
+				<h2 id="Modal_h2"></h2>
+				<p>Use This form to register a new Item</p>
+			</div>
+
+			<div class="container" style="width:100%;">
+
+				<div class="container" style="width:49%;display:inline-block;">
+
+						<ul>
+
+
+
+							<li>
+								<label class="description" for="item_name">Item Name</label>
+        						<div><input type="text" class="large text" name="item_name" required="required"></div>
+        					</li>
+
+
+
+
+							<li>
+						<label class="description" for="item_desc">Item Description </label>
+							<div>
+								<textarea name="item_desc" class="small textarea"></textarea>
+								<input type="hidden" name="categoryNo" id="categoryNo" >
+								<input type="hidden" name="categoryId" id="categoryId" >
+						</div>
+					</li>
+
+						<li>
+						<label class="description" for="item_tec_desc">Technical Details </label>
+							<div>
+								<textarea name="item_tec_desc" class="small textarea"></textarea>
+						</div>
+					</li>
+
+
+
+
+
+        				</ul>
+				</div>
+
+				<div class="container" style="display:inline-block;width:49%;vertical-align:top">
+
+						<ul>
+
+							<li>
+
+
+								<label class="description">Image of the Item</label>
+
+
+									<div>
+										<img id="item_pic" src="img/icons/image.png" height="195" width="185" style="border:1px solid #ccc;padding:22px" />
+									</div>
+
+									<div>
+										<input name="item_picture" class="file" type="file" accept="image/*" onchange="loadFile(event)" />
+									</div>
+
+
+
+
+										<script>
+ 											 var loadFile = function(event) {
+    											var reader = new FileReader();
+   											 reader.onload = function(){
+    										  var output = document.getElementById('item_pic');
+     										 output.src = reader.result;
+   												 };
+   												 reader.readAsDataURL(event.target.files[0]);
+  												};
+										</script>
+
+
+							</li>
+
+
+
+
+
+
+        				</ul>
+
+
+				</div>
+
+					<li>
+
+        					<label class="description">Item Type</label>
+							<span>
+									<input name="item_type" class="radio" type="radio" value="1" checked="checked" />
+										<label class="choice" for="item_type">Non-consumable</label>
+									<input name="item_type" class="radio" type="radio" value="0" />
+										<label class="choice" for="item_type">Consumable</label>
+
+
+							</span>
+
+							</li>
+
+					<li>
+					<label class="description" for="reference[]">Reference Links</label>
+					</li>
+
+					 <div id="dynamicInput">
+
+    				 </div>
+
+    				 <li>
+     				<a href="javascript: void(0)" onClick="addInput('dynamicInput');">Click to add Reference Link</a>
+     				</li>
+
+					<br/><br/>
+					<li>
+
+						<span>
+							<input type="submit" class="button" value="Submit" name="submit" />
+
+
+						</span>
+						<span>
+
+
+							<input type="reset"  class="button"/>
+						</span>
+
+					</li>
+
+
+
+        </div>
+
+        </form>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+
+$("form#data").submit(function(){
+
+    var formData = new FormData($(this)[0]);
+
+    $.ajax({
+        url: "item_add.php",
+        type: 'POST',
+        data: formData,
+        async: false,
+        success: function (data) {
+            alert(data);
+//alert(x); 
+//window.opener.CallAlert();
+	    //location.reload();
+	    document.getElementById("data").reset();
+	    //Window.catCliked(cat_label,cat_NAME,cur_cat_id);
+	    location.href="#close";
+
+
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+    //location.href="#close";
+    return false;
+});
+
+</script>
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        </div>		
+
+		</div>
+	</div>
+</div>

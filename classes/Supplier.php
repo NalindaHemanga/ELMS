@@ -33,6 +33,62 @@ class Supplier{
 
 	}
 
+	public function getCompany(){
+
+		return $this->company;
+
+
+	}
+
+	public function getEmail(){
+
+		return $this->email;
+
+
+	}
+
+	public function getStreet(){
+
+		return $this->street;
+
+
+	}
+
+	public function getLine2(){
+
+		return $this->line2;
+
+
+	}
+
+	public function getCity(){
+
+		return $this->city;
+
+
+	}
+
+	public function getProvince(){
+
+		return $this->province;
+
+
+	}
+
+	public function getPostal(){
+
+		return $this->postal;
+
+
+	}
+
+	public function getCountry(){
+
+		return $this->country;
+
+
+	}
+
 	public function register(){
 
 		$row = array(

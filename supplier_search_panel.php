@@ -10,9 +10,6 @@
 		echo "<legend>Supplier Details</legend>";
 		echo "<div style='display:inline-block'>";
 
-		//echo "<img src='img/profile_pictures/".$new_member->getNicNo().".jpg' width='100' hight='120' style='border:1px solid #ccc;'/>";
-		//echo "</div>";
-
 		echo "<div style='display:inline-block;vertical-align:top'>";
 
 
@@ -26,32 +23,6 @@
 		echo "<tr><td>Country    :<th><td>".$new_supplier->getCountry()."<td><tr>";
 		echo "</table>";
 
-/*
-		echo "</div>";
-		echo "</fieldset>";
-		echo "</div>";
-		echo "<br/>";
-		echo "<div>";
-		echo "<fieldset>";
-		echo "<legend>Transaction History</legend>";
-
-		$records=Transaction::getHistory($searchValue);
-		echo "<table border='1px' padding='2px'>";
-		echo "<tr><th>Item Name</th><th>Borrowed Date</th><th>Returned Date</th><th>Comments</th></tr>";
-		foreach ($records as $key => $value) {
-			echo "<tr><td>".$value["item_name"]."<td>".$value["borrowed_date"]."</td>"."<td>".$value["returned_date"]."</td>"."<td>".$value["transaction_comment"]."</td></tr>";
-		}
-
-
-
-		echo "</table>";
-		echo "</fieldset>";
-		echo "</div>";
-		echo "<br/>";
-		echo "<br/>";
-		echo "<div>";
-		echo "<input type='button' class='button' value='Proceed' onclick=\"location.href='item_issue_panel2.php';\"/>";
-		echo "</div>";*/
 	}
 	else{
 

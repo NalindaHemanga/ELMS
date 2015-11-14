@@ -33,6 +33,62 @@ class Supplier{
 
 	}
 
+	public function getCompany(){
+
+		return $this->company;
+
+
+	}
+
+	public function getEmail(){
+
+		return $this->email;
+
+
+	}
+
+	public function getStreet(){
+
+		return $this->street;
+
+
+	}
+
+	public function getLine2(){
+
+		return $this->line2;
+
+
+	}
+
+	public function getCity(){
+
+		return $this->city;
+
+
+	}
+
+	public function getProvince(){
+
+		return $this->province;
+
+
+	}
+
+	public function getPostal(){
+
+		return $this->postal;
+
+
+	}
+
+	public function getCountry(){
+
+		return $this->country;
+
+
+	}
+
 	public function register(){
 
 		$row = array(
@@ -84,6 +140,50 @@ class Supplier{
 		$result=DB::getInstance()->directSelect("Select * FROM supplier ORDER BY supplier_name");
 		return $result;
 
+
+	}
+
+
+	public static function search($values=array()){
+
+		
+
+		$result1=DB::getInstance()->search("supplier",$values);
+
+		if(count($result1)!=0){
+			$result2=DB::getInstance()->search("supplier_telephone",array("supplier_id"=>$result1[0]["supplier_id"]));
+
+			$supplier_telephone=array();
+			for($x=0;$x<count($result2);$x++){
+
+				$supplier_telephone[$x]=$result2[$x]["telephone"];
+
+
+
+			}
+			
+		
+			$supplier_data=array(
+
+				"company"=>$result1[0]["supplier_name"],
+				"email" => $result1[0]["supplier_email"],
+				"street" => $result1[0]["supplier_address_line1"],
+				"lane2" => $result1[0]["supplier_address_line2"],
+				"city" => $result1[0]["supplier_city"],
+				"province" => $result1[0]["supplier_province"],
+				"postal" => $result1[0]["supplier_postal"],
+				"country" => $result1[0]["supplier_country"],
+				"telephone" => $supplier_telephone
+				);
+
+		
+			$new_supplier=new Supplier();
+			$new_supplier->create($supplier_data);
+			return $new_supplier;
+		}
+		else
+			return null;
+		
 
 	}
 

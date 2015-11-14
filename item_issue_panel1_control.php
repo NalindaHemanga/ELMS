@@ -14,15 +14,15 @@
 		echo "<img src='img/profile_pictures/".$new_member->getNicNo().".jpg' width='100' hight='120' style='border:1px solid #ccc;'/>";
 		echo "</div>";
 
-		echo "<div style='display:inline-block;vertical-align:top'>";
+		echo "<div style='display:inline-block;vertical-align:top' class='datagrid'>";
 
 
 
 		echo "<table style='padding:20px;'>";
-		echo "<tr><td>Name    :<th><td>".$new_member->getInitials() . " " . $new_member->getSurname()."<td><tr>";
+		echo "<tbody><tr><td>Name    :<th><td>".$new_member->getInitials() . " " . $new_member->getSurname()."<td><tr>";
 		echo "<tr><td>Role/s    :<th><td>".$new_member->getRoles()."<td><tr>";
 		echo "<tr><td>Remarks :<th><td>".$new_member->getRemarks()."<td><tr>";
-		echo "</table>";
+		echo "</tbody></table>";
 
 
 		echo "</div>";
@@ -33,16 +33,22 @@
 		echo "<fieldset>";
 		echo "<legend>Transaction History</legend>";
 
+
+
+		
+
 		$records=Transaction::getHistory($searchValue);
+		echo "<div class='datagrid'>";
 		echo "<table border='1px' padding='2px'>";
-		echo "<tr><th>Item Name</th><th>Borrowed Date</th><th>Returned Date</th><th>Comments</th></tr>";
+		echo "<thead><tr><th>Item Copy No</th><th>Item Name</th><th>Borrowed Date</th><th>Returned Date</th><th>Comments</th></tr></thead>";
 		foreach ($records as $key => $value) {
-			echo "<tr><td>".$value["item_name"]."<td>".$value["borrowed_date"]."</td>"."<td>".$value["returned_date"]."</td>"."<td>".$value["transaction_comment"]."</td></tr>";
+			echo "<tbody><tr><td>".$value["item_copy_no"]."</td><td>".$value["item_name"]."<td>".$value["borrowed_date"]."</td>"."<td>".$value["returned_date"]."</td>"."<td>".$value["transaction_comment"]."</td></tr></tbody>";
 		}
 
 
 
 		echo "</table>";
+		echo "</div>";
 		echo "</fieldset>";
 		echo "</div>";
 		echo "<br/>";

@@ -2,7 +2,7 @@
 
 require_once 'core/init.php';
 	if(isset($_SESSION["items"])){
-		header("Location: item_issue_panel3.php");
+		header("Location: item_issue_panel2.php");
 	}
 	else{
 		$_SESSION["items"]=array();
@@ -21,7 +21,7 @@ require_once 'core/init.php';
 
 <link rel="stylesheet" type="text/css" href="css/content.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
-
+<link rel="stylesheet" type="text/css" href="css/forumtable.css" />
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <script src="lib/jquery.min.js"></script>
 

@@ -1,4 +1,18 @@
+<?php
 
+require_once 'core/init.php';
+
+if(isset($_SESSION["basket"]))
+{
+    
+
+}
+else{
+    header('location: dashboard.php');
+
+
+}
+?>
 
 <!DOCTYPE html>
 <html>

@@ -7,7 +7,7 @@ if(isset($_SESSION["basket"]))
 {
 
 	
-	//echo isset($_SESSION["basket"]);
+	
 
 }
 else{
@@ -26,7 +26,7 @@ else{
 <title>Item Checkout</title>
 
 
-
+<link rel="stylesheet" type="text/css" href="css/forumtable.css" />
 <link rel="stylesheet" type="text/css" href="css/content.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />

@@ -6,6 +6,8 @@
 	$new_member=Member::search(["member_nic"=>$searchValue]);
 
 	if($new_member){
+		$_SESSION["items"]=array();
+    	$_SESSION["basket"]=array();
 		echo "<div>";
 		echo "<fieldset>";
 		echo "<legend>Member Details</legend>";

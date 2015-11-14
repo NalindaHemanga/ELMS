@@ -52,7 +52,7 @@ for ($x = 0; $x <= 4; $x++) {
 
 <style>
 input[type="text"] {
-    width: 200px;
+    width: 120px;
     height: 20px;
     padding-right: 50px;
 }

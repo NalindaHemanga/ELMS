@@ -5,8 +5,7 @@ require_once 'core/init.php';
 		header("Location: item_issue_panel2.php");
 	}
 	else{
-		$_SESSION["items"]=array();
-    	$_SESSION["basket"]=array();
+		
 	}
 	
 

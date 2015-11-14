@@ -221,7 +221,8 @@ function closeclick(){
 
 
                 ?>
-             <label value='0' id="count"><?php  echo $count; ?></label> item/s in the Basket (<a href="#openModal" onclick="loadContent();">View Basket</a>)
+             <label value='0' id="count"><?php  echo $count; ?></label> item/s in the Basket | <a href="#openModal" onclick="loadContent();"><b>View Basket</b></a> | <a href="cancel_transaction.php"><b>Cancel Transaction</b></a> | <br/>
+             <label>Issuing For : <?php echo $_SESSION["member_details"]["initials"]." ".$_SESSION["member_details"]["surname"]; ?></label>
              <hr/>
 
              <div id="sub_content">

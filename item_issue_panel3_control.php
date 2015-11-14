@@ -12,9 +12,11 @@ if(isset($_SESSION["basket"]) && isset($_SESSION["items"])){
 
 			"id"=>null,
 			"purpose"=>$_POST["purpose"],
-			"comment"=>$_POST["comments"],
-			"member_id"=>$_SESSION["member_details"]["id"]
-
+			"borrow_comment"=>$_POST["comments"],
+			"return_comment"=>null,
+			"member_id"=>$_SESSION["member_details"]["id"],
+			"borrowed_date"=>date("Y-m-d"),
+			"expected_return_date"=>$_POST["expected_return_date"]
 
 
 		);
@@ -70,7 +72,8 @@ if(isset($_SESSION["basket"]) && isset($_SESSION["items"])){
 		echo "<div style='text-align:center';>";
 		
 		echo "<img src='img/icons/success-icon.png' hight='200' width='200'>";
-		echo "<h2>Transaction Successul !</h2>";
+		echo "<h2>Transaction Success
+		ul !</h2>";
 		echo "<a href='generate_slip.php' target='_blank'><h4>Print Transaction Slip</h4></a>";
 		echo "</div>";
 

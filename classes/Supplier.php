@@ -89,6 +89,13 @@ class Supplier{
 
 	}
 
+	public function getTelephone(){
+
+		return $this->telephone[0];
+
+
+	}
+
 	public function register(){
 
 		$row = array(

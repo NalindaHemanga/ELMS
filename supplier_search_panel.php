@@ -21,6 +21,7 @@
 		echo "<tr><td>Province    :<th><td>".$new_supplier->getProvince()."<td><tr>";
 		echo "<tr><td>Postal    :<th><td>".$new_supplier->getPostal()."<td><tr>";
 		echo "<tr><td>Country    :<th><td>".$new_supplier->getCountry()."<td><tr>";
+		echo "<tr><td>Contact Number    :<th><td>".$new_supplier->getTelephone()."<td><tr>";
 		echo "</table>";
 
 	}

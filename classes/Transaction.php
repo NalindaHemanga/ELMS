@@ -54,6 +54,9 @@ public function add(){
 	}
 
 }
+public function setItems($items=array()){
+	$this->transactions=$items;
+}
 
 public function getMemberId(){
 	return $this->member_id;
@@ -79,6 +82,10 @@ public function getBorrowedDate(){
 	return $this->borrowed_date;
 }
 
+public function getTransactions(){
+	return $this->transactions;
+}
+
 public function getExpectedReturnDate(){
 	return $this->expected_return_date;
 }
@@ -90,7 +97,7 @@ public function getTransactionItems(){
 
 public static function getHistory($value){
 
-	$sql="SELECT item_copy_no,item_name,it.borrowed_date,returned_date,transaction_comment FROM item,item_transaction it,transaction,member,item_copy WHERE member_nic='".$value."' AND member.member_id=transaction.member_id AND it.transaction_id=transaction.transaction_id AND item.item_id=item_copy.item_id AND it.item_copy_id=item_copy.item_copy_id ORDER BY borrowed_date DESC;";
+	$sql="SELECT item_copy_no,item_name,borrowed_date,returned_date,transaction_comment FROM item,item_transaction it,transaction,member,item_copy WHERE member_nic='".$value."' AND member.member_id=transaction.member_id AND it.transaction_id=transaction.transaction_id AND item.item_id=item_copy.item_id AND it.item_copy_id=item_copy.item_copy_id ORDER BY borrowed_date DESC;";
 	return DB::getInstance()->directSelect($sql);
 
 
@@ -126,18 +133,97 @@ public static function getPendingReturns($member_nic=null){
 		$t->create($data);
 		$trans[]=$t;
 	}
-
 	return $trans;
-
 
 }
 
+public static function search($tid){
+
+	$items=array();
+	$result1=DB::getInstance()->search("transaction",["transaction_id"=>$tid]);
+	
+	$result2=DB::getInstance()->search("item_transaction",["transaction_id"=>$tid]);
+	foreach ($result2 as $key => $value) {
+		$data1=array(
+			
+			"item_copy_id"=>$value["item_copy_id"],
+			"transaction_id"=>$value["transaction_id"],
+			"borrowed_quantity"=>$value["borrowed_quantity"],
+			"returned_date"=>$value["returned_date"],
+			"returned_quantity"=>$value["returned_quantity"],
+			"status"=>$value["status"]
+
+			);
+		$it=new ItemTransaction();
+		$it->create($data1);
+		$items[]=$it;
+	}
+
+	$data2=array(
+
+			"id"=>$result1[0]["transaction_id"],
+			"purpose"=>$result1[0]["transaction_description"],
+			"borrow_comment"=>$result1[0]["transaction_comment"],
+			"return_comment"=>$result1[0]["return_comment"],
+			"member_id"=>$result1[0]["member_id"],
+			"borrowed_date"=>$result1[0]["borrowed_date"],
+			"expected_return_date"=>$result1[0]["expected_return_date"]
+		);
+
+		$t=new Transaction();
+		$t->create($data2);
+		$t->setItems($items);
 
 
 
+		return $t;
+	
+}
+
+public function searchPendingReturns($tid){
+
+	$items=array();
+	$result1=DB::getInstance()->search("transaction",["transaction_id"=>$tid]);
+	
+	$result2=DB::getInstance()->search("item_transaction",["transaction_id"=>$tid,"status"=>0]);
+	foreach ($result2 as $key => $value) {
+		$data1=array(
+			
+			"item_copy_id"=>$value["item_copy_id"],
+			"transaction_id"=>$value["transaction_id"],
+			"borrowed_quantity"=>$value["borrowed_quantity"],
+			"returned_date"=>$value["returned_date"],
+			"returned_quantity"=>$value["returned_quantity"],
+			"status"=>$value["status"]
+
+			);
+		$it=new ItemTransaction();
+		$it->create($data1);
+		$items[]=$it;
+	}
+
+	$data2=array(
+
+			"id"=>$result1[0]["transaction_id"],
+			"purpose"=>$result1[0]["transaction_description"],
+			"borrow_comment"=>$result1[0]["transaction_comment"],
+			"return_comment"=>$result1[0]["return_comment"],
+			"member_id"=>$result1[0]["member_id"],
+			"borrowed_date"=>$result1[0]["borrowed_date"],
+			"expected_return_date"=>$result1[0]["expected_return_date"]
+		);
+
+		$t=new Transaction();
+		$t->create($data2);
+		$t->setItems($items);
 
 
 
+		return $t;
+
+
+
+}
 
 
 

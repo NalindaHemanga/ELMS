@@ -33,9 +33,7 @@ if(isset($_SESSION["basket"]) && isset($_SESSION["items"])){
 
 				"item_copy_id"=>$value["item_copy_id"],
 				"transaction_id"=>$transaction_id,
-				"borrowed_date"=>date("Y-m-d"),
 				"borrowed_quantity"=>$value["quantity"],
-				"expected_return_date"=>$_POST["expected_return_date"],
 				"returned_date"=>null,
 				"returned_quantity"=>null,
 				"status"=>0

@@ -49,6 +49,7 @@ for ($x = 0; $x <= 4; $x++) {
     <link rel="stylesheet" type="text/css" href="css/btn.css" />
     <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
     <link rel="stylesheet" type="text/css" href="css/form.css" />
+    <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
 
 <style>
 input[type="text"] {
@@ -109,7 +110,7 @@ input[type="button"] {
                 <h2> Edit Fixed Schedule </h2>
                 <hr width="840px"><br>
 
-            <div id="left" style="width:68%;overflow:auto;display:inline-block;border:3px solid #000000;padding:5px;">
+            <div id="left" style="width:68%;overflow:auto;display:inline-block;border:3px solid #000000;padding:5px;" class="datagrid">
 
 
 <?php
@@ -127,14 +128,14 @@ $result=DB::getInstance()->directSelect($sql);
 
             <table width="100%" height="300px" border="1" style="overlow:auto;" padding="0" cellspacing="0" >
 
-                    <tr>
+                    <tr><thead>
                         <td><b> Time </b></td>
                         <td><b> Monday </b></td>
                         <td><b> Tuesday </b></td>
                         <td><b> Wednesday </b></td>
                         <td><b> Thursday </b></td>
                         <td><b> Friday </b></td>
-                    </tr>
+                    </thead></tr>
 
                     <tr>
                         <td>08.00-09.00</td>

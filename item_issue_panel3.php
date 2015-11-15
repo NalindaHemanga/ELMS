@@ -5,8 +5,6 @@ require_once 'core/init.php';
 
 if(isset($_SESSION["basket"]))
 {
-
-	
 	
 
 }
@@ -125,7 +123,7 @@ function addTransaction(){
         			<li>
 						<label class="description" for="purpose">Purpose of issuing</label>
 							<div>
-								<textarea name="purpose" class="small textarea"></textarea> 
+								<textarea name="purpose" class="small textarea" required="required"></textarea> 
 						</div> 
 					</li>
         			

@@ -96,9 +96,18 @@ public static function getHistory($value){
 
 }
 
-public static function getPendingReturns(){
+public static function getPendingReturns($member_nic=null){
 
-	$sql="SELECT t.transaction_id,transaction_description,t.borrowed_date,t.expected_return_date,member_id FROM transaction t,item_transaction it WHERE t.transaction_id=it.transaction_id AND status=0;";
+	if(isset($member_nic)){
+
+		$member=Member::search(["member_nic"=>$member_nic]);
+		$extra="AND member_id=".$member->getId();
+	}
+	else{
+		$extra="";
+	}
+	
+	$sql="SELECT DISTINCT t.transaction_id,transaction_description,t.borrowed_date,t.expected_return_date,member_id FROM transaction t,item_transaction it WHERE t.transaction_id=it.transaction_id AND status=0 ".$extra.";";
 	$result=DB::getInstance()->directSelect($sql);
 	$trans=array();
 	foreach ($result as $key => $value) {

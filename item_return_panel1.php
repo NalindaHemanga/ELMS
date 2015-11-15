@@ -50,7 +50,7 @@ require_once 'core/init.php';
 
         				<div>
 
-        				<div><input type="search" class="medium text" name="searchVal" id="searchVal" placeholder=" Search Member By NIC" required="required" pattern="[0-9]{9}" title="Enter NIC number without the character at the end"/>  <input type="Submit" value="Search" name="Search"/></div>
+        				<div><input type="search" class="medium text" name="searchVal" id="searchVal" placeholder=" Search by Member NIC" required="required" pattern="[0-9]{9}" title="Enter NIC number without the character at the end"/>  <input type="Submit" value="Search" name="Search"/></div>
         			</li>
         			</ul>
 
@@ -64,7 +64,32 @@ require_once 'core/init.php';
 			<?php
 
 				if(isset($_POST["Search"])){
-					 echo "post";
+					 $result=Transaction::getPendingReturns($_POST["searchVal"]);
+
+
+					echo "<table>";
+					echo "<thead><th>Transaction ID</th><th>Description</th><th>Borrowed Date</th><th>Expected Return Date</th><th>Member Name</th></thead><tbody>";
+					foreach ($result as $key => $value) {
+						$member=Member::search(["member_id"=>$value->getMemberId()]);
+						$name = $member->getInitials()." ".$member->getSurname();
+						$tid=$value->getTransactionId();
+						$desc=$value->getPurpose();
+						$bdate=$value->getBorrowedDate();
+						$edate=$value->getExpectedReturnDate();
+
+
+						echo "<tr><td><a id='$tid' href='item_return_panel2.php?t_id=$tid'>$tid</a></td>";
+						echo "<td>$desc</td>";
+						echo "<td>$bdate</td>";
+						echo "<td>$edate</td>";
+						echo "<td>$name</td></tr>";
+						
+
+
+
+					}
+					echo "</tbody></table>";
+
 
 				}
 
@@ -79,11 +104,15 @@ require_once 'core/init.php';
 						$member=Member::search(["member_id"=>$value->getMemberId()]);
 						$name = $member->getInitials()." ".$member->getSurname();
 						$tid=$value->getTransactionId();
+						$desc=$value->getPurpose();
+						$bdate=$value->getBorrowedDate();
+						$edate=$value->getExpectedReturnDate();
 
-						echo "<tr><td>$tid</td>";
-						echo "<td>$name</td>";
-						echo "<td>$name</td>";
-						echo "<td>$name</td>";
+
+						echo "<tr><td><a id='$tid'href='item_return_panel2.php?t_id=$tid'>$tid</a></td>";
+						echo "<td>$desc</td>";
+						echo "<td>$bdate</td>";
+						echo "<td>$edate</td>";
 						echo "<td>$name</td></tr>";
 						
 

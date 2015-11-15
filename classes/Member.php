@@ -205,22 +205,7 @@ class Member {
 	}
 	else
 		return false;
-
-
-
 	}
-
- 
-
-
-
-
-
-
-
 }
-
-
-
 
 ?>

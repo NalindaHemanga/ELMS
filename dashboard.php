@@ -18,7 +18,41 @@
 		<div id="contentwrap">
         <div id="content">
 			
+
+
 			<div  class="dashicon" >
+			<a href="item_manager.php">
+			<img src="img/icons/item_manager.png" height="150" width="150" />
+			Item Manager
+			</a>
+			</div>
+
+			
+
+			<div  class="dashicon" >
+			<a href="item_issue_panel1.php">
+			<img src="img/icons/issue.png" height="150" width="150" />
+			Issue Items
+			</a>
+			</div>
+
+			<div  class="dashicon" >
+			<a href="item_return_panel1.php">
+			<img src="img/icons/return.png" height="150" width="150" />
+			Return Items
+			</a>
+			</div>
+
+			<div  class="dashicon" >
+			<a href="schedule_dashboard.php">
+			<img src="img/icons/schedule.png" height="150" width="150" />
+			Schedule Manager
+			</a>
+
+
+    </div>
+
+    <div  class="dashicon" >
 			<a href="user_manager_dashboard.php">
 			<img src="img/icons/users.png" height="150" width="150" />
 			User Manager
@@ -33,32 +67,11 @@
 			</div>
 
 			<div  class="dashicon" >
-			<a href="item_manager.php">
-			<img src="img/icons/item_manager.png" height="150" width="150" />
-			Item Manager
-			</a>
-			</div>
-
-			<div  class="dashicon" >
 			<a href="supplier_manager_dashboard.php">
 			<img src="img/icons/supplier.png" height="150" width="150" />
 			Supplier Manager
 			</a>
 			</div>
-
-			<div  class="dashicon" >
-			<a href="item_issue_panel1.php">
-			<img src="img/icons/transaction.png" height="150" width="150" />
-			Item Transaction
-			</a>
-			</div>
-
-			<div  class="dashicon" >
-			<a href="schedule_dashboard.php">
-			<img src="img/icons/schedule.png" height="150" width="150" />
-			Schedule Manager
-			</a>
-    </div>
 
 
 

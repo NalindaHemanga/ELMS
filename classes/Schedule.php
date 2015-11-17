@@ -20,6 +20,32 @@
 
 		}
 
+
+		public function getScheduleId(){
+			return $this->schedule_id;
+		}
+
+		public function getSemesterNo(){
+			return $this->semester_no;
+		}
+
+		public function getAcademicYear(){
+			return $this->academic_year;
+		}
+
+		public function getScheduleStartDate(){
+			return $this->schedule_start_date;
+		}
+
+		public function getScheduleEndDate(){
+			return $this->schedule_end_date;
+		}
+
+
+
+
+
+
 		public function add(){
 
 			$data=array(
@@ -75,6 +101,74 @@
 				return false;
 			}
 
+
+		}
+
+
+
+		public static function search($val=array()){
+
+			$result=DB::getInstance()->search("schedule",$val);
+			if(count($result)==0){
+
+				return null;
+			}
+			foreach ($result as $key => $value) {
+				$schedule=array(
+
+				"schedule_id"=>$value["schedule_id"],
+				"semester_no"=>$value["semester_no"],
+				"academic_year"=>$value["academic_year"],
+				"schedule_start_date"=>$value["schedule_start_date"],
+				"schedule_end_date"=>$value["schedule_end_date"]
+
+
+
+
+					);
+
+
+			}
+
+			$newSchedule=new Schedule();
+			$newSchedule->create($schedule);
+			return $newSchedule;
+
+
+
+		}
+
+
+		public static function getAllSchedules(){
+
+			$result=DB::getInstance()->directSelect("SELECT * FROM schedule;");
+			$schedules=array();
+			if(count($result)==0){
+
+				return null;
+			}
+			foreach ($result as $key => $value) {
+				$schedule=array(
+
+				"schedule_id"=>$value["schedule_id"],
+				"semester_no"=>$value["semester_no"],
+				"academic_year"=>$value["academic_year"],
+				"schedule_start_date"=>$value["schedule_start_date"],
+				"schedule_end_date"=>$value["schedule_end_date"]
+
+
+					);
+
+
+			
+
+			$newSchedule=new Schedule();
+			$newSchedule->create($schedule);
+			$schedules[]=$newSchedule;
+			
+
+		}
+		return $schedules;
 
 		}
 

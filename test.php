@@ -52,7 +52,21 @@ $t=new Transaction();
 $t->create($data);
 $t->add();
 
+$s=new Schedule();
 
+$data=array(
+
+	"schedule_id"=>null,
+	"semester_no"=>1,
+	"academic_year"=>"2013/2014",
+	"schedule_start_date"=>"2015-11-16",
+	"schedule_end_date"=>"2016-5-16"
+
+
+	);
+
+$s->create($data);
+$s->add();
 
 echo isset($_SESSION["basket"]);
 

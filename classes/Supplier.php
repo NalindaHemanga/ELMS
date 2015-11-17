@@ -175,7 +175,7 @@ class Supplier{
 				"company"=>$result1[0]["supplier_name"],
 				"email" => $result1[0]["supplier_email"],
 				"street" => $result1[0]["supplier_address_line1"],
-				"lane2" => $result1[0]["supplier_address_line2"],
+				"line2" => $result1[0]["supplier_address_line2"],
 				"city" => $result1[0]["supplier_city"],
 				"province" => $result1[0]["supplier_province"],
 				"postal" => $result1[0]["supplier_postal"],

@@ -70,8 +70,7 @@ if(isset($_SESSION["basket"]) && isset($_SESSION["items"])){
 		echo "<div style='text-align:center';>";
 		
 		echo "<img src='img/icons/success-icon.png' hight='200' width='200'>";
-		echo "<h2>Transaction Success
-		ul !</h2>";
+		echo "<h2>Transaction Successful !</h2>";
 		echo "<a href='generate_slip.php' target='_blank'><h4>Print Transaction Slip</h4></a>";
 		echo "</div>";
 

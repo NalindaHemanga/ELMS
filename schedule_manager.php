@@ -28,7 +28,7 @@ function addSchedule(){
 			type: "POST",
 			url: "add_schedule.php",
 			data: dataString,
-			
+
 			success: function(data) {
 
 				form.reset();
@@ -167,7 +167,7 @@ function addSchedule(){
 
         	<li>
 						<label class="description"for="textbox">Academic Year</label>
-        				<div><input type="text" class="medium text" name="academic_year" value=<?php echo $aca_year; ?> readonly></div>
+        				<div><input type="text" class="medium text" name="academic_year" value=<?php echo $aca_year; ?> ></div>
         	</li>
 
         	</li>

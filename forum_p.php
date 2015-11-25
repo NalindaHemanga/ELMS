@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Forum Template</title>
+<title>Forum Posts</title>
 <link rel="stylesheet" type="text/css" href="css/content.css" />
 <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
@@ -90,6 +90,7 @@ function test_input($data) {
    return $data;
 }
 
+//update forum_post table
 if(isset($_POST['submit']))
 {
   $new_forum_topic = new forumPost();
@@ -101,7 +102,7 @@ if(isset($_POST['submit']))
 }
 
 
-
+//Get details from forum_post table
 echo "<div class='datagrid'><table>
     <thead><tr><th>Discussion</th><th>Posted by</th><th>Date</th></tr></thead>";
 $allposts = forumPost::getallForum();

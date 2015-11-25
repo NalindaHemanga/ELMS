@@ -31,7 +31,7 @@ class forumReply{
       public function createNew($data=array()){
 
         //$this->post_id 					=	$data["post_id"];
-        $this->post_id            = $data["post_id"]
+        $this->post_id            = $data["post_id"];
         $this->reply_title 				= 	$data["reply_title"];
         $this->reply_post			=	$data["reply_post"];
         $this->reply_posted_user 	= 	$data["reply_posted_user"];
@@ -41,7 +41,7 @@ class forumReply{
       }
 
 
-
+//define the methods
       public function get_Title(){
 
         return $this->reply_title;
@@ -107,7 +107,7 @@ class forumReply{
       }
 
 
-        public static function getallForum(){
+        public static function getallForumReply(){
 
         $result=DB::getInstance()->directSelect("SELECT * FROM forum_reply;");
 

@@ -61,6 +61,7 @@
 			if(DB::getInstance()->insertRow("schedule",$data)){
 				
 
+				/*
 				$sid=DB::getInstance()->getLastId();
 				date_default_timezone_set('UTC');
  				$lab_time=["8-9","9-10","10-11","11-12","12-1","1-2","2-3","3-4","4-5"];
@@ -93,7 +94,7 @@
                 	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));
 				}
  
-
+			*/
 
 				return true;
 			}

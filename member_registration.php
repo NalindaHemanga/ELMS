@@ -13,6 +13,9 @@
 		else{
 			$validity = null;
 		}
+
+		$salt = '5&JDDlwz%Rwh!t2Yg-Igae@QxPzFTSId';
+        $enc_pass  = md5($salt.$_POST["password"]);
     	$member_data = array(
 
     		"id" 	 	=>  null,
@@ -20,7 +23,7 @@
 			"initials"	=>	$_POST["initials"],
 			"surname"	=>	$_POST["surname"],
 			"email"		=>	$_POST["email"],
-			"password"	=>	crypt($_POST["password"]),
+			"password"	=>	$enc_pass,
 			"type"		=>	$_POST["m_type"],
 			"validity"	=>  $validity,
 			"remarks"	=>	'Borrow Allowed'

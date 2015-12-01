@@ -19,7 +19,7 @@
         <div id="content">
 
         <div  class="dashicon" >
-			<a href="#">
+			<a href="fixed_schedule.php?sid=<?php echo $_GET['sid'] ?>">
 			<img src="img/icons/fixed-schedule.png" height="150" width="150" />
 			Create Fixed Schedule
 			</a>

@@ -40,7 +40,7 @@ function addSchedule(){
 			});
 
 		
-	return false;
+	location.reload();
 }
 
 </script>
@@ -124,7 +124,7 @@ function addSchedule(){
 	<div class="form">
 		<a href="#close" title="Close" class="close">X</a>
 
-       	 <form class="form" onsubmit="return addSchedule();" id="scheduleForm" >
+       	 <form class="form" onsubmit="addSchedule();" id="scheduleForm" >
 
        	 <div class="form_description">
 					<h2>Create New Schedule</h2>

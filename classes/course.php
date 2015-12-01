@@ -9,7 +9,7 @@
 
 		public function create($data=array()){
 
-			//$this->course_id	 	= 	$data["course_id"];
+			$this->course_id	 	= 	$data["course_id"];
 			$this->course_no 	    =	$data["course_no"];
 			$this->course_name	 	= 	$data["course_name"];
 		}
@@ -49,4 +49,5 @@
 			
 		}
 	}
+
 ?>

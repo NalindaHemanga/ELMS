@@ -19,6 +19,7 @@ $name=$member->getInitials()." ".$member->getSurname();
 
 
 <link rel="stylesheet" type="text/css" href="css/header.css" />
+
 <div id="headerwrap">
         <div id="header">
 			<div id="logo">

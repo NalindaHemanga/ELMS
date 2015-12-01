@@ -8,11 +8,6 @@ class forumPost{
 			$posted_date,
 			$posted_user;
 
-
-
-
-
-
 	public function __construct(){
 
 	}
@@ -43,7 +38,7 @@ class forumPost{
 	}
 
 
-
+//define the methods
 	public function get_Title(){
 
 		return $this->post_title;

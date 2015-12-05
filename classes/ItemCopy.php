@@ -128,6 +128,36 @@ class ItemCopy{
 
 	}
 
+	public function get_owner(){
+
+		return $this->owner;
+
+	}
+
+	public function get_barcode(){
+
+		return $this->barcode;
+
+	}
+
+	public function get_price(){
+
+		return $this->price;
+
+	}
+
+	public function get_installed_date(){
+
+		return $this->installed_date;
+
+	}
+
+	public function get_supplier(){
+
+		return $this->supplier;
+
+	}
+
 
 	public static function search($values=array()){
 

@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/item.css" />
 <link rel="stylesheet" type="text/css" href="css/dashboardicon.css" />
 <link rel="stylesheet" type="text/css" href="css/button.css" />
+<link rel="stylesheet" type="text/css" href="css/list.css" />
 <link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <div id="subcolumnwrap">
         <div id="treecolumn">
@@ -10,8 +11,8 @@
 
 		<font size="5" face="Agency FB"><center><strong>Item Categories</strong></center></font>
 
-				<ol class="tree">
-
+				<ul class="catList">
+               
 
 
 					<?php
@@ -27,8 +28,8 @@
 						$Cur_id=$mcat2->get_id();
 						//if(is_object($mcat2)){echo"%%";}
 						//echo"$id ";
-						echo "<li class='node'>";
-						echo "<label for=$Cur_label>".$name."</label> <input type='checkbox' class='check' id=$Cur_label onclick=catCliked('".$Cur_label."','".$name."','".$Cur_id."') />";
+						echo "<li class='catList' id=$Cur_label onclick=catCliked('".$Cur_label."','".$name."','".$Cur_id."')>";
+						echo "<a for=$Cur_label href='#'>$name</a>";
 						echo "</li>";
 						echo "<div id=$Cur_label.1>";
 						echo "</div>";
@@ -39,7 +40,7 @@
 					<div id="mainCat">
 
 					</div>
-				</ol>
+				</ul>
 		</div>
 <div style="padding-top:5px;">
 <div id="catsetting">

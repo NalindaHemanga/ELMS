@@ -11,7 +11,7 @@
 
 		<font size="5" face="Agency FB"><center><strong>Item Categories</strong></center></font>
 
-				<ol class="catList">
+				<ul class="catList">
 
 
 
@@ -40,7 +40,7 @@
 					<div id="mainCat">
 
 					</div>
-				</ol>
+				</ul>
 		</div>
 <div style="padding-top:5px;">
 <div id="catsetting">

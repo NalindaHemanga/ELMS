@@ -1,5 +1,5 @@
 <?php
-
+//define class of forum post
 class forumPost{
 
 	private $post_id,
@@ -13,7 +13,7 @@ class forumPost{
 	}
 
 
-
+	//data array of forum posts
 	public function create($data=array()){
 
 		$this->post_id 					=	$data["post_id"];
@@ -25,7 +25,7 @@ class forumPost{
 
 	}
 
-
+	
 	public function createNew($data=array()){
 
 		//$this->post_id 					=	$data["post_id"];
@@ -39,6 +39,7 @@ class forumPost{
 
 
 //define the methods
+	//Get from post_title forum_posts table
 	public function get_Title(){
 
 		return $this->post_title;
@@ -46,33 +47,35 @@ class forumPost{
 	}
 
 
-
+	//Get post_description from forum_posts table
 	public function get_Description(){
 
 		return $this->post_description;
 
 	}
 
-
+	//Get post_id from forum_posts table
 	public function get_id(){
 
 		return $this->post_id;
 
 	}
 
+	//Get posted_user from forum_posts table
 	public function get_Posteduser(){
 
 		return $this->posted_user;
 
 	}
 
+	//Get posted_date from forum_posts table
 	public function get_Postdate(){
 
 		return $this->posted_date;
 
 	}
 
-
+	//define register method to database
 	public function register(){
 
 		$row=array(
@@ -96,10 +99,10 @@ class forumPost{
 
 	}
 
-
+		//get all post data from forum_posts table
 		public static function getallForum(){
 
-		$result=DB::getInstance()->directSelect("SELECT * FROM forum_posts;");
+		$result=DB::getInstance()->directSelect("SELECT * FROM forum_posts ORDER BY post_id DESC;");
 
 		$allforums = array();
 		foreach ($result as $key => $row) {

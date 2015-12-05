@@ -1,4 +1,5 @@
 <?php
+ob_start();
   require_once 'core/init.php';
 
   $username=$_SESSION["logged_in_user"];
@@ -68,7 +69,7 @@
 
 $topic = $description = "";
 date_default_timezone_set("Asia/Colombo");
-$date=date("Y/m/d : h:i:sa");
+$date=date("Y-m-d H:i:s");
 
 $_SESSION["formdatas"]=$topic and $description;
 
@@ -100,6 +101,7 @@ if(isset($_POST['submit']))
       header('Location: forum_p.php');
       exit();
 }
+ob_flush();
 
 
 //Get details from forum_post table
@@ -114,7 +116,7 @@ foreach ($allposts as $key => $value) {
     $pst_date=$value->get_Postdate();
     //echo "<a href='forum_view_posts.php?cid=".$id."' class='cat_links'>  <b>$title</b>:  <br> Posted By <i>$pst_usr</i> </a>  ";
     echo "
-        <tbody><tr><td><a href='forum_view_posts.php?cid=".$id."'>$title</a></td><td>$pst_usr</td><td>$pst_date</td></tr>
+        <tbody><tr><td><a href='forum_view_posts.php?cid=".$id."' style='text-decoration: none; color:#0912cb;'>$title</a></td><td>$pst_usr</td><td>$pst_date</td></tr>
         <tr class=\"alt\">
         </tr>
         </tbody>

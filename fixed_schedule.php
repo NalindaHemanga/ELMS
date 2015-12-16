@@ -15,6 +15,7 @@ require_once 'core/init.php';
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
 <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
+<link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <script src="lib/jquery.min.js"></script>
  <script type="text/javascript">
             var curCourse;
@@ -82,7 +83,7 @@ foreach($courses as $course){
 
 ?>
 
-<a href="#">Add new course</a>
+<a href="#openModal">Add new course</a>
 
     </fieldset><br><br><br>
 
@@ -143,3 +144,62 @@ foreach($courses as $course){
     </div>
 </body>
 </html>
+
+
+
+<div id="openModal" class="modalDialog">
+
+<div>
+
+	<div class="form">
+		<a href="#close" title="Close" class="close">X</a>
+
+       	 <form class="form" enctype="multipart/form-data" method="POST" >
+
+        		<div class="form_description">
+					<h2>Course Registration</h2>
+					<p>Fill this form to add a new course</p>
+				</div>
+
+				<ul>
+
+					
+
+
+					
+
+					<li>
+						<label class="description"for="textbox">Course No</label>
+        				<div><input type="text" class="medium text" name="textbox"></div>
+        			</li>
+
+        			<li>
+						<label class="description"for="textbox">Course Name</label>
+        				<div><input type="text" class="medium text" name="textbox"></div>
+        			</li>
+
+        		
+					<li>
+
+						<span>
+							<input type="submit" class="button" value="      SUBMIT      " />
+
+
+						</span>
+						<span>
+
+
+							<input type="reset"  class="button"/>
+						</span>
+
+					</li>
+
+
+        		</ul>
+
+
+        </form>
+        </div>
+        </div>
+
+</div>

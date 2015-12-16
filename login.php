@@ -11,7 +11,7 @@
 
 
 			$_SESSION['logged_in_user']=$username;
-			header("location: home2.php");
+			header("location: dashboard.php");
 			 
  
 

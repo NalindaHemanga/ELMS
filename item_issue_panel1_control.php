@@ -8,6 +8,15 @@
 	if($new_member){
 		$_SESSION["items"]=array();
     	$_SESSION["basket"]=array();
+
+    	$remark=$new_member->getRemarks();
+    	if($remark=="Borrow Allowed"){
+    		$bgcolor="#00FF00";
+    	}
+    	else{
+    		$bgcolor="#FF0000";
+    	}
+    	
 		echo "<div>";
 		echo "<fieldset>";
 		echo "<legend>Member Details</legend>";
@@ -23,7 +32,7 @@
 		echo "<table style='padding:20px;'>";
 		echo "<tbody><tr><td>Name    :<th><td>".$new_member->getInitials() . " " . $new_member->getSurname()."<td><tr>";
 		echo "<tr><td>Role/s    :<th><td>".$new_member->getRoles()."<td><tr>";
-		echo "<tr><td>Remarks :<th><td>".$new_member->getRemarks()."<td><tr>";
+		echo "<tr><td>Remarks :<th><td bgcolor=\"$bgcolor\">".$remark."<td><tr>";
 		echo "</tbody></table>";
 
 

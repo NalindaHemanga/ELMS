@@ -1,5 +1,6 @@
 <?php
 
+//define the forumreply class
 class forumReply{
 
 	private $reply_id,
@@ -42,6 +43,7 @@ class forumReply{
 
 
 //define the methods
+      //Get reply_title from forum_reply table
       public function get_Title(){
 
         return $this->reply_title;
@@ -49,39 +51,39 @@ class forumReply{
       }
 
 
-
+      //Get reply_post from forum_reply table
       public function get_Post(){
 
         return $this->reply_post;
 
       }
 
-
+      //Get reply_id from forum_reply table
       public function get_Replyid(){
 
         return $this->reply_id;
 
       }
-
+      //Get post_id from forum_reply table
       public function get_Postid(){
 
         return $this->post_id;
 
       }
-
+      //Get reply_posted_user from forum_reply table
       public function get_Posteduser(){
 
         return $this->reply_posted_user;
 
       }
-
+      //Get reply_posted_date from forum_reply table
       public function get_Postdate(){
 
         return $this->reply_posted_date;
 
       }
 
-
+      //register the data
       public function register(){
 
         $row=array(
@@ -122,11 +124,14 @@ class forumReply{
       }
 
 
+//return post_id values to forum_view_posts.php
+      public static function getAllPostId(){
+        $result2=DB::getInstance()->directSelect("SELECT post_id FROM forum_reply;");
+        return $result2;
+      }
 
 
       public static function search($values=array()){
-
-
 
         $posts=array();
         $result1=DB::getInstance()->search("forum_reply",$values);

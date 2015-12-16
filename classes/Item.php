@@ -265,13 +265,22 @@ class item{
 
 	}
 
-
-
-
-
-
-
 }
+
+	public function delete(){
+
+		if( empty( $this->item_copies ) )
+		{
+			DB::getInstance()->delete("item_reference",array("item_id"=>$this->id));
+			DB::getInstance()->delete("item_category",array("item_id"=>$this->id));
+			DB::getInstance()->delete("item",array("item_id"=>$this->id));
+			return 1;
+		}
+		else{return 0;}
+
+	}
+
+
 }
 
 

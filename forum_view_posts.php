@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reply   = test_input($_POST["reply"]);
   }
 }
-hawaasads
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);

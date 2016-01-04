@@ -93,6 +93,7 @@
 		<?php include "includes/leftnav.php" ?>
 		<div id="contentwrap">
         <div id="content">
+        <form>
         <h3>Transaction Details</h3>
 
         	<div class="datagrid">
@@ -137,7 +138,7 @@
         	<?php
 
         			echo "<table>";
-					echo "<thead><th>Item Copy No</th><th>Borrowed Quantity</th><th>Return Quantity</th><th>Condition</th><th>Return Status</th></thead><tbody>";
+					echo "<thead><th>Item Copy No</th><th>Condition/Status</th><th>Return Status</th></thead><tbody>";
 
 
 					$result=$value->getTransactions();
@@ -152,13 +153,15 @@
 
 
 						echo "<tr><td>$itemCopyNo</td>";
-						echo "<td>$bcon</td>";
-						echo "<td><input type='number' class='large text' value='$bcon'/></td>";
+						//echo "<td>$bcon</td>";
+						//echo "<td><input type='number' class='large text' value='$bcon'/></td>";
 						echo "<td>";
-						echo "<select class='large select' name='condition'>";
-						echo "<option value='Working Properly' selected='selected'>Working Properly</option>";
+						echo "<select class='large select' name='condition' required='required'>";
+            echo "<option value='' selected='selected'>Select</option>";
+						echo "<option value='Working Properly'>Working Properly</option>";
 						echo "<option value='Working With defects'>Working With defects</option>";
 						echo "<option value='Not Working'>Not Working</option>";
+            echo "<option value='Misplaced'>Misplaced</option>";
 
 						echo "</select>";
 						echo "</td>";
@@ -173,15 +176,16 @@
 
 
 						?>
+            </div>
+            <br/>
+            <label>Comments</label>
+          <textarea name="paragraph" class="small textarea" value="<?php echo $rcomment; ?>"></textarea> <br/>
 
-
-        	</div>
+        	
 
         	<h3>Remarks</h3>
         	
-        	<label>Comments</label>
-        	<textarea name="paragraph" class="small textarea" value="<?php echo $rcomment; ?>"></textarea> <br/>
-        	<label>User Remark</label><br/>
+        	        	<label>User Remark</label><br/>
         	<select class='medium select'>
         		<option value="Borrow Allowed" selected="selected">Borrow Allowed</option>
         		<option value="Borrow Disallowed">Borrow Disallowed</option>
@@ -196,7 +200,7 @@
         	<input type="submit" class="button" value="     Complete Return     " name="submit" />
         	
         	
-			
+			</form>
         </div>
         </div>
 		

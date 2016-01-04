@@ -8,7 +8,7 @@
 //get the entered details of forum discussions and save in a session variable
   if(count($_GET)>0){
       $_SESSION["id"]=$_GET["cid"];
-      $_SESSION["post"]=forumPost::search(array("post_id"=>$_SESSION["id"]));
+      $_SESSION["post"]=ForumPost::search(array("post_id"=>$_SESSION["id"]));
       $_SESSION["title"]=$_SESSION["post"]->get_Title();
       $_SESSION["des"]=$_SESSION["post"]->get_Description();
       $_SESSION["pst_usr"]=$_SESSION["post"]->get_Posteduser();
@@ -132,8 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reply   = test_input($_POST["reply"]);
   }
 }
-
-
+hawaasads
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);

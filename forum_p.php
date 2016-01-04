@@ -94,7 +94,7 @@ function test_input($data) {
 //update forum_post table
 if(isset($_POST['submit']))
 {
-  $new_forum_topic = new forumPost();
+  $new_forum_topic = new ForumPost();
 
       $new_forum_topic->createNew(array('post_title' => $topic, 'post_description'=>$description, 'posted_user'=>$name,'posted_date'=>$date ));
       $new_forum_topic->register();
@@ -107,7 +107,7 @@ ob_flush();
 //Get details from forum_post table
 echo "<div class='datagrid'><table>
     <thead><tr><th>Discussion</th><th>Posted by</th><th>Date</th></tr></thead>";
-$allposts = forumPost::getallForum();
+$allposts = ForumPost::getallForum();
 foreach ($allposts as $key => $value) {
     $id=$value->get_id();
     $title=$value->get_Title();

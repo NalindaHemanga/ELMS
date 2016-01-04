@@ -1,6 +1,6 @@
 <?php
 //define class of forum post
-class forumPost{
+class ForumPost{
 
 	private $post_id,
 			$post_title,
@@ -138,7 +138,7 @@ foreach ( $result1 as $post){
 
 				);
 
-			$new_post=new forumPost();
+			$new_post=new ForumPost();
 
 			$new_post->create($post_data);
 			$posts[]=$new_post;

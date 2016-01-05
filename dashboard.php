@@ -60,7 +60,7 @@
 			</div>
 
 			<div  class="dashicon" >
-			<a href="#">
+			<a href="course_management.php">
 			<img src="img/icons/course.png" height="150" width="150" />
 			Course Manager
 			</a>

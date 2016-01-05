@@ -4,7 +4,7 @@
 <title>Item Return Panel 2</title>
 
 
-
+<link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <link rel="stylesheet" type="text/css" href="css/content.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
@@ -93,7 +93,7 @@
 		<?php include "includes/leftnav.php" ?>
 		<div id="contentwrap">
         <div id="content">
-        <form>
+        <form action="item_return_panel2_control.php" method="post">
         <h3>Transaction Details</h3>
 
         	<div class="datagrid">
@@ -108,6 +108,7 @@
 					
 						$member=Member::search(["member_id"=>$value->getMemberId()]);
 						$name = $member->getInitials()." ".$member->getSurname();
+            $nic= $member->getNicNo();
 						$tid=$value->getTransactionId();
 						$desc=$value->getPurpose();
 						$bdate=$value->getBorrowedDate();
@@ -138,7 +139,7 @@
         	<?php
 
         			echo "<table>";
-					echo "<thead><th>Item Copy No</th><th>Condition/Status</th><th>Return Status</th></thead><tbody>";
+					echo "<thead><th>Item Copy No</th><th>Return Status</th><th>Condition/Status</th></thead><tbody>";
 
 
 					$result=$value->getTransactions();
@@ -155,8 +156,9 @@
 						echo "<tr><td>$itemCopyNo</td>";
 						//echo "<td>$bcon</td>";
 						//echo "<td><input type='number' class='large text' value='$bcon'/></td>";
+            echo "<td><input type='checkbox' name='returned[]' value='$itemCopyId' id='$itemCopyId'/><label for='$itemCopyId'><span class='ui'></span></label></td>";
 						echo "<td>";
-						echo "<select class='large select' name='condition' required='required'>";
+						echo "<select class='large select' disabled name='condition[]' required='required'>";
             echo "<option value='' selected='selected'>Select</option>";
 						echo "<option value='Working Properly'>Working Properly</option>";
 						echo "<option value='Working With defects'>Working With defects</option>";
@@ -164,8 +166,8 @@
             echo "<option value='Misplaced'>Misplaced</option>";
 
 						echo "</select>";
-						echo "</td>";
-						echo "<td><input type='checkbox' name='returned[]' value='$itemCopyId' id='$itemCopyId'/><label for='$itemCopyId'><span class='ui'></span></label></td></tr>";
+						echo "</td></tr>";
+						
 						
 
 
@@ -191,9 +193,41 @@
         		<option value="Borrow Disallowed">Borrow Disallowed</option>
         	</select>
         	<br/><br/>
-        	<a href="#">View Transaction History</a>
+        	<a href="#openModal">View Transaction History</a>
+
+          <?php
+
+          echo "<div id='openModal' class='modalDialog'>";
+
+echo "<div>";
+
+  echo "<div class='form'>";
+    echo "<a href='#close' title='Close' class='close'>X</a>";
+
+       
+
+       $records=Transaction::getHistory($nic,100);
+    echo "<div class='datagrid'>";
+    echo "<table border='1px' padding='2px'>";
+    echo "<thead><tr><th>Item Copy No</th><th>Item Name</th><th>Borrowed Date</th><th>Returned Date</th><th>Comments</th></tr></thead>";
+    foreach ($records as $key => $value) {
+      echo "<tbody><tr><td>".$value["item_copy_no"]."</td><td>".$value["item_name"]."<td>".$value["borrowed_date"]."</td>"."<td>".$value["returned_date"]."</td>"."<td>".$value["return_comment"]."</td></tr></tbody>";
+    }
 
 
+
+    echo "</table>";
+
+    echo "</div>";
+
+
+       
+       echo "</div>";
+       echo "</div>";
+
+echo "</div>";
+
+          ?>
 
         	<br/><br/>
 

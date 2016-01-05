@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
+<link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 
 <script src="lib/jquery.min.js"></script>
 
@@ -55,6 +56,10 @@
     
 }*/
 
+function openModel(){
+	location.href="#openModal";
+}
+
 
 
 </script>
@@ -74,7 +79,7 @@
         </div>
 
         <div style="text-align:right;width:28%;display:inline-block;vertical-align:top;">
-			<button style="width:15em;background:#43D14C;">   <div><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-191-circle-plus.png" width="13" height="13" /><font face="Calibri" color="black" size="4"> Add new course </font></div></button>
+			<button style="width:15em;background:#43D14C;" onclick="openModel();">   <div><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-191-circle-plus.png" width="13" height="13" /><font face="Calibri" color="black" size="4"> Add new course </font></div></button>
 		</div>	
 <!--
 		<div  style="text-align:center;">
@@ -127,3 +132,95 @@
     </div>
 </body>
 </html>
+
+
+<div id="openModal" class="modalDialog">
+
+<div>
+
+	<div class="form">
+		<a href="#close" title="Close" class="close">X</a>
+
+       	 <form class="form" enctype="multipart/form-data" method="POST" >
+
+        		<div class="form_description">
+					<h2>Course Registration</h2>
+					<p>Fill this form to add a new course</p>
+				</div>
+
+				<ul>
+
+					
+
+
+					
+
+					<li>
+						<label class="description"for="textbox">Course No</label>
+        				<div><input type="text" class="medium text" name="course_no"></div>
+        			</li>
+
+        			<li>
+						<label class="description"for="textbox">Course Name</label>
+        				<div><input type="text" class="medium text" name="course_name"></div>
+        			</li>
+
+        		
+					<li>
+
+						<span>
+							<input type="submit" class="button" value="      SUBMIT      " />
+
+
+						</span>
+						<span>
+
+
+							<input type="reset"  class="button"/>
+						</span>
+
+					</li>
+
+
+        		</ul>
+
+
+        </form>
+        </div>
+        </div>
+
+</div>
+
+<?php
+
+    require_once 'core/init.php';
+		
+		
+			
+	    	$course_data = array(
+
+				"course_no"		=>	$_POST["course_no"],
+				"course_name"	=>	$_POST["course_name"],
+			);
+
+    	
+	  
+
+		     $new_course = new course();
+		     $new_course->create($course_data);
+
+			if($new_course->addCourse()){
+
+				$message = "You have successfully Registered the Course !!";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+			}
+
+			else if($new_course->addCourse()){
+
+				$message = "The Course Registration was unsuccessful.";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+
+
+			}
+	    
+?>

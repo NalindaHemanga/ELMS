@@ -17,7 +17,7 @@ require_once 'core/init.php';
 <title>Item Issuing Panel</title>
 
 
-
+<link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <link rel="stylesheet" type="text/css" href="css/content.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
 <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
@@ -108,3 +108,4 @@ function searchMember(){
     </div>
 </body>
 </html>
+

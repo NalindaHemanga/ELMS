@@ -161,7 +161,7 @@
 
 					<!-- DATE -->
 
-					<li id="li_1" >
+		<li id="li_1" >
 		<label class="description" for="element_1">Date </label>
 		<span>
 			<input id="element_1_1" name="month" class="element text" disabled="disabled" size="2" maxlength="2" value="" type="text"> /

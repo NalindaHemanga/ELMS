@@ -16,7 +16,7 @@
 
 <script>
 
-function changeInput(){
+/*function changeInput(){
 
 	var combo = $("<select></select>").attr("id", "membertype").attr("name", "membertype").attr("class","small select");
 
@@ -53,7 +53,7 @@ function changeInput(){
 			 document.getElementById("searchinput").innerHTML = "<input type='email' class='small text' name='email' required='required' placeholder='Enter E-Mail'/>";
 	}
     
-}
+}*/
 
 
 

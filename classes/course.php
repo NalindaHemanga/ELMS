@@ -1,5 +1,6 @@
 <?php
 	class Course {
+		
 		private $course_no;
 		private $course_name;
 
@@ -47,6 +48,23 @@
 				return false;
 			}
 			
+		}
+
+		public static function getDetails(){
+
+			$result=DB::getInstance()->directSelect("SELECT * FROM course ORDER BY course_id;");
+
+			$allCourse = array();
+
+			foreach ($result as $key => $row) {
+
+				$courseObj = new course();
+				$courseObj->create($row);
+				$allCourse[]=$courseObj;
+
+			}
+
+			return $allCourse;
 		}
 	}
 

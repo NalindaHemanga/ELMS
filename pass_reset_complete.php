@@ -11,7 +11,10 @@
 
 	if($newpass == $newpass1){
 
-		$enc_pass = crypt($newpass);//encrypt password
+		$salt = '5&JDDlwz%Rwh!t2Yg-Igae@QxPzFTSId';
+		$enc_pass  = md5($salt.$newpass);
+
+		//$enc_pass = crypt($newpass);//encrypt password
 
 		/*update database password column to new password*/
 

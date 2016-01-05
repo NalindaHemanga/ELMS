@@ -97,7 +97,7 @@ public function getTransactionItems(){
 
 public static function getHistory($value){
 
-	$sql="SELECT item_copy_no,item_name,borrowed_date,returned_date,transaction_comment FROM item,item_transaction it,transaction,member,item_copy WHERE member_nic='".$value."' AND member.member_id=transaction.member_id AND it.transaction_id=transaction.transaction_id AND item.item_id=item_copy.item_id AND it.item_copy_id=item_copy.item_copy_id ORDER BY borrowed_date DESC;";
+	$sql="SELECT item_copy_no,item_name,borrowed_date,returned_date,transaction_comment,return_comment FROM item,item_transaction it,transaction,member,item_copy WHERE member_nic='".$value."' AND member.member_id=transaction.member_id AND it.transaction_id=transaction.transaction_id AND item.item_id=item_copy.item_id AND it.item_copy_id=item_copy.item_copy_id ORDER BY borrowed_date DESC;";
 	return DB::getInstance()->directSelect($sql);
 
 

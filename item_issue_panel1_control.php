@@ -53,7 +53,7 @@
 		echo "<table border='1px' padding='2px'>";
 		echo "<thead><tr><th>Item Copy No</th><th>Item Name</th><th>Borrowed Date</th><th>Returned Date</th><th>Comments</th></tr></thead>";
 		foreach ($records as $key => $value) {
-			echo "<tbody><tr><td>".$value["item_copy_no"]."</td><td>".$value["item_name"]."<td>".$value["borrowed_date"]."</td>"."<td>".$value["returned_date"]."</td>"."<td>".$value["transaction_comment"]."</td></tr></tbody>";
+			echo "<tbody><tr><td>".$value["item_copy_no"]."</td><td>".$value["item_name"]."<td>".$value["borrowed_date"]."</td>"."<td>".$value["returned_date"]."</td>"."<td>".$value["return_comment"]."</td></tr></tbody>";
 		}
 
 

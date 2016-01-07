@@ -33,6 +33,22 @@ class Supplier{
 
 	}
 
+	public function create1($data=array()){
+
+		$this->company 	 	= 	$data["supplier_name"];
+		$this->email 		=	$data["supplier_email"];
+		$this->street	 	= 	$data["supplier_address_line1"];
+		$this->line2		=	$data["supplier_address_line2"];
+		$this->city 		= 	$data["supplier_city"];
+		$this->province 	=   $data["supplier_province"];
+		$this->postal 		=	$data["supplier_postal"];
+		$this->country 		=	$data["supplier_country"];
+
+
+
+	}
+
+
 	public function getCompany(){
 
 		return $this->company;
@@ -149,6 +165,23 @@ class Supplier{
 
 
 	}
+
+	public static function getDetails(){
+
+			$result=DB::getInstance()->directSelect("SELECT * FROM supplier ORDER BY supplier_name;");
+
+			$allSupplier = array();
+
+			foreach ($result as $key => $row) {
+				//print_r($row);
+				$supplierObj = new Supplier();
+				$supplierObj->create1($row);
+				$allSupplier[]=$supplierObj;
+
+			}
+
+			return $allSupplier;
+		}
 
 
 	public static function search($values=array()){

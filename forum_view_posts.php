@@ -22,6 +22,7 @@
 <head>
 <title>Forum Reply</title>
 <link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
+<link rel="stylesheet" type="text/css" href="css/forumtable.css" />
 <link rel="stylesheet" type="text/css" href="css/content.css" />
 <link rel="stylesheet" type="text/css" href="css/replypost.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
@@ -50,11 +51,8 @@
         if ($post_id==$_SESSION["id"]){
           $link_post_del='';
           break;
-
-        }
-          
-      }
-      
+        }         
+      }    
      }
    
     
@@ -66,9 +64,9 @@
   
           // Print the discussion topic
           echo "<div class=\"datagrid\"><table>
-          <tbody><tr><td style=\"color:black;\"><b>Discussion Topic : <span style=\"color:black;font-size:120%;\">".$_SESSION["title"]. "<span></b></td><td>Posted by :".$_SESSION["pst_usr"]."</td></tr>
-          <tr class=\"alt\"><td style=\"color:black;font-size:110%; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: normal;\"><p style=\"width:230px; word-wrap: break-word;
-            width: 580px;color:black; padding-right:5px;\"> ".$_SESSION["des"]."</p><br>$link_post_del</td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
+          <tbody><tr><td style=\"color:black; max-width: 600px;\"><b>Discussion Topic : <span style=\"width: 750px;color:black;font-size:120%;word-wrap: break-word;width: 750px;text-overflow: ellipsis; white-space: pre-line; text-align:justify;\">".$_SESSION["title"]. "</span></b></td><td>Posted by :".$_SESSION["pst_usr"]."</td></tr>
+          <tr class=\"alt\"><td style=\"color:black;font-size:110%; max-width: 600px; \"><p style=\" word-wrap: break-word;
+            width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-space: pre-line; text-align:justify;\"> ".$_SESSION["des"]."</p><br>$link_post_del</td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
           </tbody>
           </table></div>"
 
@@ -161,7 +159,8 @@ if(isset($_POST['submit'])){
 ob_flush();
 
 // Get the updated details of forum_reply table
-echo "<div class='datagrid' style=\"table-layout:fixed; cellpadding=10;\"><table><thead><tr><th width=\"70%\">Reply</th><th width=\"10%\">Posted Date</th><th width=\"10%\">Posted By</th></tr></thead>";
+echo "<div class='datagrid' style=\"table-layout:fixed; cellpadding=10;\">
+<table><thead><tr><th width=\"70%\">Reply</th><th width=\"10%\">Posted Date</th><th width=\"10%\">Posted By</th></tr></thead>";
 $allposts = forumReply::getallForumReply();
 foreach ($allposts as $key => $value) {
   $post_id=$value->get_Postid();
@@ -199,8 +198,8 @@ foreach ($allposts as $key => $value) {
 
   //print the replys
     echo "
-    <tbody><tr><td style=\"max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: normal;\"><p ><div style=\"width:230px;word-wrap: break-word;
-     width: 790px;color:black; padding-right:5px;\" id='$reply_id'><div id='$reply_id+$post_id'>$reply</div><br><br><br>$link_del"." "."$link_update</p></div></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
+    <tbody><tr><td style=\"max-width: 780px;text-overflow: ellipsis; white-space: initial;\"><p ><div style=\" word-wrap: break-word;
+     width: 780px;color:black; padding-right:5px; text-align:justify;\" id='$reply_id'><div id='$reply_id+$post_id'>$reply</div><br><br><br>$link_del"." "."$link_update</p></div></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
     <tr class=\"alt\">
     </tr>
     </tbody>";

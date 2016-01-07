@@ -21,6 +21,7 @@
 <html>
 <head>
 <title>Forum Reply</title>
+<link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <link rel="stylesheet" type="text/css" href="css/content.css" />
 <link rel="stylesheet" type="text/css" href="css/replypost.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
@@ -57,7 +58,7 @@
      }
    
     
-    // Compare the looged user & posted user to show delete link
+    // Compare the logged user & posted user to show delete link
     
     else{
       $link_post_del='';
@@ -72,58 +73,60 @@
           </table></div>"
 
            ?>
-
+           <!--Reply Button-->
             <div  style="width:50%;display:inline-block;vertical-align:top;">
               <ul style="list-style-type:none;">
                 <li>
                   <div>
-                  <input  type="button"  value="Reply" class="button" onclick="showForm()">
+                  <input  type="button"  value="Reply" class="button" onclick="buttonClicked()">
+                  <a href="#openModal" onClick='javascript:showForum();' style="visibility: hidden;"><b>Reply</b></a>
                 </div>
                 </li>
               </ul>
             </div>
+            
             <hr />
+
             <!-- show model after click reply button -->
             <script type="text/javascript">
-              function showForm(){
-                document.getElementById("dialog").showModal();
-              }
+              function buttonClicked(){
+                location.href="#openModal"; 
+              }    
             </script>
 
-            
+            <!-- Model Window for Reply-->
+            <div id="openModal" class="modalDialog">
+              <div>
+                <div class="form">
+                <a href="#close" title="Close" class="close">X</a>
+                  <form class="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                  Reply: 
+                  <br><br>
+                  <textarea style="vertical-align: middle;" rows="10" cols="86" name="reply" required></textarea>
+                  <br>              
+                  <br>
+                  <input class="button" type="submit" name="submit" value="Submit" >
+                  </form>
+                  </div>
+              </div>
+            </div>
 
-            
-
-            <!-- Model Window -->
-            <dialog id= "dialog">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-              <!--<label style="padding-left:23px;">Subject     :</label>   <input type="text" name="subject" required>
-              <br><br>-->
-              
-              Reply: <textarea style="vertical-align: middle;" rows="10" cols="50" name="reply" required></textarea>
-              <br>              
-              <p style="font-size:13px;padding-left:47px;">Press Esc to exit</p>
-              <br>
-
-              <input type="submit" name="submit" value="Submit" >
-            </form>
-          </dialog>
-            <br><br>
-
-            <!-- Model Window -->
-            <dialog id= "edit_dialog">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-              <!--<label style="padding-left:23px;">Subject     :</label>   <input type="text" name="subject" required>
-              <br><br>-->
-              Reply: <textarea id="text_area" style="vertical-align: middle;" rows="10" cols="50" name="replyy" required></textarea>
-              <br>
-              <p style="font-size:13px;padding-left:47px;">Press Esc to exit</p>
-              <br>
-              <input type="submit" name="ssubmit" value="Submit" >
-            </form>
-          </dialog> 
-            <br><br>
-
+            <!-- Model Window for edit option -->
+            <div id="openeditModel" class="modalDialog">
+              <div>
+                <div class="form">
+                <a href="#close" title="Close" class="close">X</a>
+                  <form class="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                  Reply: 
+                  <br><br>
+                  <textarea id="text_area" style="vertical-align: middle;" rows="10" cols="86" name="reply" required></textarea>
+                  <br>              
+                  <br>
+                  <input class="button" type="submit" name="submit_rep" value="Submit" >
+                  </form>
+                  </div>
+              </div>
+            </div>
 <?php
 // define variables and set to empty values
 $subject = $reply = $reply_pst_date = $reply_pst_usr= "";
@@ -135,7 +138,7 @@ $_SESSION["formdatas"]=$subject and $reply;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST['reply'])) {
-    $subject = test_input($_POST["subject"]);
+    //$subject = test_input($_POST["subject"]);
     $reply   = test_input($_POST["reply"]);
   }
 }
@@ -174,38 +177,36 @@ foreach ($allposts as $key => $value) {
     if ($name==$reply_pst_usr) {
       $link_del="<a id='delete_link' href=\"forum_rep_delete.php?rid=".$reply_id."\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
       
-      $link_update="<a id='delete_link' onClick='javascript:showEdit(this);' href=\"#\" class='links'>Edit</a>";
+      $link_update="<a id='delete_link' onClick='javascript:showEdit(this);' href=\"#openeditModel\" class='links'>Edit</a>";
     }
     else{
       $link_del='';
       $link_update='';
     }
 
+    //function : Load the replies to model window
 
     echo "<script type='text/javascript'>
-
-              
               function showEdit(element){
                 var reply = element.parentNode;
                 var rep = reply.querySelector('div');
                 var rep_content = document.getElementById(rep.id);
                 var x = rep_content.innerHTML;
                 document.getElementById('text_area').innerHTML = x;
-                document.getElementById('edit_dialog').showModal();
-
+                document.getElementById('openeditModel').showModal();
               }
             </script>"; 
 
-//print the replys
-echo "
-  <tbody><tr><td style=\"max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: normal;\"><p ><div style=\"width:230px;word-wrap: break-word;
-   width: 790px;color:black; padding-right:5px;\" id='$reply_id'><div id='$reply_id+$post_id'>$reply</div><br><br><br>$link_del"." "."$link_update</p></div></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
-  <tr class=\"alt\">
-  </tr>
-  </tbody>";
+  //print the replys
+    echo "
+    <tbody><tr><td style=\"max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: normal;\"><p ><div style=\"width:230px;word-wrap: break-word;
+     width: 790px;color:black; padding-right:5px;\" id='$reply_id'><div id='$reply_id+$post_id'>$reply</div><br><br><br>$link_del"." "."$link_update</p></div></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
+    <tr class=\"alt\">
+    </tr>
+    </tbody>";
   }
 }
-echo "</table></div>";
+    echo "</table></div>";
 
 ?>
 

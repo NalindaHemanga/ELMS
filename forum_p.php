@@ -12,6 +12,7 @@ ob_start();
 <html>
 <head>
 <title>Forum Posts</title>
+<link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <link rel="stylesheet" type="text/css" href="css/content.css" />
 <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
@@ -41,27 +42,35 @@ ob_start();
             </div>
             <hr />
 
-            <input  type="button"  value="Start New Discussion Forum" class="button" onclick="showForm()">
+            <input  type="button"  value="Start New Discussion" class="button" onclick="buttonClicked()">
+            <a href="#openModal" onClick='javascript:showForum();' style="visibility: hidden;"><b>Reply</b></a>
             <br><br>
 
             <script type="text/javascript">
-              function showForm(){
-                document.getElementById("dialog").showModal();
-              }
+              function buttonClicked(){
+                location.href="#openModal"; 
+              }    
             </script>
 
+            <!-- Model Window for Start New Discussion-->
+            <div id="openModal" class="modalDialog">
+              <div>
+                <div class="form">
+                <a href="#close" title="Close" class="close">X</a>
+                  <form class="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                  New Topic  :    <input type="text" name="topic" required>
+                  <br><br>
+                  Description : 
+                  <br><br>
+                  <textarea style="vertical-align: middle;" rows="10" cols="86" name="description" required></textarea>
+                  <br>              
+                  <br>
+                  <input class="button" type="submit" name="submit" value="Submit" >
+                  </form>
+                  </div>
+              </div>
+            </div>
 
-            <dialog id= "dialog">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-              New Topic  :    <input type="text" name="topic" required>
-              <br><br>
-              Description: <textarea style="vertical-align: middle;" rows="10" cols="50" name="description" required></textarea>
-              <br>
-              <p style="font-size:13px;padding-left:80px;">Press Esc to exit</p>
-              <br>
-              <input type="submit" name="submit" value="Submit" >
-            </form>
-          </dialog>
 
 
 

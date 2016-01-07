@@ -85,6 +85,26 @@
 
 
 </style>
+
+<script type="text/javascript">
+  
+function changeSelect(idn){
+
+  var selectEle=document.getElementById(idn+idn);
+  var checkboxEle=document.getElementById(idn);
+  if(checkboxEle.checked){
+    selectEle.disabled=false;
+  }else{
+    selectEle.options[0].selected="selected";
+    selectEle.disabled=true;
+  }
+
+
+}
+
+
+
+</script>
 </head>
 <body>
     <div id="wrapper">
@@ -126,13 +146,14 @@
 			<tr><th>Transaction Description</th><td><?php echo $desc; ?></td></tr>
 			<tr><th>Borrowed Date</th><td><?php echo $bdate; ?></td></tr>
 			<tr><th>Expected Return Date</th><td><?php echo $edate; ?></td></tr>
-			<tr><th>Comments</th><td><?php echo $rcomment; ?></td></tr>
+			<tr><th>Comments</th><td><?php echo $bcomment; ?></td></tr>
 
 
 			</table>
 
         	</div>
-
+          <input hidden name="condition[]">
+          <input hidden name="returned[]">
         	<h3>Borrowed Items</h3>
         	<div class="datagrid">
 
@@ -149,16 +170,16 @@
 						$itemCopyNo = $itemCopy->get_no();
 						$bcon=$value->getBorrowedQuantity();
 						$rcon=$value->getReturnedQuantity();
-					
+					   $k=$itemCopyId.$itemCopyId;
 						
 
 
 						echo "<tr><td>$itemCopyNo</td>";
 						//echo "<td>$bcon</td>";
 						//echo "<td><input type='number' class='large text' value='$bcon'/></td>";
-            echo "<td><input type='checkbox' name='returned[]' value='$itemCopyId' id='$itemCopyId'/><label for='$itemCopyId'><span class='ui'></span></label></td>";
+            echo "<td><input onclick='changeSelect(this.id);' type='checkbox' name='returned[]' value='$itemCopyId' id='$itemCopyId'/><label for='$itemCopyId'><span class='ui'></span></label></td>";
 						echo "<td>";
-						echo "<select class='large select' disabled name='condition[]' required='required'>";
+						echo "<select class='large select' disabled='disabled' id='$k' name='condition[]' required='required'>";
             echo "<option value='' selected='selected'>Select</option>";
 						echo "<option value='Working Properly'>Working Properly</option>";
 						echo "<option value='Working With defects'>Working With defects</option>";
@@ -181,15 +202,16 @@
             </div>
             <br/>
             <label>Comments</label>
-          <textarea name="paragraph" class="small textarea" value="<?php echo $rcomment; ?>"></textarea> <br/>
+          <textarea name="comment" class="small textarea"><?php echo $rcomment; ?></textarea> <br/>
 
-        	
+        	<input name="tid" hidden value="<?php echo $_GET["t_id"]?>">
 
         	<h3>Remarks</h3>
         	
         	        	<label>User Remark</label><br/>
-        	<select class='medium select'>
-        		<option value="Borrow Allowed" selected="selected">Borrow Allowed</option>
+        	<select name="remark" required="required" class='medium select'>
+            <option value="" selected="selected">Select</option>
+        		<option value="Borrow Allowed" >Borrow Allowed</option>
         		<option value="Borrow Disallowed">Borrow Disallowed</option>
         	</select>
         	<br/><br/>

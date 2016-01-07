@@ -137,6 +137,57 @@ public static function getPendingReturns($member_nic=null){
 
 }
 
+public function updateComment($comment){
+
+	$sql="UPDATE transaction SET return_comment='$comment' WHERE transaction_id=$this->id;";
+	if(DB::getInstance()->directUpdate($sql)){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+public function updateRemark($remark){
+	$sql="UPDATE member SET member_remarks='$remark' WHERE member_id=$this->member_id;";
+	if(DB::getInstance()->directUpdate($sql)){
+		return true;
+	}else{
+		return false;
+	}
+
+}
+
+public function finishReturn($icid,$con){
+	$today=date('Y-m-d');
+
+	$sql1="";
+	$sql2="";
+	$sql3="";
+	$sql4="";
+	if($con!="Misplaced"){
+		$sql1="UPDATE item_transaction SET status=1 WHERE item_copy_id=$icid AND transaction_id=$this->id;";
+		$sql2="UPDATE item_copy SET item_copy_status=1 WHERE item_copy_id=$icid;";
+		$sql3="UPDATE item_copy SET item_copy_condition='$con' WHERE item_copy_id=$icid;";
+		$sql4="UPDATE item_transaction SET returned_date='$today'  WHERE item_copy_id=$icid AND transaction_id=$this->id;";
+
+	}else{
+		$sql1="UPDATE item_transaction SET status=1 WHERE item_copy_id=$icid AND transaction_id=$this->id;";
+		$sql2="UPDATE item_copy SET item_copy_status=0 WHERE item_copy_id=$icid;";
+		$sql3="UPDATE item_copy SET item_copy_condition='$con' WHERE item_copy_id=$icid;";
+		$sql4="UPDATE item_transaction SET returned_date='$today'  WHERE item_copy_id=$icid AND transaction_id=$this->id;";
+
+	}
+
+if(DB::getInstance()->directUpdate($sql1) && DB::getInstance()->directUpdate($sql2) && DB::getInstance()->directUpdate($sql3) && DB::getInstance()->directUpdate($sql4)){
+	return true;
+
+}else{
+	return false;
+}
+
+}
+
+
 public static function search($tid){
 
 	$items=array();

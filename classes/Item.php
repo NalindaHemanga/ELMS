@@ -128,6 +128,12 @@ class item{
 
 	}
 
+	public function get_type(){
+
+		return $this->type;
+
+	}
+
 
 	public function register(){
 
@@ -177,6 +183,17 @@ class item{
 	}
 
 
+	public static function editItem($values=array()){
+	print_r($values);
+		$itemId = $values["item_id"];
+		$itemId = (int)$itemId;
+		foreach ($values as $key => $value){
+			//echo "UPDATE 'item' SET '$key' = '$value' WHERE 'item'.'item_id'=".$this->id.";";
+			$sql = "UPDATE  `item` SET  `$key` =  '$value' WHERE  `item`.`item_id` =$itemId;";
+			DB::getInstance()->directUpdate($sql);
+		}
+		return true;
+	}
 
 
 	public static function search($values=array()){
@@ -184,7 +201,7 @@ class item{
 
 		$items=array();
 		$result1=DB::getInstance()->search("item",$values);
-
+//print_r($result1);
 		if(count($result1)!=0){
 
 			for($x=0;$x<count($result1);$x++){
@@ -265,7 +282,7 @@ class item{
 
 	}
 
-}
+	}
 
 	public function delete(){
 
@@ -279,8 +296,6 @@ class item{
 		else{return 0;}
 
 	}
-
-
 }
 
 

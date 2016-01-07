@@ -283,7 +283,8 @@ xmlhttp.onreadystatechange=function()
 
 function itemCopyClicked(itemCopyId,itemCopyOwner,itemCopyStatus,itemCopyBarcode,itemCopyPrice,itemCopyInstalledDate,itemCopySupplier,itemCopyNo) {
 
-	document.getElementById("itemCopyNo").innerHTML="  Details on copy "+itemCopyNo;
+	var copyNoArray = itemCopyNo.split("_");
+	document.getElementById("itemCopyNo").innerHTML=" <div style=\"float:left;\"> Details on copy "+copyNoArray[0]+ "_</div><div style=\"float:left;\" id=\"copyLastNo\">" + copyNoArray[1] + "</div>" + "<div style=\"font-size:15px\" id=\"copyEditBtn\"><font color=\"red\"> (<a onclick=itemCopyEditName(\""+itemCopyId+"\",\""+copyNoArray[1]+"\"); onmouseover=\"\" style=\"cursor: pointer;\">edit copy number</a>) </font></div>";
 	document.getElementById("itemCopyOwner").innerHTML="Owner: "+itemCopyOwner;
 	document.getElementById("itemCopyStatus").innerHTML="Status: "+itemCopyStatus;
 	document.getElementById("itemCopyBarcode").innerHTML="Barcode: "+itemCopyBarcode;
@@ -295,6 +296,29 @@ function itemCopyClicked(itemCopyId,itemCopyOwner,itemCopyStatus,itemCopyBarcode
 
 }
 
+function itemCopyEditName(item_copy_id,cur_num){
+
+	document.getElementById("copyLastNo").innerHTML="<input id =\"new_copy_number\" type=\"number\" name=\"quantity\" min=\"1\" max=\"100\" value="+ cur_num +">";
+	document.getElementById("copyEditBtn").innerHTML="<font color=\"red\"> (<a onclick=itemCopyEditNameSubmit(\""+item_copy_id+"\"); onmouseover=\"\" style=\"cursor: pointer;\">submit</a>) </font>";
+
+}
+
+function itemCopyEditNameSubmit(item_copy_id){
+
+	var new_num = document.getElementById("new_copy_number").value
+    var dataString = 'itemCopyId='+ item_copy_id + '&new_copy_num=' + new_num;
+	$.ajax({
+	type: "POST",
+	url: "edit_item_copy_number.php",
+	data: dataString,
+	cache: false,
+	success: function(result){
+	alert(result);
+	location.href="#close";
+	itemClicked(item_Id);	
+	}
+	});
+}
 
 function itemCopyDelete(itemCopyId) {
 
@@ -422,7 +446,7 @@ function addInput(divName){
 
 	var newli = document.createElement('li');
 	newli.setAttribute('id', counter);
-	newli.innerHTML = '<div><input type="url" class="medium text" name="reference[]" placeholder=" Paste Link Here" required="required"><a 		href="javascript: void(0)" onClick="removeInput(\'dynamicInput\',\''+counter+'\');"> Remove this Link</a></div>';
+	newli.innerHTML = '<div><input type="url" class="medium text" name="reference[]" placeholder=" Paste Link Here" required="required"><a 		href="javascript: void(0)" onClick="removeInput(\''+divName+'\',\''+counter+'\');"> Remove this Link</a></div>';
 	document.getElementById(divName).appendChild(newli);
 	counter++;
 }
@@ -451,6 +475,18 @@ function AddItemCopyClicked(item_id,itemName){
 	location.href="#openModal2"
 
 	}
+
+function itemEditClicked(item_id,item_pic){
+
+	var item_pic = item_pic.replace(/%19/g, " ");
+	document.getElementById("item_id").value=item_id
+	document.getElementById("itemNameEdit").value=document.getElementById("ItemName1").innerHTML;
+	document.getElementById("itemDescEdit").value=document.getElementById("ItemDesc1").innerHTML;
+	document.getElementById("itemTechDetEdit").value=document.getElementById("ItemTechDet1").innerHTML;
+	document.getElementById("item_pic_edit").src = "img/items/" + item_pic + ".png";
+	location.href="#openModalItemEdit";
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -770,7 +806,7 @@ $("form#data2").submit(function(){
 	    //location.reload();
 	    document.getElementById("data2").reset();
 	    location.href="#close2";
-
+		itemClicked(item_Id);	
         },
         cache: false,
         contentType: false,
@@ -1224,7 +1260,189 @@ function closeModal3(){
 	</div>
 </div>
 
-<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////--------openModal5-----////////////////////////////////////////////////////////////////////// -->
 <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
+<div id="openModalItemEdit" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<div id = "modalContent">
 
+        <div class="form">
+
+       	 <form class="form" enctype="multipart/form-data" id="itemEdit" method="post">
+        	<div class="form_description">
+				<h2 id="Modal_h2"></h2>
+				<p>Use This form to register a new Item</p>
+			</div>
+
+			<div class="container" style="width:100%;">
+
+				<div class="container" style="width:49%;display:inline-block;">
+
+						<ul>
+
+
+
+							<li>
+								<label class="description" for="item_name">Item Name</label>
+        						<div><input type="text" class="large text" name="item_name" required="required" id="itemNameEdit"></div>
+        					</li>
+
+
+
+
+							<li>
+						<label class="description" for="item_desc">Item Description </label>
+							<div>
+								<textarea name="item_desc" class="small textarea" id="itemDescEdit"></textarea>
+								<input type="hidden" name="item_id" id="item_id" >
+						</div>
+					</li>
+
+						<li>
+						<label class="description" for="item_tec_desc">Technical Details </label>
+							<div>
+								<textarea name="item_tec_desc" class="small textarea" id="itemTechDetEdit"></textarea>
+						</div>
+					</li>
+
+
+
+
+
+        				</ul>
+				</div>
+
+				<div class="container" style="display:inline-block;width:49%;vertical-align:top">
+
+						<ul>
+
+							<li>
+
+
+								<label class="description">Image of the Item</label>
+
+
+									<div>
+										<img id="item_pic_edit" src="img/icons/image.png" height="195" width="185" style="border:1px solid #ccc;padding:22px" />
+									</div>
+
+									<div>
+										<input name="item_picture" class="file" type="file" accept="image/*" onchange="loadFile(event)" />
+									</div>
+
+
+
+
+										<script>
+ 											 var loadFile = function(event) {
+    											var reader = new FileReader();
+   											 reader.onload = function(){
+    										  var output = document.getElementById('item_pic_edit');
+     										 output.src = reader.result;
+   												 };
+   												 reader.readAsDataURL(event.target.files[0]);
+  												};
+										</script>
+
+
+							</li>
+
+
+
+
+
+
+        				</ul>
+
+
+				</div>
+
+					<li>
+
+        					<label class="description">Item Type</label>
+							<span>
+									<input name="item_type" class="radio" type="radio" value="1" checked="checked" />
+										<label class="choice" for="item_type">Non-consumable</label>
+									<input name="item_type" class="radio" type="radio" value="0" />
+										<label class="choice" for="item_type">Consumable</label>
+
+
+							</span>
+
+							</li>
+
+					<li>
+					<label class="description" for="reference[]">Reference Links</label>
+					</li>
+
+					 <div id="dynamicInput2">
+
+    				 </div>
+
+    				 <li>
+     				<a href="javascript: void(0)" onClick="addInput('dynamicInput2');">Click to add Reference Link</a>
+     				</li>
+
+					<br/><br/>
+					<li>
+
+						<span>
+							<input type="submit" class="button" value="Submit" name="submit" />
+
+
+						</span>
+						<span>
+
+
+							<input type="reset"  class="button"/>
+						</span>
+
+					</li>
+
+
+
+        </div>
+
+        </form>
+
+
+        </div>		
+
+		</div>
+	</div>
+</div>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<script type="text/javascript">
+
+$("form#itemEdit").submit(function(){
+
+    var formData = new FormData($(this)[0]);
+    $.ajax({
+        url: "item_edit.php",
+        type: 'POST',
+        data: formData,
+        async: false,
+        success: function (data) {
+            alert(data);
+//alert(x); 
+//window.opener.CallAlert();
+	    //location.reload();
+	    document.getElementById("data").reset();
+	    location.href="#close";
+	    //catCliked(cat_label,cat_NAME,cur_cat_id);
+
+
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+    //location.href="#close";
+    return false;
+});
+
+
+</script>

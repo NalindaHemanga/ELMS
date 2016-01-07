@@ -10,12 +10,20 @@ if(isset($item_id))
 	$itemDescription = $item->get_description();
 	$itemTechDetails = $item->get_technical_details();
 	$itemReference = $item->get_reference();
+	$itemType = $item->get_type();
+	//echo $itemType;
+	//print_r($item);
 	$itemPic = $itemName;
-	echo"<div style=\"font-family: Georgia, serif;font-size:25px;\"><div style=\"font-size:25px; float:left;\">$itemName</div>
-<div style=\"float:right;\"><a onclick=itemDelete(\"$item_id\"); onmouseover=\"\" style=\"cursor: pointer;\"><img src=\"img/icons/glyphicons_free/glyphicons/png/glyphicons-17-bin.png\" height=\"25\" width=\"20\" /></a></div>
-<br>
-		<ul><li> <div style=\"font-size:20px;\">Description</div><div style=\"font-size:15px;\">$itemDescription</div> </li><br>
-		<li> <div style=\"font-size:20px;\">Technical Details</div><div style=\"font-size:15px;\">$itemTechDetails</div> </li>
+	$ItemNameReplaced = str_replace(" ","%19",$itemName);
+	$itemPic2 = $ItemNameReplaced;
+	echo"<div style=\"font-family: Georgia, serif;font-size:25px;\"><div style=\"font-size:25px; float:left;\" id=\"ItemName1\">$itemName</div>
+	<div style=\"float:right;\">
+	<div style=\"float:left; padding-right:10px;\"><a onclick=itemEditClicked(\"$item_id\",\"$itemPic2\"); onmouseover=\"\" style=\"cursor: pointer;\"><img src=\"img/icons/glyphicons_free/glyphicons/png/glyphicons-151-edit.png\" height=\"25\" width=\"25\" /></a></div>
+	<div style=\"float:right;\"><a onclick=itemDelete(\"$item_id\"); onmouseover=\"\" style=\"cursor: pointer;\"><img src=\"img/icons/glyphicons_free/glyphicons/png/glyphicons-17-bin.png\" height=\"25\" width=\"20\" /></a></div>
+	</div>
+	<br>
+		<ul><li> <div style=\"font-size:20px;\">Description</div><div style=\"font-size:15px;\" id=\"ItemDesc1\">$itemDescription</div> </li><br>
+		<li> <div style=\"font-size:20px;\">Technical Details</div><div style=\"font-size:15px;\" id=\"ItemTechDet1\">$itemTechDetails</div> </li>
 		<li> <div><img id=\"item_pic\" src=\"img/items/$itemPic.png\" height=\"195\" width=\"185\" style=\"border:1px solid #ccc;padding:22px\" /></div> </li><br></ul></div>";
 	if (count($copies)>0){
 	echo"<ul>";
@@ -34,6 +42,7 @@ if(isset($item_id))
 	echo"</ul>";
 	}else{echo"<div style=\"font-family: Georgia, serif;font-size:15px;\">No item copies for this item.<div>";}
 	//echo "<button type=\"button\" onclick=\"location.href = 'item_copy_add.php?item_id=$item_id&item_name=$itemName';\">Add Item Copy</button>";
-	$ItemNameReplaced = str_replace(" ","%19",$itemName);
+	//$ItemNameReplaced = str_replace(" ","%19",$itemName);
 	echo "<button type=\"button\" onclick=AddItemCopyClicked(\"$item_id\",\"$ItemNameReplaced\")>Add Item Copy</button>";
+	
 ?>

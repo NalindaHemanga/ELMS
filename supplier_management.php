@@ -116,9 +116,7 @@ function registerSupplier(){
 			foreach ($allDetails as $key => $value) {
     			$name=$value->getCompany();
     			$email=$value->getEmail();
-    			#$des=$value->get_Description();
-    			//$telephone=$value->getTelephone();
-    			//echo "<a href='forum_view_posts.php?cid=".$id."' class='cat_links'>  <b>$title</b>:  <br> Posted By <i>$pst_usr</i> </a>  ";
+    			
 		    echo "
 		        <tbody><tr><td><a href='forum_view_posts.php?cid=".$name."' style='text-decoration: none; color:#0912cb;'>$name</a></td><td>$email</td></tr>
 		        <tr class=\"alt\">

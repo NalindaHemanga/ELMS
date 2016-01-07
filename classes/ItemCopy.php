@@ -157,6 +157,30 @@ class ItemCopy{
 		return $this->supplier;
 
 	}
+	
+
+	public function update_item_copy_no($new_num){
+
+		if($this->no==$new_num){return true;}
+		
+		else{
+		$parent_item_id = $this->item_id;
+		$item_copy_id = $this->id;
+		$parent_item = Item::search(array("item_id"=>$parent_item_id));
+		$copies = $parent_item->get_copies();
+		foreach($copies as $itemCopy){
+			
+			if($itemCopy->get_no()==$new_num){return false;}
+			
+			}
+			
+		$sql = "UPDATE  `item_copy` SET  `item_copy_no` =  '$new_num' WHERE  `item_copy`.`item_copy_id` =$item_copy_id;";
+		DB::getInstance()->directUpdate($sql);	
+		echo $sql;	
+		return true;
+		}
+
+	}
 
 
 	public static function search($values=array()){
@@ -203,6 +227,15 @@ class ItemCopy{
 		else
 			return null;
 
+
+	}
+
+	public function delete(){
+
+		if (DB::getInstance()->delete("item_copy",array("item_copy_id"=>$this->id))){
+		return true;
+		}
+		return false;
 
 	}
 

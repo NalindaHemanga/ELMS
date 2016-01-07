@@ -55,8 +55,10 @@ ob_start();
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
               New Topic  :    <input type="text" name="topic" required>
               <br><br>
-              Description: <textarea style="vertical-align: middle;" rows="4" cols="50" name="description" required></textarea>
-              <br><br>
+              Description: <textarea style="vertical-align: middle;" rows="10" cols="50" name="description" required></textarea>
+              <br>
+              <p style="font-size:13px;padding-left:80px;">Press Esc to exit</p>
+              <br>
               <input type="submit" name="submit" value="Submit" >
             </form>
           </dialog>

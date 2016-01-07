@@ -42,7 +42,7 @@
       //get details of reply posts
       $allposts = forumReply::getallForumReply();
       //define the delete variable to delete post. this will unavailable if foreach execute
-      $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links'>Delete</a>";
+      $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
       //check availabilty of foriegn key post_id (table forum_reply) of primary key post id (table forum_post)
       foreach ($allposts as $key =>$value) {
         $post_id=$value->get_Postid();
@@ -66,7 +66,8 @@
           // Print the discussion topic
           echo "<div class=\"datagrid\"><table>
           <tbody><tr><td style=\"color:black;\"><b>Discussion Topic : <span style=\"color:black;font-size:120%;\">".$_SESSION["title"]. "<span></b></td><td>Posted by :".$_SESSION["pst_usr"]."</td></tr>
-          <tr class=\"alt\"><td style=\"color:black;font-size:110%;\">".$_SESSION["des"]."<br>$link_post_del</td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
+          <tr class=\"alt\"><td style=\"color:black;font-size:110%; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: normal;\"><p style=\"width:230px; word-wrap: break-word;
+            width: 580px;color:black; padding-right:5px;\"> ".$_SESSION["des"]."</p><br>$link_post_del</td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
           </tbody>
           </table></div>"
 
@@ -98,23 +99,29 @@
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
               <!--<label style="padding-left:23px;">Subject     :</label>   <input type="text" name="subject" required>
               <br><br>-->
-              Reply: <textarea style="vertical-align: middle;" rows="4" cols="50" name="reply" required></textarea>
-              <br><br>
+              
+              Reply: <textarea style="vertical-align: middle;" rows="10" cols="50" name="reply" required></textarea>
+              <br>              
+              <p style="font-size:13px;padding-left:47px;">Press Esc to exit</p>
+              <br>
+
               <input type="submit" name="submit" value="Submit" >
             </form>
           </dialog>
             <br><br>
 
             <!-- Model Window -->
-            <dialog id= "dialogg">
+            <dialog id= "edit_dialog">
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
               <!--<label style="padding-left:23px;">Subject     :</label>   <input type="text" name="subject" required>
               <br><br>-->
-              Reply: <textarea id="text_area" style="vertical-align: middle;" rows="4" cols="50" name="reply" required></textarea>
-              <br><br>
-              <input type="submit" name="submit" value="Submit" >
+              Reply: <textarea id="text_area" style="vertical-align: middle;" rows="10" cols="50" name="replyy" required></textarea>
+              <br>
+              <p style="font-size:13px;padding-left:47px;">Press Esc to exit</p>
+              <br>
+              <input type="submit" name="ssubmit" value="Submit" >
             </form>
-          </dialog>
+          </dialog> 
             <br><br>
 
 <?php
@@ -163,33 +170,36 @@ foreach ($allposts as $key => $value) {
     $reply_pst_date=$value->get_Postdate();
 
 
-    // Compare the looged user & posted user to show delete link
+    // Compare the loged user & posted user to show delete link
     if ($name==$reply_pst_usr) {
-      $link_del="<a id='delete_link' href=\"forum_rep_delete.php?rid=".$reply_id."'\" class='links'>Delete</a>";
+      $link_del="<a id='delete_link' href=\"forum_rep_delete.php?rid=".$reply_id."\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
       
-      $link_update="<a id='delete_link' onClick='javascript:showEdit();' href=\"#\" class='links'>Edit</a>";
+      $link_update="<a id='delete_link' onClick='javascript:showEdit(this);' href=\"#\" class='links'>Edit</a>";
     }
     else{
       $link_del='';
       $link_update='';
     }
 
+
     echo "<script type='text/javascript'>
 
               
-              function showEdit(){
-                var reply='$reply';
-                document.getElementById('text_area').innerHTML = reply;
- 
-                document.getElementById('dialogg').showModal();
+              function showEdit(element){
+                var reply = element.parentNode;
+                var rep = reply.querySelector('div');
+                var rep_content = document.getElementById(rep.id);
+                var x = rep_content.innerHTML;
+                document.getElementById('text_area').innerHTML = x;
+                document.getElementById('edit_dialog').showModal();
 
               }
             </script>"; 
 
 //print the replys
 echo "
-  <tbody><tr><td style=\"max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: normal;\"><p style=\"width:230px;word-wrap: break-word;
-   width: 800px;color:black; padding-right:5px;\">$reply<br><br>$link_del"." "."$link_update</p></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
+  <tbody><tr><td style=\"max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: normal;\"><p ><div style=\"width:230px;word-wrap: break-word;
+   width: 790px;color:black; padding-right:5px;\" id='$reply_id'><div id='$reply_id+$post_id'>$reply</div><br><br><br>$link_del"." "."$link_update</p></div></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
   <tr class=\"alt\">
   </tr>
   </tbody>";

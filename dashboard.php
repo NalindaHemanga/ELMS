@@ -67,7 +67,7 @@
 			</div>
 
 			<div  class="dashicon" >
-			<a href="supplier_manager_dashboard.php">
+			<a href="supplier_management.php">
 			<img src="img/icons/supplier.png" height="150" width="150" />
 			Supplier Manager
 			</a>

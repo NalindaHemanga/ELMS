@@ -48,6 +48,44 @@ var counter = 0;
 
 }
 
+function registerSupplier(){
+
+		var form=document.getElementById("supplierForm");
+
+		var dataString = $(form).serialize();
+
+
+		$.ajax({
+			type: "POST",
+			url: "remote_supplier_registration.php",
+			data: dataString,
+
+			success: function(json_data) {
+
+				form.reset();
+				var div=document.getElementById("dynamicInput");
+				div.innerHTML="";
+				document.getElementsByClassName("close")[0].click();
+
+				var data_array = $.parseJSON(json_data);
+				alert(data_array['message']);
+				closeModal3();
+				$('#supplier_dropdown').append($('<option>', {
+       				 	value: data_array["sup_id"],
+        				text: data_array["sup_name"],
+        				selected:"selected"
+   				 }));
+			}
+			});
+
+
+
+
+		return false;
+
+	}
+
+
 
 
 </script>
@@ -108,7 +146,7 @@ var counter = 0;
 	<div class="form">
 		<a href="#close" title="Close" class="close">X</a>
 
-       	 <form class="form" enctype="multipart/form-data" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" >
+       	 <form id="supplierForm" class="form" onsubmit="return registerSupplier();">
         	<div class="form_description">
 				<h2>Supplier Registration</h2>
 				<p>Use This form to register a new supplier</p>

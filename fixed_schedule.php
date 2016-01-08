@@ -17,6 +17,7 @@ require_once 'core/init.php';
 <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
 <link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <script src="lib/jquery.min.js"></script>
+ 
  <script type="text/javascript">
             var curCourse;
             var curCourseId;
@@ -33,9 +34,46 @@ require_once 'core/init.php';
 
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
+        var day = document.getElementById("day2").value;
+        var sid = document.getElementById("sid").value;
+        
        // ev.target.appendChild(document.getElementById(data));
         document.getElementById(id).value = curCourse;
-        document.getElementById(id+"h").value = curCourseId;
+        //document.getElementById(id+"h").value = curCourseId;
+
+
+
+
+        
+
+        var dataString = "subject=" + curCourse + "&day=" + day + "&sid=" + sid + "&time=" + id;
+       
+
+        $.ajax({
+            type: "POST",
+            url: "generate_fixed_schedule.php",
+            data: dataString,
+
+            success: function(data) {
+
+            
+                
+                alert(data);
+
+
+            }
+            });
+
+
+
+
+
+
+
+
+
+
+
     }
 
     function clearContent(id) {
@@ -49,9 +87,10 @@ require_once 'core/init.php';
     	
     	
     	
+		var sid = document.getElementById("sid").value;
+        
 				
-				
-		$("#timetable").load("time_table_slot.php",{"dayy":day});
+		$("#timetable").load("time_table_slot.php",{"data[]":[day,sid]});
 			
 
     	
@@ -103,7 +142,7 @@ $shedule_id=$_GET["sid"];
 
 
 ?>
-<input type="text" hidden value="<?php echo $shedule_id; ?>" >
+<input type="text" id="sid" hidden value="<?php echo $shedule_id; ?>" />
 <a href="#openModal">Add new course</a>
 
     </fieldset><br><br><br>

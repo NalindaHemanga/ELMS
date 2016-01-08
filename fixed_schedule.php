@@ -58,8 +58,7 @@ require_once 'core/init.php';
 
             
                 
-                alert(data);
-
+               
 
             }
             });
@@ -76,9 +75,41 @@ require_once 'core/init.php';
 
     }
 
+
+
     function clearContent(id) {
         document.getElementById(id).value = "";
-        document.getElementById(id+"h").value = "";
+         var day = document.getElementById("day2").value;
+        var sid = document.getElementById("sid").value;
+        
+       // ev.target.appendChild(document.getElementById(data));
+        
+        //document.getElementById(id+"h").value = curCourseId;
+
+
+
+
+        
+
+        var dataString = "subject=" + curCourse + "&day=" + day + "&sid=" + sid + "&time=" + id;
+       
+
+        $.ajax({
+            type: "POST",
+            url: "delete_fixed_schedule.php",
+            data: dataString,
+
+            success: function(data) {
+
+            
+                
+                
+
+
+            }
+            });
+
+        
     }
 
 

@@ -6,6 +6,7 @@ class LabSlot{
 			$lab_slot_time,
 			$lab_slot_date,
 			$status,
+			$course_id,
 			$schedule_id;
 
 	public function create($data){
@@ -15,6 +16,8 @@ class LabSlot{
 		$this->lab_slot_date=$data["lab_slot_date"];
 		$this->status=$data["status"];
 		$this->schedule_id=$data["schedule_id"];
+		$this->course_id=$data["course_id"];
+
 
 	}
 
@@ -27,7 +30,8 @@ class LabSlot{
 			"lab_slot_time"=>$this->lab_slot_time,
 			"lab_slot_date"=>$this->lab_slot_date,
 			"status"=>$this->status,
-			"schedule_id"=>$this->schedule_id
+			"schedule_id"=>$this->schedule_id,
+			"course_id"=>$this->course_id
 
 		);	
 

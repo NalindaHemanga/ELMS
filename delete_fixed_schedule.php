@@ -13,7 +13,8 @@ require_once 'core/init.php';
 	$subject=$_POST["subject"];
 
 	$res=DB::getInstance()->directSelect("SELECT course_id FROM course WHERE course_name='$subject';");
-	$cid=$res[0]["course_id"];
+	if(count($res)>0)
+		$cid=$res[0]["course_id"];
 
 	switch($time){
 		case "m1":$labtime="8-9";break;
@@ -44,34 +45,8 @@ require_once 'core/init.php';
 						$day2 = date('l', strtotime($date));
 						
 						if($day1==$day2){
-
-						if(count($result)==0){
-
-							$data2=array(
-
-								"lab_slot_id"=>null,
-								"lab_slot_time"=>$labtime,
-								"lab_slot_date"=>$date,
-								"status"=>0,
-								"schedule_id"=>$sid,
-								"course_id"=>$cid
-
-
-
-								);
-							$labslot=new LabSlot();
-							$labslot->create($data2);
-							$labslot->add();
-
-						}else{
-
-							$sql="UPDATE lab_slot SET course_id=$cid WHERE schedule_id=$sid AND lab_slot_date='$date' AND lab_slot_time='$labtime';";
-							DB::getInstance()->directUpdate($sql);
-							
-
-
-
-						}
+							DB::getInstance()->delete("lab_slot",["schedule_id" => $sid,"lab_slot_date" =>$date,"lab_slot_time" =>$labtime]);
+						
 					}
                 	
                 	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));

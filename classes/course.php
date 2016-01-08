@@ -34,7 +34,6 @@
 		}
 
 		public function addCourse(){
-
 			$row = array(
 
 				"course_no" => $this->course_no, 	 	

@@ -17,50 +17,11 @@
 
 <script>
 
-/*function changeInput(){
 
-	var combo = $("<select></select>").attr("id", "membertype").attr("name", "membertype").attr("class","small select");
-
-   
-    combo.append("<option>System Administrator</option>");
-    combo.append("<option>Laboratory Administrator</option>");
-    combo.append("<option>Laboratory Assistant</option>");
-    combo.append("<option>Related Lecturer</option>");
-    combo.append("<option>Non-related Lecturer</option>");
-    combo.append("<option>Related Teaching Assistant</option>");
-    combo.append("<option>Non-related Teaching Assistant</option>");
-    combo.append("<option>Undergraduate Student</option>");
-    combo.append("<option>Graduate Student</option>");
-    combo.append("<option>Collaborator</option>");
-    combo.append("<option>Temporary Member</option>");
-    
-
-	var x = document.getElementById("searchtype").value;
-	if(x=='0'){
-		document.getElementById("searchinput").innerHTML = "";
-
-	}
-
-	if(x=='1'){
-			 document.getElementById("searchinput").innerHTML = "";
-			 $("#searchinput").append(combo);
-	}
-	else if(x=='2'){
-		document.getElementById("searchinput").innerHTML = "";
-			 document.getElementById("searchinput").innerHTML = "<input id='nic' type='text' class='small text' name='nic_no' required='required' pattern='[0-9]{9}'' title='Enter NIC number without the character at the end' placeholder='Enter NIC No'/>";
-	}
-	else if(x=='3'){
-		document.getElementById("searchinput").innerHTML = "";
-			 document.getElementById("searchinput").innerHTML = "<input type='email' class='small text' name='email' required='required' placeholder='Enter E-Mail'/>";
-	}
-    
-}*/
 
 function openModel(){
 	location.href="#openModal";
 }
-
-
 
 </script>
 </head>
@@ -81,39 +42,18 @@ function openModel(){
         <div style="text-align:right;width:28%;display:inline-block;vertical-align:top;">
 			<button style="width:15em;background:#43D14C;" onclick="openModel();">   <div><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-191-circle-plus.png" width="13" height="13" /><font face="Calibri" color="black" size="4"> Add new course </font></div></button>
 		</div>	
-<!--
-		<div  style="text-align:center;">
-		 
 
-				
-								<select id='searchtype' class="small select" name="dropdown" onchange="changeInput();"> 
-									<option value="0" selected="selected" >Select Search Method</option>
-									<option value="1" >Search by Course ID</option>
-									<option value="2" >Search by Course Number</option>
-									<option value="3" >Search by Course Name</option>
-
-								</select>
-
-				<span id='searchinput'></span>
-							
-
-		
-				 <button style="width:10em;">   <img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-28-search.png" width="13" height="13" /><font face="Calibri" color="black" size="4"> Search </font></button>
-
-
-		</div>
--->
 		<?php
 
 			echo "<div class='datagrid'><table>
     		<thead><tr><th>Course ID</th><th>Course Number</th><th>Course Name</th></tr></thead>";
 			$allDetails = course::getDetails();
 			foreach ($allDetails as $key => $value) {
+
     			$id=$value->getCourseId();
     			$number=$value->getCourseNo();
-    			#$des=$value->get_Description();
     			$name=$value->getCourseName();
-    			//echo "<a href='forum_view_posts.php?cid=".$id."' class='cat_links'>  <b>$title</b>:  <br> Posted By <i>$pst_usr</i> </a>  ";
+    			
 		    echo "
 		        <tbody><tr><td>$id</td><td>$number</td><td>$name</td></tr>
 		        <tr class=\"alt\">
@@ -191,36 +131,56 @@ function openModel(){
 
 </div>
 
+
+
 <?php
 
     require_once 'core/init.php';
-		
-		
-			
-	    	$course_data = array(
+
+
+    if(count($_POST) > 0) {
+
+
+
+    	$course_data = array(
 
 				"course_no"		=>	$_POST["course_no"],
 				"course_name"	=>	$_POST["course_name"],
 			);
 
-    	
-	  
+		$_SESSION['form_data'] = $course_data;
 
-		     $new_course = new course();
-		     $new_course->create($course_data);
 
-			if($new_course->addCourse()){
+        header("Location: course_management.php",true,303);
+        die();
+    }
+    else if (isset($_SESSION['form_data'])){
+
+
+
+
+     $new_course = new Course();
+     $new_course->create($_SESSION["form_data"]);
+
+			if($new_course->add_course()){
 
 				$message = "You have successfully Registered the Course !!";
 				echo "<script type='text/javascript'>alert('$message');</script>";
 			}
 
-			else if($new_course->addCourse()){
+			else{
+
 
 				$message = "The Course Registration was unsuccessful.";
 				echo "<script type='text/javascript'>alert('$message');</script>";
 
 
 			}
-	    
+
+
+
+        unset($_SESSION["form_data"]);
+
+    }
+
 ?>

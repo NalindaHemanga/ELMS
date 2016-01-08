@@ -20,7 +20,7 @@ class ItemCopy{
 
 	}
 
-	public function createNew($data=array()){
+	public function createNew($data=array()){ // acts as the parameterized constructor
 
 		$this->id 				= 	$data["id"];
 		$this->no 				=	$data["no"];
@@ -69,7 +69,7 @@ class ItemCopy{
 		$this->item_id			= 	$data["item_id"];
 	}
 
-	public function register(){
+	public function register(){ // insert a new item copy to the database
 
 		$row=array(
 

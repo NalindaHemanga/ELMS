@@ -46,12 +46,7 @@
     else if (isset($_SESSION['form_data'])){
 
 
-        /*
-            Put database-affecting code here.
-
-          */
-
-
+        
      $new_member = new Member();
      $new_member->create($_SESSION["form_data"]);
 

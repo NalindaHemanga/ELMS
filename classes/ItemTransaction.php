@@ -39,7 +39,7 @@ public function getStatus(){
 
 
 
-	public function create($data){
+	public function create($data){ // acts as the parameterized constructor
 
 			$this->item_copy_id=$data["item_copy_id"];
 			$this->transaction_id=$data["transaction_id"];
@@ -51,7 +51,7 @@ public function getStatus(){
 	}
 
 
-	public function add(){
+	public function add(){ // add new transaction to the database
 
 
 		$row=array(

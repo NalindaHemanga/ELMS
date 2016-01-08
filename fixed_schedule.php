@@ -30,6 +30,7 @@ require_once 'core/init.php';
         ev.dataTransfer.setData("text", ev.target.id);
     }
     function drop(ev,id) {
+
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
        // ev.target.appendChild(document.getElementById(data));
@@ -81,8 +82,28 @@ foreach($courses as $course){
 	echo "<div style=\"padding:3px;\"><div style=\"border-style: solid; border-width:1px;\"draggable=\"true\" ondragstart='drag(event,\"$courseName\",\"$courseId\")'><font color=\"#0d6f94\">$courseName</font></div></div>";
 }
 
-?>
 
+$shedule_id=$_GET["sid"];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
+<input type="text" hidden value="<?php echo $shedule_id; ?>" >
 <a href="#openModal">Add new course</a>
 
     </fieldset><br><br><br>

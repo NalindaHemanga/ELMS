@@ -33,28 +33,28 @@ class DB {
 
 	}
 
-	public function startTr(){
+	public function startTr(){ // starts a transaction
 
 		$this->pdo->beginTransaction();
 
 	}
 
-	public function commitTr(){
+	public function commitTr(){ // commit a transaction
 		$this->pdo->commit();
 	}
 
-	public function rollBackTr(){
+	public function rollBackTr(){ //rollback a transaction
 
 		$this->pdo->rollBack();
 	}
 
 
 
-	public function getLastId(){
+	public function getLastId(){ // returns the last inserted ID
 		return $this->pdo->lastInsertId();
 	}
 
-	public function directInsert($sql){
+	public function directInsert($sql){ // executes the Insert query
 
 		$this->query=$this->pdo->prepare($sql);
 		$this->query->execute();
@@ -65,7 +65,7 @@ class DB {
 
 
 
-	public function search($table,$values=array()){
+	public function search($table,$values=array()){ // select and return results
 		
 		try{
 
@@ -122,7 +122,7 @@ class DB {
 
 	}
 
-	public function directSelect($sql){
+	public function directSelect($sql){ //executes the select query and returns results
 		try {
 
 
@@ -141,12 +141,12 @@ class DB {
 
 	}
 
-	public function directDelete(){
+	public function directDelete(){ //executes the delete query
 
 
 	}
 
-	public function insertRow($table,$data=array()){
+	public function insertRow($table,$data=array()){ // easy insert function
 
 	try{
 
@@ -207,7 +207,7 @@ class DB {
 
 	}
 
-	public function delete($table,$values=array()){
+	public function delete($table,$values=array()){ // executes the delete
 
 		try{
 
@@ -255,7 +255,7 @@ class DB {
 	}
 
 
-	function directUpdate($sql){
+	function directUpdate($sql){ //executes the update query
 		
 		$state=false;
 		try {

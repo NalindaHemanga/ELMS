@@ -3,7 +3,7 @@
         <div id="leftcolumn">
             <ul class="leftnav">
 
-            	
+            	<li class="leftnav"><a class="home" href="homepage.php"><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-21-home.png"/><font color="#000000" size="5" face="Agency FB"> HOME</font></a></li>
             	<li class="leftnav"><a class="home" href="dashboard.php"><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-479-blackboard.png"/><font color="#000000" size="5" face="Agency FB"> DASHBOARD</font></a></li>
             	<li class="leftnav"><a class="home" href="#"><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-375-claw-hammer.png"/><font color="#000000" size="5" face="Agency FB"> ITEMS</font></a></li>
                 <li class="leftnav"><a class="home" href="#"><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-46-calendar.png"/><font color="#000000" size="5" face="Agency FB"> SCHEDULE</font></a></li>

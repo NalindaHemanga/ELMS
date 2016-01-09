@@ -4,6 +4,9 @@
 
   $member=Member::search(array("member_email"=>$username));
   $name=$member->getInitials()." ".$member->getSurname();
+  $roles = $member->getRoles();
+  $rolesArray=explode(",", $roles);
+  //print_r($rolesArray);
 
 //get the entered details of forum discussions and save in a session variable
   if(count($_GET)>0){
@@ -20,6 +23,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Forum Reply</title>
 <link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
@@ -29,18 +33,37 @@
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
 <link rel="stylesheet" type="text/css" href="css/forum_styles.css" />
 <link rel="stylesheet" type="text/css" href="css/form.css" />
+
+
+
+
 </head>
 <body>
+<script src="lib/jquery.min.js"></script>
+
     <div id="wrapper">
         <?php include "includes/header.php" ?>
 
         <?php include "includes/leftnav.php" ?>
         <div id="contentwrap">
         <div id="content">
-  <?php
+<?php
   ob_start();
-    //Compare the logged user and posted user is same or not
-    if ($name==$_SESSION["pst_usr"]){
+
+  
+  $x=0;
+  $link_post_del='';
+//Checked the logged user is an admin or not
+  foreach ($rolesArray as $role) {
+    $role=str_replace(" ","%19%",$role);
+    if ($role=='%19%System%19%Administrator%19%'){
+      $x=1;
+      $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
+    }
+   }
+
+// Compare the logged user & posted user to show delete link
+    if ($name==$_SESSION["pst_usr"] && $x==0){
       //get details of reply posts
       $allposts = forumReply::getallForumReply();
       //define the delete variable to delete post. this will unavailable if foreach execute
@@ -54,43 +77,42 @@
         }         
       }    
      }
+     
    
     
-    // Compare the logged user & posted user to show delete link
     
-    else{
-      $link_post_del='';
-    }
+    
   
-          // Print the discussion topic
-          echo "<div class=\"datagrid\"><table>
-          <tbody><tr><td style=\"color:black; max-width: 600px;\"><b>Discussion Topic : <span style=\"width: 750px;color:black;font-size:120%;word-wrap: break-word;width: 750px;text-overflow: ellipsis; white-space: pre-line; text-align:justify;\">".$_SESSION["title"]. "</span></b></td><td>Posted by :".$_SESSION["pst_usr"]."</td></tr>
-          <tr class=\"alt\"><td style=\"color:black;font-size:110%; max-width: 600px; \"><p style=\" word-wrap: break-word;
-            width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-space: pre-line; text-align:justify;\"> ".$_SESSION["des"]."</p><br>$link_post_del</td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
-          </tbody>
-          </table></div>"
+  
+// Print the discussion topic
+echo "<div class=\"datagrid\"><table>
+<tbody><tr><td style=\"color:black; max-width: 600px;\"><b>Discussion Topic : <span style=\"width: 750px;color:black;font-size:120%;word-wrap: break-word;width: 750px;text-overflow: ellipsis; white-space: pre-line; text-align:justify;\">".$_SESSION["title"]. "</span></b></td><td>Posted by :".$_SESSION["pst_usr"]."</td></tr>
+<tr class=\"alt\"><td style=\"color:black;font-size:110%; max-width: 600px; \"><p style=\" word-wrap: break-word;
+width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-space: pre-line; text-align:justify;\"> ".$_SESSION["des"]."</p><br>$link_post_del</td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
+</tbody>
+</table></div>"
 
-           ?>
-           <!--Reply Button-->
-            <div  style="width:50%;display:inline-block;vertical-align:top;">
-              <ul style="list-style-type:none;">
-                <li>
-                  <div>
-                  <input  type="button"  value="Reply" class="button" onclick="buttonClicked()">
-                  <a href="#openModal" onClick='javascript:showForum();' style="visibility: hidden;"><b>Reply</b></a>
-                </div>
-                </li>
-              </ul>
-            </div>
+?>
+<!--Reply Button-->
+<div  style="width:50%;display:inline-block;vertical-align:top;">
+  <ul style="list-style-type:none;">
+    <li>
+      <div>
+      <input  type="button"  value="Reply" class="button" onclick="buttonClicked()">
+        <a href="#openModal" onClick='javascript:showForum();' style="visibility: hidden;"><b>Reply</b></a>
+      </div>
+    </li>
+  </ul>
+</div>
             
-            <hr />
+<hr />
 
-            <!-- show model after click reply button -->
-            <script type="text/javascript">
-              function buttonClicked(){
-                location.href="#openModal"; 
-              }    
-            </script>
+<!-- show model after click reply button -->
+<script type="text/javascript">
+  function buttonClicked(){
+    location.href="#openModal"; 
+  }    
+</script>
 
             <!-- Model Window for Reply-->
             <div id="openModal" class="modalDialog">
@@ -109,22 +131,29 @@
               </div>
             </div>
 
+
+
             <!-- Model Window for edit option -->
             <div id="openeditModel" class="modalDialog">
               <div>
                 <div class="form">
                 <a href="#close" title="Close" class="close">X</a>
-                  <form class="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                  <form id="update_rep" class="form" method="post">
+                  
                   Reply: 
                   <br><br>
-                  <textarea id="text_area" style="vertical-align: middle;" rows="10" cols="86" name="reply" required></textarea>
+                  <textarea id="text_area" style="vertical-align: middle;" rows="10" cols="86" name="reply" value="" required></textarea>
+                  <input id="reply_id" type="hidden" name="id" value="">
                   <br>              
                   <br>
-                  <input class="button" type="submit" name="submit_rep" value="Submit" >
+                  <input class="button" type="button" id="submit_rep" name="submit_rep" value="Submit" >
+                  <span id ="save_statuss"></span>
                   </form>
                   </div>
               </div>
             </div>
+<script type="text/javascript" src="js/ajax.js"></script>
+
 <?php
 // define variables and set to empty values
 $subject = $reply = $reply_pst_date = $reply_pst_usr= "";
@@ -191,7 +220,8 @@ foreach ($allposts as $key => $value) {
                 var rep = reply.querySelector('div');
                 var rep_content = document.getElementById(rep.id);
                 var x = rep_content.innerHTML;
-                document.getElementById('text_area').innerHTML = x;
+                document.getElementById('text_area').value = x;
+                document.getElementById('reply_id').value=reply.id;
                 document.getElementById('openeditModel').showModal();
               }
             </script>"; 
@@ -199,7 +229,7 @@ foreach ($allposts as $key => $value) {
   //print the replys
     echo "
     <tbody><tr><td style=\"max-width: 780px;text-overflow: ellipsis; white-space: initial;\"><p ><div style=\" word-wrap: break-word;
-     width: 780px;color:black; padding-right:5px; text-align:justify;\" id='$reply_id'><div id='$reply_id+$post_id'>$reply</div><br><br><br>$link_del"." "."$link_update</p></div></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
+     width: 780px;color:black; padding-right:5px; text-align:justify;\" id='$reply_id'><div id='$reply_id+$post_id'>$reply</div><br>$link_del"." "."$link_update</p></div></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
     <tr class=\"alt\">
     </tr>
     </tbody>";

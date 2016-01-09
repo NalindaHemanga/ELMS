@@ -111,14 +111,18 @@ function registerSupplier(){
 		<?php
 
 			echo "<div class='datagrid'><table>
-    		<thead><tr><th>Supplier Name</th><th>Supplier E-mail</th></tr></thead>";
+    		<thead><tr><th>Supplier Name</th><th>Supplier E-mail</th><th>Address</th><th>Telephone</th></tr></thead>";
 			$allDetails = Supplier::getDetails();
 			foreach ($allDetails as $key => $value) {
     			$name=$value->getCompany();
     			$email=$value->getEmail();
+    			$street=$value->getStreet();
+    			$line2=$value->getLine2();
+    			$city=$value->getCity();
+    			$telephone=$value->getTelephone();
     			
 		    echo "
-		        <tbody><tr><td><a href='forum_view_posts.php?cid=".$name."' style='text-decoration: none; color:#0912cb;'>$name</a></td><td>$email</td></tr>
+		        <tbody><tr><td><a href='forum_view_posts.php?cid=".$name."' style='text-decoration: none; color:#0912cb;'>$name</a></td><td>$email</td><td>$street<br>$line2<br>$city</td><td>$telephone</td></tr>
 		        <tr class=\"alt\">
 		        </tr>
 		        </tbody>
@@ -485,7 +489,7 @@ function registerSupplier(){
 
 
      $new_supplier = new Supplier();
-     print_r($_SESSION["form_data"]);
+     //print_r($_SESSION["form_data"]);
      $new_supplier->create($_SESSION["form_data"]);
 
 			if($new_supplier->register()){

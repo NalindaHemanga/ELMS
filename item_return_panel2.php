@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
-
+<script src="lib/jquery.min.js"></script>
 <style>
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
@@ -102,6 +102,27 @@ function changeSelect(idn){
 
 }
 
+function completeReturn(){
+   var form=document.getElementById("returnForm");
+
+        var dataString = $(form).serialize();
+
+         $.ajax({
+            type: "POST",
+            url: "item_return_panel2_control.php",
+            data: dataString,
+
+            success: function(data) {
+                
+                var content=document.getElementById("content");
+                content.innerHTML=data;
+                //location.reload();
+            }
+            });
+
+         return false;
+}
+
 
 
 </script>
@@ -113,7 +134,7 @@ function changeSelect(idn){
 		<?php include "includes/leftnav.php" ?>
 		<div id="contentwrap">
         <div id="content">
-        <form action="item_return_panel2_control.php" method="post">
+        <form id="returnForm" onsubmit="return completeReturn();">
         <h3>Transaction Details</h3>
 
         	<div class="datagrid">

@@ -6,10 +6,14 @@
 
 	$member=Member::search(["member_email"=>$username]);
 
-	$roles=explode(",",$member->getRoles());
+	$r=explode(",",$member->getRoles());
+
+	$roles=array_map('trim',$r);
+
 	print_r($roles);
+	
 
-
+	
 
 
 
@@ -41,16 +45,21 @@
         <div id="content">
 			
 
+        <?php 
 
+        if(in_array("Laboratory Administrator", $roles) || in_array("Related Lecturer", $roles)){ ?>
 			<div  class="dashicon" >
 			<a href="item_manager.php">
 			<img src="img/icons/item_manager.png" height="150" width="150" />
 			Item Manager
 			</a>
 			</div>
-
+		<?php } ?>
 			
 
+		<?php 
+
+        if(in_array("Laboratory Assistant", $roles)){ ?>
 			<div  class="dashicon" >
 			<a href="item_issue_panel1.php">
 			<img src="img/icons/issue.png" height="150" width="150" />
@@ -58,12 +67,19 @@
 			</a>
 			</div>
 
+		<?php } ?>
+
+		<?php 
+
+        if(in_array("Laboratory Assistant", $roles)){ ?>
+
 			<div  class="dashicon" >
 			<a href="item_return_panel1.php">
 			<img src="img/icons/return.png" height="150" width="150" />
 			Return Items
 			</a>
 			</div>
+		<?php } ?>
 
 			<div  class="dashicon" >
 			<a href="schedule_manager.php">

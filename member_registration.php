@@ -7,6 +7,9 @@
 
     if(count($_POST) > 0) {
 
+    	$salt = '5&JDDlwz%Rwh!t2Yg-Igae@QxPzFTSId';
+        $enc_pass  = md5($salt.$_POST["password"]);
+
         if($_POST["period"] != "NULL") {
 			$validity	= date_format(date_add(DateTime::createFromFormat('Y-m-d', date("Y-m-d")),date_interval_create_from_date_string($_POST["period"])),"Y-m-d");
 		}
@@ -20,7 +23,7 @@
 			"initials"	=>	$_POST["initials"],
 			"surname"	=>	$_POST["surname"],
 			"email"		=>	$_POST["email"],
-			"password"	=>	crypt($_POST["password"]),
+			"password"	=>	$enc_pass,
 			"type"		=>	$_POST["m_type"],
 			"validity"	=>  $validity,
 			"remarks"	=>	'Borrow Allowed'

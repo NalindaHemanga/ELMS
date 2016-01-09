@@ -1,3 +1,25 @@
+<?php
+	
+	require_once 'core/init.php';
+
+	$username=$_SESSION['logged_in_user'];
+
+	$member=Member::search(["member_email"=>$username]);
+
+	$roles=explode(",",$member->getRoles());
+	print_r($roles);
+
+
+
+
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>

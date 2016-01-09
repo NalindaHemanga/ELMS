@@ -259,14 +259,36 @@ foreach ($allposts as $key => $value) {
     $reply_pst_usr=$value->get_Posteduser();
     $reply_pst_date=$value->get_Postdate();
 
+  $y=0;
+  $link_del='';
+  $link_update='';
+
+//Checked the logged user is an admin and also posted user
+  foreach ($rolesArray as $role) {
+    $role=str_replace(" ","%19%",$role);
+    if ($role=='%19%System%19%Administrator%19%' && $name==$reply_pst_usr){
+      $y=1;
+      $link_del="<a id='delete_link' href=\"forum_rep_delete.php?rid=".$reply_id."\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
+      $link_update="<a id='delete_link' onClick='javascript:showEdit(this);' href=\"#openeditModel\" class='links'>Edit</a>";
+    }
+    } 
+
+    foreach ($rolesArray as $role) {
+    $role=str_replace(" ","%19%",$role);
+    if ($role=='%19%System%19%Administrator%19%' && $name!=$reply_pst_usr){
+      $y=1;
+      $link_del="<a id='delete_link' href=\"forum_rep_delete.php?rid=".$reply_id."\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
+      $link_update="";
+    } 
+  }
 
     // Compare the loged user & posted user to show delete link
-    if ($name==$reply_pst_usr) {
+    if ($name==$reply_pst_usr && $y==0) {
       $link_del="<a id='delete_link' href=\"forum_rep_delete.php?rid=".$reply_id."\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
       
       $link_update="<a id='delete_link' onClick='javascript:showEdit(this);' href=\"#openeditModel\" class='links'>Edit</a>";
     }
-    else{
+    else if ($name!=$reply_pst_usr && $y==0){
       $link_del='';
       $link_update='';
     }

@@ -9,7 +9,7 @@ $data=$_POST["data"];
 $day=$data[0];
 $sid=$data[1];
 $status=false;
-$subjects=array();
+$subjects=array("","","","","","","","","");
 $schedule=Schedule::search(["schedule_id"=>$sid]);
 $date = $schedule->getScheduleStartDate();
 $end_date = $schedule->getScheduleEndDate();
@@ -18,18 +18,20 @@ while(strtotime($date) <= strtotime($end_date)){
 
 	$day2 = date('l', strtotime($date));
 	if($day==$day2){
-
+		$i=0;
 	foreach ($slots as $key => $labtime) {
 			
 		
 		$result=DB::getInstance()->directSelect("SELECT course_id FROM lab_slot WHERE schedule_id=$sid AND lab_slot_date='$date' AND lab_slot_time='$labtime' ;");
 		if(count($result)>0){
 			$result2=DB::getInstance()->directSelect("SELECT course_name FROM course WHERE course_id=".$result[0]["course_id"].";");
-			$subjects[]=$result2[0]["course_name"];
+			$subjects[$i]=$result2[0]["course_name"];
 
 		}else{
-			$subjects[]="";
+			$subjects[$i]="";
 		}
+
+		$i++;
 	}
 
 	$status=true;

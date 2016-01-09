@@ -1,21 +1,3 @@
-<?php
-
-require_once 'core/init.php';
-
-if(isset($_SESSION["logged_in_user"])){
-	$username=$_SESSION["logged_in_user"];
-}
-else{
-
-	header("location: login.php");
-}
-
-$member=Member::search(array("member_email"=>$username));
-$name=$member->getInitials()." ".$member->getSurname();
-
-
-?>
-
 
 
 <!DOCTYPE html>

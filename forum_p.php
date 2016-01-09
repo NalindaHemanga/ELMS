@@ -6,6 +6,7 @@ ob_start();
 
   $member=Member::search(array("member_email"=>$username));
   $name=$member->getInitials()." ".$member->getSurname();
+  
 
  ?>
 <!DOCTYPE html>

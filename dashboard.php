@@ -54,6 +54,7 @@
 
     <div  class="dashicon" >
 			<a href="user_manager_dashboard.php">
+			<a href="member_management.php">
 			<img src="img/icons/users.png" height="150" width="150" />
 			User Manager
 			</a>

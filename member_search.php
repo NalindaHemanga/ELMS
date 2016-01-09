@@ -1,78 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Member_Search</title>
+<?php
+require "core/init.php";
+
+if(count($_GET) > 0){
+$search_methode=$_GET['searchType'];
+$search_term=$_GET['searchInput'];
+
+if($search_methode=="1"){
+	switch($search_term){
+
+				case "System Administrator":$search_term="sys_ad";break;
+				case "Laboratory Administrator":$search_term="lab_ad";break;
+				case "Laboratory Assistant":$search_term="lab_as";break;
+				case "Related Lecturer":$search_term="rel_lec";break;
+				case "Non-Related Lecturer":$search_term="nrel_lec";break;
+				case "Related Teaching Assistant":$search_term="rel_ta";break;
+				case "Non-Related Teaching Assistant":$search_term="nrel_ta";break;
+				case "Undergraduate Student":$search_term="u_std";break;
+				case "Graduate Student":$search_term="g_std";break;
+				case "Collaborator":$search_term="col";break;
+				case "Temporary Member":$search_term="tmp_mem";break;
+							
+//echo $search_term;			
+}
+$results = DB::getInstance()->search("member_role",array("role"=>$search_term));
+//print_r($results);
+$members;
+foreach ($results as $result){
+	$members[] = Member::search(array("member_id" => $result['member_id']));
+	}
+}
 
 
+//print_r($members);
+//echo $search_methode;
+//echo $search_term;
 
-<link rel="stylesheet" type="text/css" href="css/content.css" />
-<link rel="stylesheet" type="text/css" href="css/btn.css" />
-<link rel="stylesheet" type="text/css" href="css/wrapper.css" />
-<link rel="stylesheet" type="text/css" href="css/dashboardicon.css" />
-<link rel="stylesheet" type="text/css" href="css/font.css" />
-<link rel="stylesheet" type="text/css" href="css/form.css" />
+echo "<br><br><div class='datagrid'><table>
+	<thead><tr><th>Initials</th><th>Surname</th><th>Email</th><th>Remarks</th></tr></thead>";
 
-</head>
-<body>
+foreach ($members as $member){
+	$initials = $member->getInitials();
+	$surname = $member->getSurname();
+	$email = $member->getEmail();
+	$remarks = $member->getRemarks();
 
-
-		
-    <div id="wrapper">
-		<?php include "includes/header.php" ?>
-		
-		<?php include "includes/leftnav.php" ?>
-
-		<div id="contentwrap">
-        <div id="content">
-
-                	<div class="form">
-
-            			<form class="form" method="POST" action="member_search_display.php" >
-
-            					<msf style="margin-left:200px;">MEMBER  SEARCH</msf>
-
-            					<div style="height: 120px"></div>
+    echo "
+        <tbody><tr><td>$initials</td><td>$surname</td><td>$email</td><td>$remarks</td></tr>
+        <tr class=\"alt\">
+        </tr>
+        </tbody>
+        ";
 
 
-
-                				<div style="margin-left:30px"><label class="description" for="nic_no"><msf1>ENTER NIC HERE</msf1></label>
-                    				<input id="nic_no" name="nic_no" type="search" size="70"  style="margin-left:170px">
-               					</div>
- 
-            
-
-								<div style="height: 165px"></div>
+}
 
 
-
-                 				<div style="margin-left:450px">
-                 					
-                                    <span>
-                            		<input type="submit" class="button" value="     Submit     " name="submit" />
-                                    </span>
-                                    
-
-                                    <span>
-                                    <input type="Button" id="Button" class="button"     value="     Back     " name="Back"   onclick=# />
-                                
-                                              <script type="text/javascript">
-                                    
-                                                document.getElementById("Button").onclick = function () {   // This javascript function acts as an onclick function that redirects to the given php file or url
-                                                location.href = "user_manager_dashboard.php"; };                       // Button should be given an id so that function can be attached to that id
-                                              </script>
-                            		</span>
-								</div>
-
-
-
-
-            			</form>
-        
-        		</div>
-        </div>
-        </div>
-		
-       <?php include "includes/footer.php" ?>
-    </div>
-</body>
-</html>
+echo "</table></div>";
+}
+?>

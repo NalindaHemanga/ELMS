@@ -19,6 +19,7 @@ class Supplier{
 
 	public function create($data=array()){
 
+		$this->id 	 	= 	$data["id"];
 		$this->company 	 	= 	$data["company"];
 		$this->email 		=	$data["email"];
 		$this->street	 	= 	$data["street"];
@@ -35,6 +36,7 @@ class Supplier{
 
 	public function create1($data=array()){
 
+		$this->id 	 	= 	$data["supplier_id"];
 		$this->company 	 	= 	$data["supplier_name"];
 		$this->email 		=	$data["supplier_email"];
 		$this->street	 	= 	$data["supplier_address_line1"];
@@ -43,11 +45,22 @@ class Supplier{
 		$this->province 	=   $data["supplier_province"];
 		$this->postal 		=	$data["supplier_postal"];
 		$this->country 		=	$data["supplier_country"];
-
+		//$this->telephone	=	$data["telephone"];
+		if(isset($data["telephone"])){
+			$this->telephone	=	$data["telephone"];
+		}else{
+			$this->telephone	=	false;
+		}
 
 
 	}
 
+	public function getId(){
+
+		return $this->id;
+
+
+	}
 
 	public function getCompany(){
 
@@ -107,7 +120,7 @@ class Supplier{
 
 	public function getTelephone(){
 
-		return $this->telephone[0];
+		return $this->telephone;//has some issues. no column in db table as telephone.
 
 
 	}
@@ -169,13 +182,20 @@ class Supplier{
 	public static function getDetails(){
 
 			$result=DB::getInstance()->directSelect("SELECT * FROM supplier ORDER BY supplier_name;");
-
+			$result_tp=DB::getInstance()->directSelect("SELECT * FROM supplier_telephone ORDER BY supplier_id;");
 			$allSupplier = array();
 
 			foreach ($result as $key => $row) {
 				//print_r($row);
+				foreach ($result_tp as $key2 => $row2) { 
+					if($row["supplier_id"]==$row2["supplier_id"]){
+						$row["telephone"][]=$row2["telephone"];
+					}  
+				}
+				//print_r($row);
 				$supplierObj = new Supplier();
 				$supplierObj->create1($row);
+				//print_r($supplierObj);
 				$allSupplier[]=$supplierObj;
 
 			}
@@ -204,7 +224,7 @@ class Supplier{
 			
 		
 			$supplier_data=array(
-
+				"id"=>$result1[0]["supplier_id"],
 				"company"=>$result1[0]["supplier_name"],
 				"email" => $result1[0]["supplier_email"],
 				"street" => $result1[0]["supplier_address_line1"],
@@ -227,12 +247,40 @@ class Supplier{
 
 	}
 
+	public function update($values=array()){
+//print_r($values);
+		$supId = $this->id;
+echo $supId;
+		foreach ($values as $key => $value){
+			$column;
+			switch($key){
 
+				case "company":$column="supplier_name";break;
+				case "email":$column="supplier_email";break;
+				case "street":$column="supplier_address_line1";break;
+				case "line2":$column="supplier_address_line2";break;
+				case "city":$column="supplier_city";break;
+				case "province":$column="supplier_province";break;
+				case "postal":$column="supplier_postal";break;
+				case "country":$column="supplier_country";break;
 
+			}
+			if($key=="telephone"){
+				$sql2 = "DELETE FROM `supplier_telephone` WHERE `supplier_telephone`.`supplier_id` = $supId;";
+				DB::getInstance()->directUpdate($sql2);
+				foreach ($value as $key2 => $value2){
+					$sql3 = "INSERT INTO `supplier_telephone` (`supplier_id` ,`telephone`)VALUES ('$supId', '$value2');";
+					DB::getInstance()->directUpdate($sql3);
+				}
+			}
+			elseif($this->$key != $value){
+			$sql = "UPDATE  `supplier` SET  `$column` =  '$value' WHERE  `supplier`.`supplier_id` =$supId;";
+			DB::getInstance()->directUpdate($sql);
+			}else{echo "values are equal.";}
+		}
+		return true;
 
-
-
-
+	}
 
 
 }

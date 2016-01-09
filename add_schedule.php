@@ -35,7 +35,7 @@ if(strtotime($start_date)<strtotime($end_date)){
 }
 else{
 
-	echo "Schedule Start date must be less than Schedule end data !!";
+	echo "Schedule start date must be less than schedule end date !!";
 
 }
 

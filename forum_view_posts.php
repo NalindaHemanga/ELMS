@@ -112,6 +112,11 @@ width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-spa
   function buttonClicked(){
     location.href="#openModal"; 
   }    
+//Close function for edit option
+  function closeModel(){
+    document.getElementsByClassName("close")[0].click();
+    window.location.reload()
+  }
 </script>
 
             <!-- Model Window for Reply-->
@@ -146,7 +151,7 @@ width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-spa
                   <input id="reply_id" type="hidden" name="id" value="">
                   <br>              
                   <br>
-                  <input class="button" type="button" id="submit_rep" name="submit_rep" value="Submit" >
+                  <input class="button" type="button" id="submit_rep" name="submit_rep" value="Submit" onclick="closeModel();">
                   <span id ="save_statuss"></span>
                   </form>
                   </div>

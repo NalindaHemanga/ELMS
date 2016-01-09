@@ -10,7 +10,7 @@
 
 	$roles=array_map('trim',$r);
 
-	print_r($roles);
+	
 	
 
 	
@@ -81,14 +81,21 @@
 			</div>
 		<?php } ?>
 
+		<?php 
+
+        if(in_array("Laboratory Administrator", $roles)){ ?>
 			<div  class="dashicon" >
 			<a href="schedule_manager.php">
 			<img src="img/icons/schedule.png" height="150" width="150" />
 			Schedule Manager
 			</a>
-
-
     </div>
+    <?php } ?>
+
+
+		<?php 
+
+        if(in_array("System Administrator", $roles)){ ?>
 
     <div  class="dashicon" >
 			<a href="user_manager_dashboard.php">
@@ -98,6 +105,12 @@
 			</a>
 			</div>
 
+			<?php } ?>
+
+
+		<?php 
+
+        if(in_array("Laboratory Administrator", $roles)){ ?>
 			<div  class="dashicon" >
 			<a href="course_management.php">
 			<img src="img/icons/course.png" height="150" width="150" />
@@ -105,12 +118,20 @@
 			</a>
 			</div>
 
+		<?php } ?>
+
+
+		<?php 
+
+        if(in_array("Laboratory Administrator", $roles)){ ?>
 			<div  class="dashicon" >
 			<a href="supplier_management.php">
 			<img src="img/icons/supplier.png" height="150" width="150" />
 			Supplier Manager
 			</a>
 			</div>
+
+		<?php } ?>
 
 
 

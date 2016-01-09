@@ -1,4 +1,23 @@
 
+<?php
+
+require_once 'core/init.php';
+
+if(isset($_SESSION["logged_in_user"])){
+	$username=$_SESSION["logged_in_user"];
+	$member=Member::search(array("member_email"=>$username));
+$name=$member->getInitials()." ".$member->getSurname();
+	$logged=true;
+}
+else{
+
+	$logged=false;
+}
+
+
+
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +30,7 @@
 <link rel="stylesheet" type="text/css" href="css/homepage.css" />
 <link rel="stylesheet" type="text/css" href="css/btn.css" />
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
+
 <script src="lib/jquery.min.js"></script>
 </head>
 
@@ -25,16 +45,36 @@
 		<div id="logo" >
 					<img src="img/logo.png" width="70px" height="70px" alt="UCSC logo"/>
 		</div>	
+
 		
 		<div id="title">
-					<font face="Agency FB" color="#000000" size="6px" ><b>Electronic Laboratory </b></font></div>
+					<font face="Agency FB" color="#000000" size="6px" ><b>Electronic Laboratory </b></font>
+
 		</div>
+
+		<div style="float:right; padding:27px;">
+				<?php
+				if($logged){ ?>
+				<font face="Calibri" color="black" size="4">You are logged in as <strong><span style="text-transform:uppercase;"><a class="head"><?php echo $name;?></a></span></strong> (<a href="logout.php">Logout</a>)</font>
+				<?php }else{ ?>
+				<font face="Calibri" color="black" size="4">You are not logged in. (<a href="login.php">Login</a>)</font>
+				<?php } ?>  
+			</div>
+
+		</div>
+		
 		
 	
 			 <ul>
 					<li><a class="active" href="#"> Home</a></li>
-					<li><a href="login.php"> Login</a></li>
+					<?php
+					if($logged){ ?>
+					<li><a class="active" href="dashboard.php"> Dashboard</a></li>
+					<?php } ?>  
+					
 			</ul> 
+
+
 		<div id="slider">
 		
 		<div id="photos">

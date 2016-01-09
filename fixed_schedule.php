@@ -162,10 +162,11 @@
                 document.getElementsByClassName("close")[0].click();
                 form.reset();
                 alert(data);
-                location.reload();
+                //location.reload();
             }
             });
 
+         return false;
          
     }
 
@@ -302,7 +303,7 @@ $shedule_id=$_GET["sid"];
 	<div class="form">
 		<a href="#close" title="Close" class="close">X</a>
 
-       	 <form class="form" id="courseForm" onsubmit="return false">
+       	 <form class="form" id="courseForm" onsubmit="return registerCourse();">
 
         		<div class="form_description">
 					<h2>Course Registration</h2>
@@ -318,19 +319,19 @@ $shedule_id=$_GET["sid"];
 
 					<li>
 						<label class="description"for="textbox">Course No</label>
-        				<div><input type="text" class="medium text" name="course_no"></div>
+        				<div><input type="text" class="medium text" name="course_no" required></div>
         			</li>
 
         			<li>
 						<label class="description"for="textbox">Course Name</label>
-        				<div><input type="text" class="medium text" name="course_name"></div>
+        				<div><input type="text" class="medium text" name="course_name" required></div>
         			</li>
 
         		
 					<li>
 
 						<span>
-							<input type="submit" onclick="registerCourse();" class="button" value="      SUBMIT      " />
+							<input type="submit"  class="button" value="      SUBMIT      " />
 
 
 						</span>

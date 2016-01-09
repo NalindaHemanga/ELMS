@@ -34,12 +34,12 @@ function addSchedule(){
 				form.reset();
 				
 				alert(data);
-				location.reload();
+				
 
 			}
 			});
 
-		
+		return false;
 	
 }
 
@@ -124,7 +124,7 @@ function addSchedule(){
 	<div class="form">
 		<a href="#close" title="Close" class="close">X</a>
 
-       	 <form class="form" onsubmit="return false" id="scheduleForm" >
+       	 <form class="form" onsubmit="return addSchedule();" id="scheduleForm" >
 
        	 <div class="form_description">
 					<h2>Create New Schedule</h2>
@@ -173,7 +173,7 @@ function addSchedule(){
         	</li>
 
 						<span>
-							<input type="submit" onclick="addSchedule();" class="button" value="      SUBMIT      "  />
+							<input type="submit"  class="button" value="      SUBMIT      "  />
 
 
 						</span>

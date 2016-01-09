@@ -144,12 +144,12 @@ function openModel(){
 
 					<li>
 						<label class="description"for="textbox">Course No</label>
-        				<div><input type="text" class="medium text" name="course_no"></div>
+        				<div><input type="text" class="medium text" name="course_no" required></div>
         			</li>
 
         			<li>
 						<label class="description"for="textbox">Course Name</label>
-        				<div><input type="text" class="medium text" name="course_name"></div>
+        				<div><input type="text" class="medium text" name="course_name" required></div>
         			</li>
 
         		

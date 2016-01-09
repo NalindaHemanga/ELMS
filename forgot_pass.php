@@ -21,18 +21,12 @@ if($_GET['code']){
 	if($get_email == $db_email && $get_code == $db_code){
 		/*password re-set form*/
 		echo "
-				<html>
-				<head>
-				</head>
-				<body>
 					<form action='pass_reset_complete.php?code=$get_code' method='POST'>
 						Enter a new password<br><input type='password' name='newpass'><br>
 						Re-enter your password<br><input type='password' name='newpass1'><p>
 						<input type='hidden' name='username' value='$db_email'>
 						<input type='submit' value='Update Password!'>
 					</form>
-				</body>
-				</html>
 
 		";
 	}
@@ -42,16 +36,10 @@ if($_GET['code']){
 if(!$_GET['code']){
 
 	echo "
-		<html>
-		<head>
-		</head>
-		<body>
 			<form action='forgot_pass.php' method='POST'>
 				Enter your email<br><input type='email' name='email'><p>
 				<input type='submit' value='Submit' name='submit'>
 			</form>
-		</body>
-		</html>
 
 	";
 

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,12 +21,16 @@
 
 		
 		<div id="header" >
+		
 		<div id="logo" >
-		<img src="img/logo.png" width="70px" height="70px" alt="UCSC logo"/></div>	
+					<img src="img/logo.png" width="70px" height="70px" alt="UCSC logo"/>
+		</div>	
+		
 		<div id="title">
-		<font face="Agency FB" color="#000000" size="6px" ><b>Electronic Laboratory </b></font></div>
+					<font face="Agency FB" color="#000000" size="6px" ><b>Electronic Laboratory </b></font></div>
 		</div>
 		
+	
 			 <ul>
 					<li><a class="active" href="#"> Home</a></li>
 					<li><a href="login.php"> Login</a></li>

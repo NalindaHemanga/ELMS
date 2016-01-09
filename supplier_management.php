@@ -117,7 +117,7 @@ function editSupplier(){
 
 		var dataString = $(form).serialize();
 
-alert(dataString);
+//alert(dataString);
 		$.ajax({
 			type: "POST",
 			url: "edit_supplier.php",
@@ -253,6 +253,41 @@ function supplierEditClicked(){
          	document.getElementById("dynamicInputTelephone").appendChild(newli);
          	counter++;
 	}
+
+}
+
+function supplierDelete(){
+
+	    if(confirm("Are you sure that you want to delete this category? ") == true) {
+		var dataString = "supId="+sup_id;
+		$.ajax({
+			type: "POST",
+			url: "delete_supplier.php",
+			data: dataString,
+
+			success: function(result) {
+//alert(json_data);
+				//form.reset();
+				var div=document.getElementById("dynamicInputTelephone");
+				div.innerHTML="";
+				document.getElementsByClassName("close")[0].click();
+
+				//var data_array = $.parseJSON(json_data);
+				alert(result);
+				location.reload();
+				//closeModal3();
+				//$('#supplier_dropdown').append($('<option>', {
+       				 //	value: data_array["sup_id"],
+        			//	text: data_array["sup_name"],
+        			//	selected:"selected"
+   				// }));
+			}
+			});
+
+		}else {
+
+    		}
+		return false;
 
 }
 </script>
@@ -656,7 +691,11 @@ function supplierEditClicked(){
         	<div class="form_description">
 				<h2>Supplier Details</h2>
 				<div><p>Click on the edit button to alter the details</p>
+
+<div style="float:right;"><a onclick="supplierDelete()"; onmouseover="" style="cursor: pointer;"><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-17-bin.png" height="25" width="20" /></a></div>
+
 <div style="float:right; padding-right:10px;"><a onclick="supplierEditClicked()" onmouseover="" style="cursor: pointer;"><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-151-edit.png" height="25" width="25" /></a></div></div>
+
 			</div>
 
 			<div class="container" style="width:100%;">

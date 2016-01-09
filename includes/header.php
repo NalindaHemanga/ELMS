@@ -5,14 +5,17 @@ require_once 'core/init.php';
 
 if(isset($_SESSION["logged_in_user"])){
 	$username=$_SESSION["logged_in_user"];
+	$member=Member::search(array("member_email"=>$username));
+$name=$member->getInitials()." ".$member->getSurname();
+$r=explode(",",$member->getRoles());
+
+	$roles=array_map('trim',$r);
 }
 else{
 
-	header("location: login.php");
+	header("location: homepage.php");
 }
 
-$member=Member::search(array("member_email"=>$username));
-$name=$member->getInitials()." ".$member->getSurname();
 
 
 ?>

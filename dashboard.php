@@ -1,25 +1,3 @@
-<?php
-	
-	require_once 'core/init.php';
-
-	$username=$_SESSION['logged_in_user'];
-
-	$member=Member::search(["member_email"=>$username]);
-
-	$r=explode(",",$member->getRoles());
-
-	$roles=array_map('trim',$r);
-
-	
-	
-
-	
-
-
-
-
-?>
-
 
 
 
@@ -46,6 +24,9 @@
 			
 
         <?php 
+
+        
+       
 
         if(in_array("Laboratory Administrator", $roles) || in_array("Related Lecturer", $roles)){ ?>
 			<div  class="dashicon" >

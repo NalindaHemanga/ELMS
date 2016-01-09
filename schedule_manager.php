@@ -167,7 +167,7 @@ function addSchedule(){
 
         	<li>
 						<label class="description"for="textbox">Academic Year</label>
-        				<div><input type="text" class="medium text" name="academic_year" value=<?php echo $aca_year; ?> ></div>
+        				<div><input required type="text" class="medium text" name="academic_year" value=<?php echo $aca_year; ?> ></div>
         	</li>
 
         	</li>

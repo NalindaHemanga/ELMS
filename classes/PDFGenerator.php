@@ -23,6 +23,8 @@ class PDFGenerator extends fpdf{
      $this->Cell(0,0,'Transaction Slip',0,0,'C');
 }
 
+
+
 // Page footer
 function Footer()
 {

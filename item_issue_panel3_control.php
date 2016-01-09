@@ -7,6 +7,9 @@ if(isset($_SESSION["basket"]) && isset($_SESSION["items"])){
 	$state=true;
 	DB::getInstance()->startTr();
 	$newTransaction=new Transaction();
+	$rdate=$_POST["expected_return_date"];
+	$member=$_SESSION["member_details"]["id"];
+
 
 	$data=array(
 
@@ -71,7 +74,7 @@ if(isset($_SESSION["basket"]) && isset($_SESSION["items"])){
 		
 		echo "<img src='img/icons/success-icon.png' hight='200' width='200'>";
 		echo "<h2>Transaction Successful !</h2>";
-		echo "<a href='generate_slip.php' target='_blank'><h4>Print Transaction Slip</h4></a>";
+		echo "<a href='generate_slip.php?rdate=$rdate&member=$member' target='_blank'><h4>Print Transaction Slip</h4></a>";
 		echo "</div>";
 
 	}

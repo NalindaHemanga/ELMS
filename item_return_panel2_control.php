@@ -26,7 +26,7 @@ if(count($_POST)>0){
 		
 				echo "<img src='img/icons/success-icon.png' hight='200' width='200'>";
 				echo "<h2>Item Return Successful !</h2>";
-				echo "<a href='item_return_panel1.php' target='_blank'><h4>Back to Item Returns</h4></a>";
+				echo "<a href='item_return_panel1.php'><h4>Back to Item Returns</h4></a>";
 				echo "</div>";
 
 			}
@@ -34,7 +34,7 @@ if(count($_POST)>0){
 				echo "<div style='text-align:center';>";
 				echo "<img src='img/icons/error-icon.png' hight='200' width='200'>";
 				echo "<h2>Item Return Unsuccesssul !</h2>";
-				echo "<a href='item_return_panel1.php' target='_blank'><h4>Back to Item Returns</h4></a>";
+				echo "<a href='item_return_panel1.php'><h4>Back to Item Returns</h4></a>";
 				echo "</div>";
 			}
 

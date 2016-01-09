@@ -1,3 +1,65 @@
+<?php
+
+    require_once 'core/init.php';
+
+
+    if(count($_POST) > 0) {
+
+
+
+    	$supplier_data = array(
+
+		"company" 	 	=> 	$_POST["company"],
+		"email" 		=>	$_POST["email"],
+		"street"	 	=>	$_POST["street"],
+		"line2"			=>	$_POST["line2"],
+		"city" 			=> 	$_POST["city"],
+		"province" 		=>  $_POST["province"],
+		"postal" 		=>	$_POST["postal"],
+		"country" 		=>	$_POST["country"],
+		"telephone"		=>	$_POST["links"]
+
+	);
+
+		$_SESSION['form_data'] = $supplier_data;
+
+
+        header("Location: supplier_registration.php",true,303);
+        die();
+    }
+    else if (isset($_SESSION['form_data'])){
+
+
+
+
+     $new_supplier = new Supplier();
+     print_r($_SESSION["form_data"]);
+     $new_supplier->create($_SESSION["form_data"]);
+
+			if($new_supplier->register()){
+
+				$message = "You have successfully Registered the Supplier !!";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+			}
+
+			else{
+
+
+				$message = "The Supplier Registration was unsuccessful.";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+
+
+			}
+
+
+
+        unset($_SESSION["form_data"]);
+
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -225,12 +287,12 @@ function supplierEditClicked(){
 //<<<<<<< Updated upstream
     			
 //=======
-			$street=$value->getStreet();
-			$line2=$value->getLine2();
-			$city=$value->getCity();
-			$province=$value->getProvince();
-			$postal=$value->getPostal();
-			$country=$value->getCountry();
+			$street 	=	$value->getStreet();
+			$line2 		=	$value->getLine2();
+			$city 		=	$value->getCity();
+			$province 	=	$value->getProvince();
+			$postal 	=	$value->getPostal();
+			$country 	=	$value->getCountry();
 			$nameReplaced = str_replace(" ","%19",$name);
 			$streetReplaced = str_replace(" ","%19",$street);
 			$line2Replaced = str_replace(" ","%19",$line2);
@@ -901,64 +963,4 @@ function supplierEditClicked(){
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-<?php
-
-    require_once 'core/init.php';
-
-
-    if(count($_POST) > 0) {
-
-
-
-    	$supplier_data = array(
-
-		"company" 	 	=> 	$_POST["company"],
-		"email" 		=>	$_POST["email"],
-		"street"	 	=>	$_POST["street"],
-		"line2"			=>	$_POST["line2"],
-		"city" 			=> 	$_POST["city"],
-		"province" 		=>  $_POST["province"],
-		"postal" 		=>	$_POST["postal"],
-		"country" 		=>	$_POST["country"],
-		"telephone"		=>	$_POST["links"]
-
-	);
-
-		$_SESSION['form_data'] = $supplier_data;
-
-
-        header("Location: supplier_registration.php",true,303);
-        die();
-    }
-    else if (isset($_SESSION['form_data'])){
-
-
-
-
-     $new_supplier = new Supplier();
-     print_r($_SESSION["form_data"]);
-     $new_supplier->create($_SESSION["form_data"]);
-
-			if($new_supplier->register()){
-
-				$message = "You have successfully Registered the Supplier !!";
-				echo "<script type='text/javascript'>alert('$message');</script>";
-			}
-
-			else{
-
-
-				$message = "The Supplier Registration was unsuccessful.";
-				echo "<script type='text/javascript'>alert('$message');</script>";
-
-
-			}
-
-
-
-        unset($_SESSION["form_data"]);
-
-    }
-
-?>
 

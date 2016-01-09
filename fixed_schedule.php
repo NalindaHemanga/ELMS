@@ -1,6 +1,46 @@
 <?php
 
-require_once 'core/init.php';
+    require_once 'core/init.php';
+        
+        if(count($_POST) > 0) {
+
+            
+            
+            $course_data = array(
+
+                "course_id"     =>  null,
+                "course_no"     =>  $_POST["course_no"],
+                "course_name"   =>  $_POST["course_name"],
+            );
+
+            $_SESSION['form_data'] = $course_data;
+
+
+            header("Location: fixed_schedule.php",true,303);
+            die();
+        }
+        
+        else if (isset($_SESSION['form_data'])){
+
+             $new_course = new Course();
+             $new_course->create($_SESSION["form_data"]);
+
+            if($new_course->addCourse()){
+
+                $message = "You have successfully Registered the Course !!";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+            }
+
+            else{
+
+                $message = "The Course Registration was unsuccessful.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+
+
+            }
+                unset($_SESSION["form_data"]);
+
+        }
 ?>
 
 
@@ -101,15 +141,32 @@ require_once 'core/init.php';
 
             success: function(data) {
 
-            
-                
-                
-
-
             }
             });
 
         
+    }
+
+    function registerCourse(){
+
+        var form=document.getElementById("courseForm");
+
+        var dataString = $(form).serialize();
+
+         $.ajax({
+            type: "POST",
+            url: "remote_course_registration.php",
+            data: dataString,
+
+            success: function(data) {
+                document.getElementsByClassName("close")[0].click();
+                form.reset();
+                alert(data);
+                location.reload();
+            }
+            });
+
+         
     }
 
 
@@ -245,7 +302,7 @@ $shedule_id=$_GET["sid"];
 	<div class="form">
 		<a href="#close" title="Close" class="close">X</a>
 
-       	 <form class="form" enctype="multipart/form-data" method="POST" >
+       	 <form class="form" id="courseForm" onsubmit="return false">
 
         		<div class="form_description">
 					<h2>Course Registration</h2>
@@ -261,19 +318,19 @@ $shedule_id=$_GET["sid"];
 
 					<li>
 						<label class="description"for="textbox">Course No</label>
-        				<div><input type="text" class="medium text" name="textbox"></div>
+        				<div><input type="text" class="medium text" name="course_no"></div>
         			</li>
 
         			<li>
 						<label class="description"for="textbox">Course Name</label>
-        				<div><input type="text" class="medium text" name="textbox"></div>
+        				<div><input type="text" class="medium text" name="course_name"></div>
         			</li>
 
         		
 					<li>
 
 						<span>
-							<input type="submit" class="button" value="      SUBMIT      " />
+							<input type="submit" onclick="registerCourse();" class="button" value="      SUBMIT      " />
 
 
 						</span>

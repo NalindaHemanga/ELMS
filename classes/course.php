@@ -3,6 +3,7 @@
 		
 		private $course_no;
 		private $course_name;
+		private $course_id;
 
 		public function __construct(){
 

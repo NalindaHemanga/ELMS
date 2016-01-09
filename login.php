@@ -92,7 +92,7 @@
 					<li>
 						
         				<input type="email" class="medium text" name="username" placeholder=" E-Mail Address" required="required" 
-                                  style=" font-weight:bold; color: #000000;"/>
+                                  style="color: #000000;"/>
         			</li>
 
         			<li>

@@ -22,20 +22,14 @@ if(count($_POST)>0){
 		
 
 			if($tran->finishReturn($returned[$i],$condition[$i])){
-				echo "<div style='text-align:center';>";
-		
-				echo "<img src='img/icons/success-icon.png' hight='200' width='200'>";
-				echo "<h2>Item Return Successful !</h2>";
-				echo "<a href='item_return_panel1.php'><h4>Back to Item Returns</h4></a>";
-				echo "</div>";
+				
+				$status=true;
+				
 
 			}
 			else{
-				echo "<div style='text-align:center';>";
-				echo "<img src='img/icons/error-icon.png' hight='200' width='200'>";
-				echo "<h2>Item Return Unsuccesssul !</h2>";
-				echo "<a href='item_return_panel1.php'><h4>Back to Item Returns</h4></a>";
-				echo "</div>";
+				$status=false;
+				
 			}
 
 
@@ -44,6 +38,22 @@ if(count($_POST)>0){
 	
 	}
 
+	if($status){
+			echo "<div style='text-align:center';>";
+			echo "<img src='img/icons/success-icon.png' hight='200' width='200'>";
+			echo "<h2>Item Return Successful !</h2>";
+			echo "<a href='item_return_panel1.php'><h4>Back to Item Returns</h4></a>";
+			echo "</div>";
+
+	}else{
+
+		echo "<div style='text-align:center';>";
+		echo "<img src='img/icons/error-icon.png' hight='200' width='200'>";
+		echo "<h2>Item Return Unsuccesssul !</h2>";
+		echo "<a href='item_return_panel1.php'><h4>Back to Item Returns</h4></a>";
+		echo "</div>";
+
+	}
 
 }
 

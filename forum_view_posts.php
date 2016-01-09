@@ -6,7 +6,6 @@
   $name=$member->getInitials()." ".$member->getSurname();
   $roles = $member->getRoles();
   $rolesArray=explode(",", $roles);
-  //print_r($rolesArray);
 
 //get the entered details of forum discussions and save in a session variable
   if(count($_GET)>0){
@@ -16,49 +15,76 @@
       $_SESSION["des"]=$_SESSION["post"]->get_Description();
       $_SESSION["pst_usr"]=$_SESSION["post"]->get_Posteduser();
       $_SESSION["pst_date"]=$_SESSION["post"]->get_Postdate();
-      //print_r($post);
     }
-    $new_id=$_SESSION["id"];
- ?>
+//Put into variable to ease to use
+$new_id=$_SESSION["id"];
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Forum Reply</title>
-<link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
-<link rel="stylesheet" type="text/css" href="css/forumtable.css" />
-<link rel="stylesheet" type="text/css" href="css/content.css" />
-<link rel="stylesheet" type="text/css" href="css/replypost.css" />
-<link rel="stylesheet" type="text/css" href="css/btn.css" />
-<link rel="stylesheet" type="text/css" href="css/wrapper.css" />
-<link rel="stylesheet" type="text/css" href="css/forum_styles.css" />
-<link rel="stylesheet" type="text/css" href="css/form.css" />
-
-
-
-
+  <title>Forum Reply</title>
+  <link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
+  <link rel="stylesheet" type="text/css" href="css/forumtable.css" />
+  <link rel="stylesheet" type="text/css" href="css/content.css" />
+  <link rel="stylesheet" type="text/css" href="css/replypost.css" />
+  <link rel="stylesheet" type="text/css" href="css/btn.css" />
+  <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
+  <link rel="stylesheet" type="text/css" href="css/forum_styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/form.css" />
 </head>
+
 <body>
+
 <script src="lib/jquery.min.js"></script>
+  <div id="wrapper">
+    <?php include "includes/header.php" ?>
+    <?php include "includes/leftnav.php" ?>
 
-    <div id="wrapper">
-        <?php include "includes/header.php" ?>
+    <div id="contentwrap">
+      <div id="content">
 
-        <?php include "includes/leftnav.php" ?>
-        <div id="contentwrap">
-        <div id="content">
 <?php
   ob_start();
 
-  
   $x=0;
   $link_post_del='';
-//Checked the logged user is an admin or not
+  $link_update_post='';
+
+//Checked the logged user is an admin and also posted user
   foreach ($rolesArray as $role) {
     $role=str_replace(" ","%19%",$role);
-    if ($role=='%19%System%19%Administrator%19%'){
+    $allposts = forumReply::getallForumReply();
+    if ($role=='%19%System%19%Administrator%19%' && $name==$_SESSION["pst_usr"]){
       $x=1;
       $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
+      $link_update_post="<a id='delete_link' onClick='javascript:showeditPost(this);' href=\"#openeditpostModal\" class='links'>Edit</a>";
+      //Check whether there are replied
+      foreach ($allposts as $key =>$value) {
+        $post_id=$value->get_Postid();
+        if ($post_id==$_SESSION["id"]){
+          $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
+          $link_update_post='';
+          break;
+        }
+      }
+    } 
+
+//Check the logged user is only the admin but not the posted user
+    else if ($role=='%19%System%19%Administrator%19%' && $name!=$_SESSION["pst_usr"]){
+      $x=1;
+      $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
+      $link_update_post="";
+
+      //Check whether there are replied
+      foreach ($allposts as $key =>$value) {
+        $post_id=$value->get_Postid();
+        if ($post_id==$_SESSION["id"]){
+          $link_post_del='';
+          $link_update_post='';
+          break;
+        }
+      }
     }
    }
 
@@ -68,27 +94,36 @@
       $allposts = forumReply::getallForumReply();
       //define the delete variable to delete post. this will unavailable if foreach execute
       $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
+      $link_update_post="<a id='delete_link' onClick='javascript:showeditPost(this);' href=\"#openeditpostModel\" class='links'>Edit</a>";
       //check availabilty of foriegn key post_id (table forum_reply) of primary key post id (table forum_post)
       foreach ($allposts as $key =>$value) {
         $post_id=$value->get_Postid();
         if ($post_id==$_SESSION["id"]){
           $link_post_del='';
+          $link_update_post='';
           break;
         }         
       }    
      }
      
-   
+echo "<script type='text/javascript'>
+              function showeditPost(element){
+                var e_post = element.parentNode;
+                var rep = e_post.querySelector('div');
+                var rep_content = document.getElementById(rep.id);
+                var x = rep_content.innerHTML;
+                document.getElementById('post_des').value = x;
+                document.getElementById('postedit_id').value=e_post.id;
+                document.getElementById('openeditpostModal').showModal();
+              }
+            </script>"; 
     
     
-    
-  
-  
 // Print the discussion topic
 echo "<div class=\"datagrid\"><table>
 <tbody><tr><td style=\"color:black; max-width: 600px;\"><b>Discussion Topic : <span style=\"width: 750px;color:black;font-size:120%;word-wrap: break-word;width: 750px;text-overflow: ellipsis; white-space: pre-line; text-align:justify;\">".$_SESSION["title"]. "</span></b></td><td>Posted by :".$_SESSION["pst_usr"]."</td></tr>
-<tr class=\"alt\"><td style=\"color:black;font-size:110%; max-width: 600px; \"><p style=\" word-wrap: break-word;
-width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-space: pre-line; text-align:justify;\"> ".$_SESSION["des"]."</p><br>$link_post_del</td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
+<tr class=\"alt\"><td style=\"color:black;font-size:110%; max-width: 600px; \"><div id='$new_id' style=\"  word-wrap: break-word;
+width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-space: pre-line; text-align:justify;\"> <div id='$new_id+1' >".$_SESSION["des"]."</div><br>$link_post_del"." "."$link_update_post</div></td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
 </tbody>
 </table></div>"
 
@@ -136,6 +171,25 @@ width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-spa
               </div>
             </div>
 
+            <!-- Model Window for Edit Discussion -->
+            <div id="openeditpostModal" class="modalDialog">
+              <div>
+                <div class="form">
+                <a href="#close" title="Close" class="close">X</a>
+                  <form class="form" method="post">
+                  <input id="postedit_id" type="hidden" name="id" value="">
+                  Description : 
+                  <br><br>
+                  <textarea id="post_des" style="vertical-align: middle;" rows="10" cols="86" name="description" value="" required></textarea>
+                  <br>              
+                  <br>
+                  <input id="submit_discussion" class="button" type="submit" name="submit_post" value="Submit" onclick="closeModel();" >
+                  <span id ="save_statuss"></span>
+                  </form>
+                  </div>
+              </div>
+            </div>
+<script type="text/javascript" src="js/ajax_update_discussion.js"></script>
 
 
             <!-- Model Window for edit option -->

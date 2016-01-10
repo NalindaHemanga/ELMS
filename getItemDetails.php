@@ -1,5 +1,13 @@
 <?php
-require 'core/init.php';
+require_once 'core/init.php';
+
+	$member_role=$_SESSION['roles'];
+	
+	if(in_array("Laboratory Administrator", $member_role) || in_array("Related Lecturer", $member_role)){
+
+	}else{
+		header('location:restricted_page.php');
+	}
 
 $item_id = $_GET["item_id"];
 $cat_label = $_GET["cat_label"];

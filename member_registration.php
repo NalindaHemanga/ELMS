@@ -7,10 +7,10 @@
 
     if(count($_POST) > 0) {
 
-    	$salt = '5&JDDlwz%Rwh!t2Yg-Igae@QxPzFTSId';
-        $enc_pass  = md5($salt.$_POST["password"]);
+    	$salt = '5&JDDlwz%Rwh!t2Yg-Igae@QxPzFTSId';    //Salt is for encrypting the password.
+        $enc_pass  = md5($salt.$_POST["password"]);    //Encrypted password is easy to decrypt if salt is not used when encryption is done
 
-        if($_POST["period"] != "NULL") {
+        if($_POST["period"] != "NULL") {              //Validity of the member 
 			$validity	= date_format(date_add(DateTime::createFromFormat('Y-m-d', date("Y-m-d")),date_interval_create_from_date_string($_POST["period"])),"Y-m-d");
 		}
 		else{
@@ -29,7 +29,7 @@
 			"remarks"	=>	'Borrow Allowed'
 
 	);
-    	$temp_path=$_FILES["picture"]["tmp_name"];
+    	$temp_path=$_FILES["picture"]["tmp_name"];                            //Rename profile picture's name into NIC and move it into img folder
     	$img_type = pathinfo($_FILES["picture"]["name"],PATHINFO_EXTENSION);
 
 
@@ -52,7 +52,7 @@
           */
 
 
-     $new_member = new Member();
+     $new_member = new Member();                      //Creates a new Member
      $new_member->create($_SESSION["form_data"]);
 
 	if($new_member->register()){

@@ -117,7 +117,7 @@
 
 					<div>
 		
-		<center><a href='forgot_pass.php' style=" font-weight: bold;color: #000000;">Forgot Password?</a></center>
+		<center><a href='fforgot_pass.php' style=" font-weight: bold;color: #000000;">Forgot Password?</a></center>
 		</div>
 
 

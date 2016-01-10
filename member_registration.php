@@ -40,18 +40,6 @@
         $_SESSION['form_data'] = $member_data;
 
 
-        //header("Location: member_registration.php",true,303);
-        //die();
-    //}
-   // else if (isset($_SESSION['form_data'])){
-
-
-        /*
-            Put database-affecting code here.
-
-          */
-
-
      $new_member = new Member();                      //Creates a new Member
      $new_member->create($_SESSION["form_data"]);
 

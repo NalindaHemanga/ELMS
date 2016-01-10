@@ -19,7 +19,7 @@
 
 function changeInput(){
 
-	var combo = $("<select></select>").attr("id", "membertype").attr("name", "membertype").attr("class","small select");
+	var combo = $("<select></select>").attr("id", "txtbx").attr("name", "membertype").attr("class","small select");
 
    
     combo.append("<option>System Administrator</option>");
@@ -47,11 +47,11 @@ function changeInput(){
 	}
 	else if(x=='2'){
 		document.getElementById("searchinput").innerHTML = "";
-			 document.getElementById("searchinput").innerHTML = "<input id='nic' type='text' class='small text' name='nic_no' required='required' pattern='[0-9]{9}'' title='Enter NIC number without the character at the end' placeholder='Enter NIC No'/>";
+			 document.getElementById("searchinput").innerHTML = "<input id='txtbx' type='text' class='small text' name='nic_no' required='required' pattern='[0-9]{9}'' title='Enter NIC number without the character at the end' placeholder='Enter NIC No'/>";
 	}
 	else if(x=='3'){
 		document.getElementById("searchinput").innerHTML = "";
-			 document.getElementById("searchinput").innerHTML = "<input type='email' class='small text' name='email' required='required' placeholder='Enter E-Mail'/>";
+			 document.getElementById("searchinput").innerHTML = "<input id='txtbx' type='email' class='small text' name='email' required='required' placeholder='Enter E-Mail'/>";
 	}
     
 }
@@ -67,7 +67,8 @@ function addNewMember(){
 function loadXMLDoc()
 {
 var searchType = document.getElementById("searchtype").value;
-var searchInput = document.getElementById("membertype").value;
+var searchInput = document.getElementById("txtbx").value;
+
 var xmlhttp;
 if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -86,6 +87,12 @@ xmlhttp.onreadystatechange=function()
   }
  xmlhttp.open("GET", "member_search.php?searchType=" + searchType + "&searchInput=" + searchInput, true);
         xmlhttp.send();
+
+}
+
+function memberClicked(){
+
+alert("ok");
 
 }
 

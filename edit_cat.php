@@ -1,4 +1,6 @@
 <?php
+
+
 //require "core/init.php";
 $dbhost = "localhost";
 $dbuser = "root";

@@ -1,6 +1,15 @@
 <?php
 
 	require_once 'core/init.php';
+
+	$member_role=$_SESSION['roles'];
+	
+	if(in_array("Laboratory Administrator", $member_role)){
+
+	}else{
+		header('location:restricted_page.php');
+	}
+	
 	$searchValue=$_GET["searchVal"];
 	$new_supplier=Supplier::search(["supplier_email"=>$searchValue]);
 

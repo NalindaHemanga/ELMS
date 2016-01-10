@@ -7,6 +7,7 @@
 	$newpass1 = $_POST['newpass1'];
 	$post_email = $_POST['username'];
 	$code = $_GET['code'];
+        
 
 
 	if($newpass == $newpass1){
@@ -18,20 +19,28 @@
 
 		/*update database password column to new password*/
 
-		$quary = "UPDATE member SET member_password='$enc_pass' WHERE member_email='$post_email'";
+		$quary = "UPDATE member SET member_password='$enc_pass' WHERE member_email='$post_email';";
 		DB::getInstance()->directUpdate($quary);
+               
+
 
 		/*reset the database pass_reset column to 0*/
-		$quary1 = "UPDATE member SET pass_reset='0' WHERE member_email='$post_email'";
+		$quary1 = "UPDATE member SET pass_reset='0' WHERE member_email='$post_email';";
 		DB::getInstance()->directUpdate($quary1);
 
 
-		echo "Your password has been updated.<p><a href='http://elms.16mb.com/login.php'>Click here to go back</a>";
+		//echo "Your password has been updated.<p><a href='http://elms.16mb.com/login.php'>Click here to go back</a>";
+                echo '<script type="text/javascript">alert("Password has been updated");
+		location.href="http://elms.16mb.com/login.php";</script>';
+
 
 	}
 	else{
 
-		echo "Password must match <a href='forgot_pass.php?code=$code&email=$post_email'>Click here to go back</a>";
+		//echo "Password must match <a href='fforgot_pass.php?code=$code&email=$post_email'>xxxxx</a>";
+                echo '<script type="text/javascript">alert("Password is not matched. Try again with sent link...!!!!");
+		location.href="http://elms.16mb.com/login.php";</script>';
+		
 	}
 
-?>
+?>							

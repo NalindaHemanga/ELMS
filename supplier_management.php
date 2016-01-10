@@ -78,14 +78,14 @@
 <script src="lib/jquery.min.js"></script>
 
 <script>
-/*load modal window*/
+
 function openModel(){
 	location.href="#openModal";
 }
 
 var counter = 0;
 
-/*pop-up add telephone number using this function*/
+
 	function addInput(divName){
 
 
@@ -99,7 +99,7 @@ var counter = 0;
          		 counter++;
 
  }
-/*remove telepone number link*/
+
     function removeInput(divName,liid) {
 
   		var d = document.getElementById(divName);
@@ -110,7 +110,6 @@ var counter = 0;
 
 }
 
-/*pop-up supplier edit form*/
 function editSupplier(){
 //alert("OK");
 
@@ -151,7 +150,7 @@ function editSupplier(){
 
 
 }
-/*this function use to add new supplier get details from html form and update the database*/ 
+
 
 function registerSupplier(){
 
@@ -174,12 +173,15 @@ function registerSupplier(){
 
 				var data_array = $.parseJSON(json_data);
 				alert(data_array['message']);
+//alert("OK");
+				//location.reload();
 				closeModal3();
 				$('#supplier_dropdown').append($('<option>', {
        				 	value: data_array["sup_id"],
         				text: data_array["sup_name"],
         				selected:"selected"
    				 }));
+
 			}
 			});
 
@@ -191,7 +193,7 @@ function registerSupplier(){
 	}
 
 
-/*this function is process after clicking supplier name on the supplier view table*/
+
 function supplierClicked(id,name1,email,street1,line21,city1,province1,postal,country1,telephoneJson){
 	
 	telephoneJson = telephoneJson.replace(/%19/g, '"');
@@ -229,7 +231,7 @@ function supplierClicked(id,name1,email,street1,line21,city1,province1,postal,co
 
 	location.href="#openModal2";
 }
-/*this function process after clicking edit button*/
+
 function supplierEditClicked(){
 //alert(line2);
 	document.getElementById("companyName").innerHTML="<input id=\"name\" type=\"text\" class=\"medium text\" name=\"company\" required=\"required\" value=\""+name+"\">";
@@ -256,7 +258,7 @@ function supplierEditClicked(){
 	}
 
 }
-/*this function process after clicking delete button*/
+
 function supplierDelete(){
 
 	    if(confirm("Are you sure that you want to delete this category? ") == true) {

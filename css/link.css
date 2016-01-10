@@ -1,0 +1,7 @@
+a.changeBlue{ /* default link color */
+     color: #0000FF;
+}
+a.changeBlue:hover { /* change to blue on mouseover */
+     color: #800080;
+     cursor:pointer
+}

@@ -5,6 +5,7 @@ if(count($_GET) > 0){
 $search_methode=$_GET['searchType'];
 $search_term=$_GET['searchInput'];
 
+
 if($search_methode=="1"){
 	switch($search_term){
 
@@ -30,6 +31,17 @@ foreach ($results as $result){
 	}
 }
 
+elseif($search_methode=="2"){
+
+	$members[]= Member::search(array("member_nic" =>$search_term));
+//print_r($members);
+}
+
+elseif($search_methode=="3"){
+
+	$members[]= Member::search(array("member_email" =>$search_term));
+//print_r($members);
+}
 
 //print_r($members);
 //echo $search_methode;
@@ -37,8 +49,10 @@ foreach ($results as $result){
 
 echo "<br><br><div class='datagrid'><table>
 	<thead><tr><th>Initials</th><th>Surname</th><th>Email</th><th>Remarks</th></tr></thead>";
-
+$x=0;
 foreach ($members as $member){
+	if(isset($member)){
+	$x = 1;
 	$initials = $member->getInitials();
 	$surname = $member->getSurname();
 	$email = $member->getEmail();
@@ -50,11 +64,13 @@ foreach ($members as $member){
         </tr>
         </tbody>
         ";
-
+	}else{}
 
 }
-
-
+if($x==0){
+echo "</table>No results to display</div>";
+}else{
 echo "</table></div>";
+}
 }
 ?>

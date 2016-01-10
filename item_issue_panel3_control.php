@@ -73,7 +73,12 @@ if(isset($_SESSION["basket"]) && isset($_SESSION["items"])){
 
 	}
 
-	if($state){
+	if(strtotime($rdate)>=strtotime(date("m/d/Y")))
+		$state2=true;
+	else
+		$state2=false;
+
+	if($state && $state2){
 		DB::getInstance()->commitTr();
 		$_SESSION["temp_basket"]=$_SESSION["basket"];
 		unset($_SESSION["basket"]);
@@ -93,7 +98,7 @@ if(isset($_SESSION["basket"]) && isset($_SESSION["items"])){
 		echo "<div style='text-align:center';>";
 		echo "<img src='img/icons/error-icon.png' hight='200' width='200'>";
 		echo "<h2>Transaction Unsuccesssul !</h2>";
-		echo "<a href='item_issue_panel2.php' target='_blank'><h4><< Back to item transaction</h4></a>";
+		echo "<a href='item_issue_panel2.php'><h4><< Back to item transaction</h4></a>";
 		echo "</div>";
 
 	}

@@ -116,14 +116,13 @@
 
 					<div>
 		
-<<<<<<< HEAD
+
 		<center><a href='fforgot_pass.php' style=" font-weight: bold;color: #000000;">Forgot Password?</a></center>
 		</div>
-=======
-						<center><a href='forgot_pass.php' style=" font-weight: bold;color: #000000;">Forgot Password?</a></center>
-		
+
+						
 					</div>	
->>>>>>> d6547a848a4f46bc03725c3de7632c44c5267c3c
+
 
 
 

@@ -52,11 +52,12 @@ $new_id=$_SESSION["id"];
   $link_update_post='';
 
 //Checked the logged user is an admin and also posted user
-  foreach ($rolesArray as $role) {
-    $role=str_replace(" ","%19%",$role);
+  foreach ($rolesArray as $m_role) {
+    $m_role=str_replace(" ","%19%",$m_role);
     $allposts = forumReply::getallForumReply();
-    if ($role=='%19%System%19%Administrator%19%' && $name==$_SESSION["pst_usr"]){
+    if ($m_role=='%19%System%19%Administrator%19%' && $name==$_SESSION["pst_usr"]){
       $x=1;
+
       $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
       $link_update_post="<a id='delete_link' onClick='javascript:showeditPost(this);' href=\"#openeditpostModal\" class='links'>Edit</a>";
       //Check whether there are replied
@@ -68,11 +69,13 @@ $new_id=$_SESSION["id"];
           break;
         }
       }
-    } 
+    }
+
 
 //Check the logged user is only the admin but not the posted user
-    else if ($role=='%19%System%19%Administrator%19%' && $name!=$_SESSION["pst_usr"]){
+    else if ($m_role=='%19%System%19%Administrator%19%' && $name!=$_SESSION["pst_usr"]){
       $x=1;
+
       $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
       $link_update_post="";
 
@@ -80,7 +83,7 @@ $new_id=$_SESSION["id"];
       foreach ($allposts as $key =>$value) {
         $post_id=$value->get_Postid();
         if ($post_id==$_SESSION["id"]){
-          $link_post_del='';
+          $link_post_del="<a id='delete_link' href=\"forum_posts_delete.php?pid=".$_SESSION["id"]."'\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
           $link_update_post='';
           break;
         }
@@ -124,7 +127,7 @@ echo "<div class=\"datagrid\"><table>
 <thead><tr><th width=\"80%\" ><span style=\"color:black;font-size:100%;\"><b>Discussion Topic :</b></span></br><hr><span style='font-size:90%;text-align:justify;'>".$_SESSION["title"]. "</span><br><br></th><th width=\"20%\"><span style=\"color:black;font-size:120%;\">Posted by :</span>".$_SESSION["pst_usr"]."</th></tr></thead>";
 
 echo "<tbody>
-<td><div id='$new_id'><div  style='text-align:justify;'  id='$new_id+1' >".$_SESSION["des"]."</div><br>$link_post_del"." "."$link_update_post</div></td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
+<td><div id='$new_id'><div  style='text-align:justify;'  id='$new_id+100' >".$_SESSION["des"]."</div><br>$link_post_del"." "."$link_update_post</div></td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
 <tr class=\"alt\">
 </tbody>";
 

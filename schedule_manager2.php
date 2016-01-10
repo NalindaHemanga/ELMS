@@ -26,14 +26,14 @@
 			</div>
 
 			
-
+<!--
 			<div  class="dashicon" >
 			<a href="#">
 			<img src="img/icons/dynamic-schedule.png" height="150" width="150" />
 			Add Dynamic Time Slot
 			</a>
 			</div>
-			
+	-->		
 			
         </div>
         </div>

@@ -72,6 +72,30 @@
 
 <script>
 
+function deleteCourse(id){
+
+
+if (confirm("Are you sure that you want to delete this course? ")){
+	var dataString="cid="+id
+	$.ajax({
+			type: "POST",
+			url: "delete_course.php",
+			data: dataString,
+
+			success: function(data) {
+
+	
+				
+				alert(data);
+				location.reload();
+				
+
+			}
+			});
+
+}
+
+}
 
 
 function openModel(){
@@ -110,7 +134,7 @@ function openModel(){
     			$name=$value->getCourseName();
     			
 		    echo "
-		        <tbody><tr><td>$number</td><td>$name</td><td><div style='text-align:center;'><button style='width:10em;''>   <div><img src='img/icons/glyphicons_free/glyphicons/png/glyphicons-151-edit.png' width='13' height='13' /><font face='Calibri' color='black' size='4'> Edit </font></div></button> <button style='width:10em;'>   <div><img src='img/icons/glyphicons_free/glyphicons/png/glyphicons-17-bin.png' width='13' height='15' /><font face='Calibri' color='black' size='4'> Delete </font></div></button><div></td></tr>
+		        <tbody><tr><td>$number</td><td>$name</td><td><div style='text-align:center;'><button style='width:10em;''>   <div><img src='img/icons/glyphicons_free/glyphicons/png/glyphicons-151-edit.png' width='13' height='13' /><font face='Calibri' color='black' size='4'> Edit </font></div></button> <button id='$id' onclick='deleteCourse(this.id)' style='width:10em;'>   <div><img src='img/icons/glyphicons_free/glyphicons/png/glyphicons-17-bin.png' width='13' height='15' /><font face='Calibri' color='black' size='4'> Delete </font></div></button><div></td></tr>
 		        <tr class=\"alt\">
 		        </tr>
 		        </tbody>

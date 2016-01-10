@@ -19,7 +19,7 @@
 
 function changeInput(){
 
-	var combo = $("<select></select>").attr("id", "membertype").attr("name", "membertype").attr("class","small select");
+	var combo = $("<select></select>").attr("id", "membertype").attr("name", "membertype").attr("class","small select"); //This loads combo box or textbox according to the selection
 
    
     combo.append("<option>System Administrator</option>");
@@ -35,28 +35,28 @@ function changeInput(){
     combo.append("<option>Temporary Member</option>");
     
 
-	var x = document.getElementById("searchtype").value;
+	var x = document.getElementById("searchtype").value; //assigns 1st dropdown menu's value to X
 	if(x=='0'){
-		document.getElementById("searchinput").innerHTML = "";
+		document.getElementById("searchinput").innerHTML = ""; //Get value selected in dropdown menu or inserted in the text area
 
 	}
 
-	if(x=='1'){
+	if(x=='1'){                    //if 1st dropdown menu's selection is 1st choise, displays combo box
 			 document.getElementById("searchinput").innerHTML = "";
 			 $("#searchinput").append(combo);
 	}
-	else if(x=='2'){
+	else if(x=='2'){               //if 1st dropdown menu's selection is 2nd choise, displays textbox
 		document.getElementById("searchinput").innerHTML = "";
 			 document.getElementById("searchinput").innerHTML = "<input id='nic' type='text' class='small text' name='nic_no' required='required' pattern='[0-9]{9}'' title='Enter NIC number without the character at the end' placeholder='Enter NIC No'/>";
 	}
-	else if(x=='3'){
+	else if(x=='3'){              //if 1st dropdown menu's selection is 3rd choise, displays textbox
 		document.getElementById("searchinput").innerHTML = "";
 			 document.getElementById("searchinput").innerHTML = "<input type='email' class='small text' name='email' required='required' placeholder='Enter E-Mail'/>";
 	}
     
 }
 
-function addNewMember(){
+function addNewMember(){        //Gives the location of the model window
 
 	location.href="#openModal";
 
@@ -67,14 +67,14 @@ function addNewMember(){
 function loadXMLDoc()
 {
 var searchType = document.getElementById("searchtype").value;
-var searchInput = document.getElementById("membertype").value;
+var searchInput = document.getElementById("membertype").value;      
 var xmlhttp;
 if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  {                                      // code for IE7+, Firefox, Chrome, Opera, Safari
   xmlhttp=new XMLHttpRequest();
   }
 else
-  {// code for IE6, IE5
+  {                                     // code for IE6, IE5
   xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
 xmlhttp.onreadystatechange=function()
@@ -84,7 +84,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("searchResult").innerHTML=xmlhttp.responseText;
     }
   }
- xmlhttp.open("GET", "member_search.php?searchType=" + searchType + "&searchInput=" + searchInput, true);
+ xmlhttp.open("GET", "member_search.php?searchType=" + searchType + "&searchInput=" + searchInput, true);    //Send a request to member_search.php with related search input 
         xmlhttp.send();
 
 }
@@ -106,14 +106,14 @@ xmlhttp.onreadystatechange=function()
         </div>
 
         <div style="text-align:right;width:28%;display:inline-block;vertical-align:top;">
-			<button style="width:15em;background:#43D14C;" onclick=addNewMember();>   <div><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-191-circle-plus.png" width="13" height="13" /><font face="Calibri" color="black" size="4"> Add new member </font></div></button>
+			<button style="width:15em;background:#43D14C;" onclick=addNewMember();>   <div><img src="img/icons/glyphicons_free/glyphicons/png/glyphicons-191-circle-plus.png" width="13" height="13" /><font face="Calibri" color="black" size="4"> Add new member </font></div></button>    //Creates a button that will open a model window for registering a new member.
 		</div>	
 
 		<div  style="text-align:center;">
 		 
 
 				
-								<select id='searchtype' class="small select" name="dropdown" onchange="changeInput();"> 
+								<select id='searchtype' class="small select" name="dropdown" onchange="changeInput();">  //Creates a dropdown menue with 3 options for searching
 									<option value="0" selected="selected" >Select Search Method</option>
 									<option value="1" >Search by Member Type</option>
 									<option value="2" >Search by Member NIC</option>
@@ -136,7 +136,7 @@ xmlhttp.onreadystatechange=function()
         </div>
 
 <!-- ///////////////////////////////////////--------openModal-----////////////////////////////////////////////////////////////////////// -->
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////////For Registering a new member//////////////////////////////////////////////////////////////////////////// -->
 
 <div id="openModal" class="modalDialog">
 	<div>
@@ -316,7 +316,7 @@ xmlhttp.onreadystatechange=function()
 
 <script  type="text/javascript">
 
-$("form#supplieAdd").submit(function(){
+$("form#supplieAdd").submit(function(){         //Send collected member registration data to member_registration.php
 
     var formData = new FormData($(this)[0]);
 
@@ -342,7 +342,7 @@ $("form#supplieAdd").submit(function(){
     return false;
 });
 
-function validatePassword(){
+function validatePassword(){                         //Check whether two passwords matches
 var pass2=document.getElementById("pass").value;
 var pass1=document.getElementById("conpass").value;
 if(pass1!=pass2)
@@ -353,7 +353,7 @@ else
 
 //empty string means no validation error
 }
-function autoType() {
+function autoType() {                          //Make password the NIC no unless it is changed later
 	
     var t1=document.getElementById("nic");
     var p1=document.getElementById("pass");
@@ -365,7 +365,7 @@ function autoType() {
 
 }
 
-function resetText(){
+function resetText(){                   //Reset typed data
 
 document.getElementById("pass").value="";
 document.getElementById("conpass").value="";
@@ -374,7 +374,7 @@ document.getElementById("conpass").value="";
 
 }
 
-function checkCheckBoxGroup(groupName) {
+function checkCheckBoxGroup(groupName) {          //Check Whether atleast 1 user role is selected
   var g = document.getElementsByName(groupName);
 
   for(var i = 0;i<g.length;i++) {

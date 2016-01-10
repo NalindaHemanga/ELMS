@@ -125,6 +125,8 @@ class Supplier{
 
 	}
 
+/*this function use to register supplier affter calling this function all the data go to the database*/
+
 	public function register(){
 
 		$row = array(
@@ -137,30 +139,24 @@ class Supplier{
 			"supplier_province" => $this->province,
 			"supplier_postal" => $this->postal,
 			"supplier_country" => $this->country
-
-
-
-			);
-
-
+		);
 
 
 		if(DB::getInstance()->insertRow("supplier",$row)){
 
-
 			if(count($this->telephone)>0){
-			$last_id=DB::getInstance()->getLastId();
-			foreach ($this->telephone as $key => $value) {
-				$row2=array(
-					"supplier_id" => $last_id,
-					"telephone"		=> $value
+				$last_id=DB::getInstance()->getLastId();
+				foreach ($this->telephone as $key => $value) {
+					$row2=array(
+						"supplier_id" => $last_id,
+						"telephone"		=> $value
 
 
-					);
+						);
 
-				DB::getInstance()->insertRow("supplier_telephone",$row2);
+					DB::getInstance()->insertRow("supplier_telephone",$row2);
 
-			}
+				}
 			}
 			return true;
 		}
@@ -171,6 +167,8 @@ class Supplier{
 
 	}
 
+/*this is use get all supplier details fro database*/
+
 	public static function getAllSuppliers(){
 
 		$result=DB::getInstance()->directSelect("Select * FROM supplier ORDER BY supplier_name");
@@ -179,6 +177,7 @@ class Supplier{
 
 	}
 
+/*this function give all details but it get details from two tables*/
 	public static function getDetails(){
 
 			$result=DB::getInstance()->directSelect("SELECT * FROM supplier ORDER BY supplier_name;");
@@ -246,6 +245,8 @@ class Supplier{
 		
 
 	}
+
+/*this is use to update supplier table*/
 
 	public function update($values=array()){
 //print_r($values);

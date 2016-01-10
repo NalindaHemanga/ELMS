@@ -193,6 +193,7 @@ function registerSupplier(){
 	}
 
 
+//after clicking supplier name this function call
 
 function supplierClicked(id,name1,email,street1,line21,city1,province1,postal,country1,telephoneJson){
 	
@@ -232,6 +233,8 @@ function supplierClicked(id,name1,email,street1,line21,city1,province1,postal,co
 	location.href="#openModal2";
 }
 
+//after clicking edit button this function execute
+
 function supplierEditClicked(){
 //alert(line2);
 	document.getElementById("companyName").innerHTML="<input id=\"name\" type=\"text\" class=\"medium text\" name=\"company\" required=\"required\" value=\""+name+"\">";
@@ -259,6 +262,7 @@ function supplierEditClicked(){
 
 }
 
+//after clicking delete button this function execute 
 function supplierDelete(){
 
 	    if(confirm("Are you sure that you want to delete this category? ") == true) {
@@ -365,7 +369,7 @@ function supplierDelete(){
 
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
+<!-- this is add supplier open modal-->
 <div id="openModal" class="modalDialog">
 
 <div>
@@ -681,7 +685,7 @@ function supplierDelete(){
 
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
+<!--this is edit supplier open model-->
 
 <div id="openModal2" class="modalDialog">
 

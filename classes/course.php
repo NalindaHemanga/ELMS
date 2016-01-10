@@ -34,6 +34,7 @@
 
 		}
 
+/*this function use to add couse to data base*/
 		public function addCourse(){
 			$row = array(
 
@@ -49,6 +50,8 @@
 			}
 			
 		}
+
+/*this is use to get all detailt appropiate course*/
 
 		public static function getDetails(){
 

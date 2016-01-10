@@ -118,7 +118,7 @@ ob_flush();
 
 //Get details from forum_post table
 echo "<div class='datagrid'><table>
-    <thead><tr><th style='overflow: hidden; width: 50%;'>Discussion</th><th style='overflow: hidden; width: 25%;'>Posted by</th><th style='overflow: hidden; width: 25%;'>Date</th></tr></thead>";
+    <thead><tr><th>Discussion</th><th>Posted by</th><th>Date</th></tr></thead>";
 $allposts = ForumPost::getallForum();
 foreach ($allposts as $key => $value) {
     $id=$value->get_id();
@@ -128,8 +128,7 @@ foreach ($allposts as $key => $value) {
     $pst_date=$value->get_Postdate();
     //echo "<a href='forum_view_posts.php?cid=".$id."' class='cat_links'>  <b>$title</b>:  <br> Posted By <i>$pst_usr</i> </a>  ";
     echo "
-        <tbody><tr><td style='word-wrap: break-word;
-            width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-space: pre-line; text-align:justify; max-width: 600px; overflow: hidden; width: 50%;'><a href='forum_view_posts.php?cid=".$id."' style='text-decoration: none; color:#0912cb;'>$title</a></td><td style='overflow: hidden; width: 25%;'>$pst_usr</td><td style='overflow: hidden; width: 25%;'>$pst_date</td></tr>
+        <tbody><tr><td><a href='forum_view_posts.php?cid=".$id."' style='text-decoration: none; color:#0912cb;'>$title</a></td><td>$pst_usr</td><td>$pst_date</td></tr>
         <tr class=\"alt\">
         </tr>
         </tbody>

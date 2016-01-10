@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="css/button.css" />
 <link rel="stylesheet" type="text/css" href="css/modelwindow.css" />
 <link rel="stylesheet" type="text/css" href="css/list.css" />
+<link rel="stylesheet" type="text/css" href="css/link.css" />
 <div id="subcolumnwrap">
         <div id="treecolumn">
 		<div id="coltree" style="overflow-y:auto; height:350px; background: #D7DADB;">
@@ -59,9 +60,8 @@
 </div>
 
 <div id= "editCat">
-<a class="button icon chat"><span>Edit</span></a>
-</div>
 
+</div>
 
 <div id= "submitCat">
 
@@ -88,8 +88,10 @@ var cat_ID_new_division = "mainCat";
 var cur_cat_id;
 var item_Id;
 
+
+
 function catCliked(lable,name,id)
-{ 
+{ //alert(id);
 	loadXMLDoc(id);
 	newCatCancel();
 	cat_label = lable;
@@ -251,6 +253,7 @@ data: dataString,
 cache: false,
 success: function(html) {
 alert(html);
+
 }
 });
 
@@ -281,16 +284,21 @@ xmlhttp.onreadystatechange=function()
         xmlhttp.send();
 }
 
-function itemCopyClicked(itemCopyId,itemCopyOwner,itemCopyStatus,itemCopyBarcode,itemCopyPrice,itemCopyInstalledDate,itemCopySupplier,itemCopyNo) {
+function itemCopyClicked(itemCopyId,itemCopyOwner,itemCopyStatus,itemCopyBarcode,itemCopyPrice,itemCopyInstalledDate,itemCopySupplier,supplierName,supplierEmail,itemCopyNo) {
 
 	var copyNoArray = itemCopyNo.split("_");
 	document.getElementById("itemCopyNo").innerHTML=" <div style=\"float:left;\"> Details on copy "+copyNoArray[0]+ "_</div><div style=\"float:left;\" id=\"copyLastNo\">" + copyNoArray[1] + "</div>" + "<div style=\"font-size:15px\" id=\"copyEditBtn\"><font color=\"red\"> (<a onclick=itemCopyEditName(\""+itemCopyId+"\",\""+copyNoArray[1]+"\"); onmouseover=\"\" style=\"cursor: pointer;\">edit copy number</a>) </font></div>";
+
+	if(itemCopyOwner==1){itemCopyOwner="Electronic Laboratory";}
+	else{itemCopyOwner="SCORE Laboratory";}
+	if(itemCopyStatus==1){itemCopyStatus="Available in the lab";}
+	else{itemCopyStatus="Currently not available";}
 	document.getElementById("itemCopyOwner").innerHTML="Owner: "+itemCopyOwner;
 	document.getElementById("itemCopyStatus").innerHTML="Status: "+itemCopyStatus;
 	document.getElementById("itemCopyBarcode").innerHTML="Barcode: "+itemCopyBarcode;
 	document.getElementById("itemCopyPrice").innerHTML="Price: "+itemCopyPrice;
 	document.getElementById("itemCopyInstalledDate").innerHTML="Installed On: "+itemCopyInstalledDate;
-	document.getElementById("itemCopySupplier").innerHTML="Supplier: "+itemCopySupplier;
+	document.getElementById("itemCopySupplier").innerHTML="Supplier: "+supplierName.replace("%19", " ")+ "---------email: "+supplierEmail;
 	//document.getElementById("itemCopyEditBtn").innerHTML="Supplier: ";
 	location.href="#openModal4";
 
@@ -351,7 +359,7 @@ function itemDelete(itemId) {
 	cache: false,
 	success: function(result){
 	alert(result);
-	catCliked(cat_lable,cat_NAME,cur_cat_id);	
+	loadXMLDoc(cur_cat_id);
 	}
 	});
 	//setTimeout(function(){reloadpg();},100);
@@ -477,13 +485,29 @@ function AddItemCopyClicked(item_id,itemName){
 	}
 
 function itemEditClicked(item_id,item_pic){
+	var x = document.getElementById("refLinks").getElementsByTagName("a").length;
+	var linkArea = document.getElementById("refLinks");
 
+	for (i = 0; i < x; i++) {
+		if(i==0){document.getElementById("dynamicInput2").innerHTML="";}
+		var link =linkArea.getElementsByTagName("a")[i].innerHTML;
+
+		var newli = document.createElement('li');
+		newli.setAttribute('id', counter);
+		newli.innerHTML = '<div><input type="url" class="medium text" name="reference[]" placeholder=" Paste Link Here" required="required" value="'+link+'"><a 		href="javascript: void(0)" onClick="removeInput(\'dynamicInput2\',\''+counter+'\');"> Remove this Link</a></div>';
+//alert("ok");
+		document.getElementById("dynamicInput2").appendChild(newli);
+		counter++;
+
+	}
 	var item_pic = item_pic.replace(/%19/g, " ");
 	document.getElementById("item_id").value=item_id
 	document.getElementById("itemNameEdit").value=document.getElementById("ItemName1").innerHTML;
 	document.getElementById("itemDescEdit").value=document.getElementById("ItemDesc1").innerHTML;
 	document.getElementById("itemTechDetEdit").value=document.getElementById("ItemTechDet1").innerHTML;
 	document.getElementById("item_pic_edit").src = "img/items/" + item_pic + ".png";
+
+
 	location.href="#openModalItemEdit";
 
 }
@@ -516,7 +540,7 @@ function itemEditClicked(item_id,item_pic){
 
 							<li>
 								<label class="description" for="item_name">Item Name</label>
-        						<div><input type="text" class="large text" name="item_name" required="required"></div>
+        						<div><input type="text" class="large text" name="item_name" required="required"></div
         					</li>
 
 
@@ -556,21 +580,21 @@ function itemEditClicked(item_id,item_pic){
 
 
 									<div>
-										<img id="item_pic" src="img/icons/image.png" height="195" width="185" style="border:1px solid #ccc;padding:22px" />
+										<img id="item_pic1" src="img/icons/image.png" height="195" width="185" style="border:1px solid #ccc;padding:22px" />
 									</div>
 
 									<div>
-										<input name="item_picture" class="file" type="file" accept="image/*" onchange="loadFile(event)" />
+										<input name="item_picture" class="file" type="file" accept="image/*" onchange="loadFile1(event)" />
 									</div>
 
 
 
 
 										<script>
- 											 var loadFile = function(event) {
+ 											 var loadFile1 = function(event) {
     											var reader = new FileReader();
    											 reader.onload = function(){
-    										  var output = document.getElementById('item_pic');
+    										  var output = document.getElementById('item_pic1');
      										 output.src = reader.result;
    												 };
    												 reader.readAsDataURL(event.target.files[0]);
@@ -664,8 +688,10 @@ $("form#data").submit(function(){
 //window.opener.CallAlert();
 	    //location.reload();
 	    document.getElementById("data").reset();
-	    location.href="#close";
-	    catCliked(cat_label,cat_NAME,cur_cat_id);
+	    //document.getElementById("item_pic1").src = "img/icons/image.png";
+	    document.getElementsByClassName("close")[0].click();
+	    //catCliked(A1,Accessory,30);
+	    loadXMLDoc(cur_cat_id);
 
 
         },
@@ -818,7 +844,7 @@ $("form#data2").submit(function(){
 
 function addNewSup(){
 
-	location.href="#close2";
+	//location.href="#close2";
 	location.href="#openModal3";
 
 	}
@@ -836,7 +862,7 @@ function addNewSup(){
 <div>
 
 	<div class="form">
-		<a onclick=closeModal3(); title="Close" class="close">X</a>
+		<a href="#openModal2"; title="Close" class="close">X</a>
 
        	 <form id="supplierForm" class="form" onsubmit="return registerSupplier();">
         	<div class="form_description">
@@ -1104,12 +1130,12 @@ function addNewSup(){
 					<label class="description" for="links[]">Telephone</label>
 					</li>
 
-					 <div id="dynamicInput">
+					 <div id="dynamicInput3">
 
     				 </div>
 
     				 <li>
-     				<a href="javascript: void(0)" onClick="addInput2('dynamicInput');">Click to add Telephone Number</a>
+     				<a href="javascript: void(0)" onClick="addInput2('dynamicInput3');">Click to add Telephone Number</a>
      				</li>
 
 
@@ -1163,7 +1189,7 @@ function addNewSup(){
 
 
         newli.setAttribute('id', counter);
-        newli.innerHTML = '<div><input type="text" class="medium text" name="tel[]" required="required" pattern="[0-9]{10}"><a href="javascript: void(0)" onClick="removeInput2(\'dynamicInput\',\''+counter+'\');"> Remove </a></div>';
+        newli.innerHTML = '<div><input type="text" class="medium text" name="tel[]" required="required" pattern="[0-9]{10}"><a href="javascript: void(0)" onClick="removeInput2(\'dynamicInput3\',\''+counter+'\');"> Remove </a></div>';
         document.getElementById(divName).appendChild(newli);
         counter++;
 
@@ -1197,15 +1223,16 @@ function addNewSup(){
 				var div=document.getElementById("dynamicInput");
 				div.innerHTML="";
 				document.getElementsByClassName("close")[0].click();
-
+				//location.href="#close3"
 				var data_array = $.parseJSON(json_data);
 				alert(data_array['message']);
-				closeModal3();
+				//closeModal3();
 				$('#supplier_dropdown').append($('<option>', {
        				 	value: data_array["sup_id"],
         				text: data_array["sup_name"],
         				selected:"selected"
    				 }));
+				location.href="#openModal2";
 			}
 			});
 
@@ -1272,8 +1299,8 @@ function closeModal3(){
 
        	 <form class="form" enctype="multipart/form-data" id="itemEdit" method="post">
         	<div class="form_description">
-				<h2 id="Modal_h2"></h2>
-				<p>Use This form to register a new Item</p>
+				<h2 id="Modal_h2">Edit item details</h2>
+				<p>Use This form to edit item details.</p>
 			</div>
 
 			<div class="container" style="width:100%;">
@@ -1431,7 +1458,9 @@ $("form#itemEdit").submit(function(){
 //window.opener.CallAlert();
 	    //location.reload();
 	    document.getElementById("data").reset();
-	    location.href="#close";
+	    document.getElementsByClassName("close")[0].click();
+	    //location.href="#close";
+	    loadXMLDoc(cur_cat_id);
 	    //catCliked(cat_label,cat_NAME,cur_cat_id);
 
 
@@ -1443,6 +1472,4 @@ $("form#itemEdit").submit(function(){
     //location.href="#close";
     return false;
 });
-
-
 </script>

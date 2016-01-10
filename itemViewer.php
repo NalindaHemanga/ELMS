@@ -47,7 +47,7 @@ if ($editable == 1){
 	echo "<a onclick = addItemClicked(\"$cat_id\") >";
 	//echo		"<a href=\"item_add.php?cat_id=$cat_id&cat_name=$categoryName&cat_no=$categoryNo\">";
 	//echo '<a href="#openModal">';
-	echo	'<img src="img/items/plus.jpg" height="150" width="150" />';
+	echo	'<img src="img/items/plus.png" height="150" width="150" />';
 	echo		'Add new item';
 	echo		'</a>';
 	echo		'</div>';

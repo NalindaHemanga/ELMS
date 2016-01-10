@@ -209,6 +209,7 @@ class DB {
 
 	public function delete($table,$values=array()){ // executes the delete
 
+		$state=false;
 		try{
 
 		$no=0;
@@ -240,7 +241,8 @@ class DB {
 		}
 
 
-    		$this->query->execute();
+    		if($this->query->execute())
+    			$state=true;
 
 
 
@@ -250,7 +252,7 @@ class DB {
     	}
 
 
-
+    	return $state;
 
 	}
 

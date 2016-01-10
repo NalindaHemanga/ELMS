@@ -818,7 +818,7 @@ $("form#data2").submit(function(){
 
 function addNewSup(){
 
-	location.href="#close2";
+	//location.href="#close2";
 	location.href="#openModal3";
 
 	}
@@ -1196,10 +1196,13 @@ function addNewSup(){
 				form.reset();
 				var div=document.getElementById("dynamicInput");
 				div.innerHTML="";
-				document.getElementsByClassName("close")[0].click();
 
+				document.getElementsByClassName("close")[0].click();
+				
 				var data_array = $.parseJSON(json_data);
+				alert("sdsdfsdfsdf");
 				alert(data_array['message']);
+				
 				closeModal3();
 				$('#supplier_dropdown').append($('<option>', {
        				 	value: data_array["sup_id"],

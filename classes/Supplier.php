@@ -250,7 +250,7 @@ class Supplier{
 	public function update($values=array()){
 //print_r($values);
 		$supId = $this->id;
-echo $supId;
+//echo $supId;
 		foreach ($values as $key => $value){
 			$column;
 			switch($key){
@@ -276,7 +276,7 @@ echo $supId;
 			elseif($this->$key != $value){
 			$sql = "UPDATE  `supplier` SET  `$column` =  '$value' WHERE  `supplier`.`supplier_id` =$supId;";
 			DB::getInstance()->directUpdate($sql);
-			}else{echo "values are equal.";}
+			}else{}
 		}
 		return true;
 

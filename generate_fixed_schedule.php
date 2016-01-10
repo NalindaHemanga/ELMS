@@ -2,6 +2,14 @@
 
 require_once 'core/init.php';
 
+	$member_role=$_SESSION['roles'];
+	
+	if(in_array("Laboratory Administrator", $member_role)){
+
+	}else{
+		header('location:restricted_page.php');
+	}
+
 				
 	$sid=$_POST["sid"];
 	$schedule=Schedule::search(["schedule_id"=>$sid]);

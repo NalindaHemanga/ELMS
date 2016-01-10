@@ -2,6 +2,14 @@
 
 require_once 'core/init.php';
 
+	$member_role=$_SESSION['roles'];
+	
+	if(in_array("Laboratory Administrator", $member_role)){
+
+	}else{
+		header('location:restricted_page.php');
+	}
+
 $start_date = $_POST["sem_start_date"];
 $end_date = $_POST["sem_end_date"];
 

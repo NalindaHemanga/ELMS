@@ -173,12 +173,15 @@ function registerSupplier(){
 
 				var data_array = $.parseJSON(json_data);
 				alert(data_array['message']);
+//alert("OK");
+				//location.reload();
 				closeModal3();
 				$('#supplier_dropdown').append($('<option>', {
        				 	value: data_array["sup_id"],
         				text: data_array["sup_name"],
         				selected:"selected"
    				 }));
+
 			}
 			});
 

@@ -42,6 +42,7 @@
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/wrapper.css" />
 <style>
+
     body{
         background: url(img/e.png);
     }
@@ -73,12 +74,15 @@
 		
 		
 			
-			<div><p style="text-align: center;"><img src="img/logonew.png" height="150" width="150" /></p>
-<p style="text-align: center;"><strong><span style="font-size: 26px; color:#FFFF00;"> University of Colombo School of Computing</span></strong></p>
-<p style="text-align: center;"><span style="color: #0B4C5F;"><span style="font-family: tahoma,arial,helvetica,sans-serif; font-size: 22px; color:#FFFF00;">Sign in to continue to Electronic Laboratory Management System of UCSC</span></span></p>
+			<div>
+			
+				<p style="text-align: center;"><img src="img/logonew.png" height="150" width="150" /></p>
+				<p style="text-align: center;"><strong><span style="font-size: 26px; color:#FFFF00;"> University of Colombo School of Computing</span></strong></p>
+				<p style="text-align: center;"><span style="color: #0B4C5F;"><span style="font-family: tahoma,arial,helvetica,sans-serif; font-size: 22px; color:#FFFF00;">Sign in to continue to Electronic Laboratory Management System of UCSC</span></span></p>
 
-</div>
-<center>
+			</div>
+			
+			<center>
 
 
 <div class="transbox">
@@ -91,45 +95,46 @@
                    
 					<li>
 						
-        				<input type="email" class="medium text" name="username" placeholder=" E-Mail Address" required="required" 
-                                  style="color: #000000;"/>
+        				<input type="email" class="medium text" name="username" placeholder=" E-Mail Address" required="required" style="color: #000000;"/>
         			</li>
+					
 
         			<li>
 						
         				<input type="password" class="medium text" name="password" placeholder=" Password" required="required" style=" color: #000000;"/>
         			</li>
-
-
-
-        			
+					
+					
 					<li>
 
-						
-							<input type="submit" class="button" value="    Sign In    "  style=" font-weight: bold;color: #000000;"/>
+						<input type="submit" class="button" value="    Sign In    "  style=" font-weight: bold;color: #000000;"/>
 
-                 
-						
-						
 					</li>
-                    <br/><br/>
+                    
+					<br/><br/>
 					
 
 					<div>
 		
+<<<<<<< HEAD
 		<center><a href='fforgot_pass.php' style=" font-weight: bold;color: #000000;">Forgot Password?</a></center>
 		</div>
+=======
+						<center><a href='forgot_pass.php' style=" font-weight: bold;color: #000000;">Forgot Password?</a></center>
+		
+					</div>	
+>>>>>>> d6547a848a4f46bc03725c3de7632c44c5267c3c
 
 
 
-        		</ul>
+				</ul>
         
 
-        </form>
+			</form>
     
-        </div>
+</div>
         
-		</center>
+						</center>
 		
 
 		

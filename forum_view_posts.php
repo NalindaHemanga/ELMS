@@ -121,11 +121,14 @@ echo "<script type='text/javascript'>
     
 // Print the discussion topic
 echo "<div class=\"datagrid\"><table>
-<tbody><tr><td style=\"color:black; max-width: 600px;\"><b>Discussion Topic : <span style=\"width: 750px;color:black;font-size:120%;word-wrap: break-word;width: 750px;text-overflow: ellipsis; white-space: pre-line; text-align:justify;\">".$_SESSION["title"]. "</span></b></td><td>Posted by :".$_SESSION["pst_usr"]."</td></tr>
-<tr class=\"alt\"><td style=\"color:black;font-size:110%; max-width: 600px; \"><div id='$new_id' style=\"  word-wrap: break-word;
-width: 750px;color:black; padding-right:5px;  text-overflow: ellipsis; white-space: pre-line; text-align:justify;\"> <div id='$new_id+1' >".$_SESSION["des"]."</div><br>$link_post_del"." "."$link_update_post</div></td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
-</tbody>
-</table></div>"
+<thead><tr><th width=\"80%\" ><span style=\"color:black;font-size:100%;\"><b>Discussion Topic :</b></span></br><hr><span style='font-size:90%;text-align:justify;'>".$_SESSION["title"]. "</span><br><br></th><th width=\"20%\"><span style=\"color:black;font-size:120%;\">Posted by :</span>".$_SESSION["pst_usr"]."</th></tr></thead>";
+
+echo "<tbody>
+<td><div id='$new_id'><div  style='text-align:justify;'  id='$new_id+1' >".$_SESSION["des"]."</div><br>$link_post_del"." "."$link_update_post</div></td><td>Posted date: ".$_SESSION["pst_date"]." </td></tr>
+<tr class=\"alt\">
+</tbody>";
+
+echo "</table></div>";
 
 ?>
 <!--Reply Button-->
@@ -247,7 +250,7 @@ if(isset($_POST['submit'])){
 ob_flush();
 
 // Get the updated details of forum_reply table
-echo "<div class='datagrid' style=\"table-layout:fixed; cellpadding=10;\">
+echo "<div class='datagrid'>
 <table><thead><tr><th width=\"70%\">Reply</th><th width=\"10%\">Posted Date</th><th width=\"10%\">Posted By</th></tr></thead>";
 $allposts = forumReply::getallForumReply();
 foreach ($allposts as $key => $value) {
@@ -259,14 +262,36 @@ foreach ($allposts as $key => $value) {
     $reply_pst_usr=$value->get_Posteduser();
     $reply_pst_date=$value->get_Postdate();
 
+  $y=0;
+  $link_del='';
+  $link_update='';
+
+//Checked the logged user is an admin and also posted user
+  foreach ($rolesArray as $role) {
+    $role=str_replace(" ","%19%",$role);
+    if ($role=='%19%System%19%Administrator%19%' && $name==$reply_pst_usr){
+      $y=1;
+      $link_del="<a id='delete_link' href=\"forum_rep_delete.php?rid=".$reply_id."\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
+      $link_update="<a id='delete_link' onClick='javascript:showEdit(this);' href=\"#openeditModel\" class='links'>Edit</a>";
+    }
+    } 
+
+    foreach ($rolesArray as $role) {
+    $role=str_replace(" ","%19%",$role);
+    if ($role=='%19%System%19%Administrator%19%' && $name!=$reply_pst_usr){
+      $y=1;
+      $link_del="<a id='delete_link' href=\"forum_rep_delete.php?rid=".$reply_id."\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
+      $link_update="";
+    } 
+  }
 
     // Compare the loged user & posted user to show delete link
-    if ($name==$reply_pst_usr) {
+    if ($name==$reply_pst_usr && $y==0) {
       $link_del="<a id='delete_link' href=\"forum_rep_delete.php?rid=".$reply_id."\" class='links' onclick=\"return confirm('Are you sure you want to delete this?')\">Delete</a>";
       
       $link_update="<a id='delete_link' onClick='javascript:showEdit(this);' href=\"#openeditModel\" class='links'>Edit</a>";
     }
-    else{
+    else if ($name!=$reply_pst_usr && $y==0){
       $link_del='';
       $link_update='';
     }
@@ -287,8 +312,8 @@ foreach ($allposts as $key => $value) {
 
   //print the replys
     echo "
-    <tbody><tr><td style=\"max-width: 780px;text-overflow: ellipsis; white-space: initial;\"><p ><div style=\" word-wrap: break-word;
-     width: 780px;color:black; padding-right:5px; text-align:justify;\" id='$reply_id'><div id='$reply_id+$post_id'>$reply</div><br>$link_del"." "."$link_update</p></div></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
+    <tbody><tr><td style=\"text-overflow: ellipsis; white-space: initial;\"><p ><div style=\" word-wrap: break-word;
+     color:black; padding-right:5px; text-align:justify;\" id='$reply_id'><div id='$reply_id+$post_id'>$reply</div><br>$link_del"." "."$link_update</p></div></td><td>$reply_pst_date</td><td> $reply_pst_usr</td></tr>
     <tr class=\"alt\">
     </tr>
     </tbody>";

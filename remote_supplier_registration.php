@@ -1,6 +1,14 @@
 <?php
   
     require_once 'core/init.php';
+
+	$member_role=$_SESSION['roles'];
+	
+	if(in_array("Laboratory Administrator", $member_role)){
+
+	}else{
+		header('location:restricted_page.php');
+	}
   
 
     	if(array_key_exists('tel', $_POST)){
